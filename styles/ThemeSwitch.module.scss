@@ -1,0 +1,28 @@
+@import './variable.scss';
+
+.container {
+    position: relative;
+    width: 58px;
+    height: 30px;
+    padding: 3px;
+    border-radius: 15px;
+    background-color: #dedede;
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+
+    .handler {
+        position: absolute;
+        width: 26px;
+        height: 26px;
+        top: 2px;
+        left: 2px;
+        background-color: white;
+        border-radius: 50%;
+        box-shadow: 0 0 3px #00000070;
+        transition: box-shadow 0.2s ease-in-out, transform 0.2s ease-in-out;
+        &:hover {
+            box-shadow: 0 0 5px 3px $primary;
+        }
+    }
+}

@@ -1,0 +1,32 @@
+@import './variable.scss';
+
+.footer {
+    width: 100%;
+    height: 150px;
+    background-color: $tiffany;
+    padding: 20px calc(100% - 1264px);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: $secondary;
+    .mediaList {
+        display: flex;
+        width: 200px;
+        justify-content: space-evenly;
+
+        .media {
+            cursor: pointer;
+        }
+    }
+    h3 {
+        width: 100%;
+    }
+}
+
+@media (max-width: 1264px) {
+    .footer {
+        padding: 20px 10%;
+    }
+}

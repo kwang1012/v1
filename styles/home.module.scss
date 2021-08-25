@@ -1,0 +1,57 @@
+@import './variable.scss';
+
+.main {
+    width: 100%;
+    padding: 0 calc(100% - 1264px);
+    margin-top: 70px;
+}
+
+.header {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100%;
+    height: calc(100vh - 70px);
+    text-align: center;
+    justify-content: center;
+    h1 {
+        position: relative;
+        font-size: 4vw;
+        width: 100%;
+        margin: 0;
+        overflow: hidden;
+        .box {
+            position: absolute;
+            bottom: 0.8vw;
+            width: 0;
+            height: 0.5vw;
+            background-color: $primary;
+            z-index: 0;
+        }
+        .hi {
+            display: inline-block;
+            margin-right: 2vw;
+        }
+        .text, .cursor {
+            color: $primary;
+        }
+    }
+    h2 {
+        width: 80%;
+        margin: 20px auto;
+        color: #555;
+        font-size: 1.5vw;
+    }
+    
+}
+
+.work {
+    width: 100%;
+    min-height: calc(100vh - 70px);
+}
+
+@media (max-width: 1264px) {
+    .main {
+        padding: 0 10%;
+    }
+}
