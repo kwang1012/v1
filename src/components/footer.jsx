@@ -1,9 +1,14 @@
 import styles from 'styles/footer.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useSelector } from 'react-redux';
+import { useTheme } from '@material-ui/core';
 
 const providers = ['facebook', 'instagram', 'twitter'];
 
 export default function Footer() {
+
+    const theme = useTheme();
+    const themeValue = useSelector(state => state.theme.value);
 
     function goto(provider) {
         switch (provider) {
@@ -29,7 +34,7 @@ export default function Footer() {
     }
 
     return (
-        <footer className={styles.footer}>
+        <footer className={[styles.footer, themeValue === 'dark' ? styles.darkCover : ''].join(' ')}>
             <div className={styles.mediaList}>
                 {
                     providers.map((provider, i) => {
@@ -39,7 +44,7 @@ export default function Footer() {
                     })
                 }
             </div>
-            <h3>© 2021 by Kai Wang.</h3>
+            <h3 style={{ color: theme.palette.footerText }}>© 2021 by Kai Wang.</h3>
         </footer>
     );
 }

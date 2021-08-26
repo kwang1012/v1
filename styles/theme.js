@@ -7,19 +7,26 @@ export const lightTheme = createTheme({
             light: '#757ce8',
             main: '#CC3363',
             dark: '#002884',
-            contrastText: '#fff',
+            contrastText: 'black',
         },
         secondary: {
             light: '#ff7961',
             main: '#f44336',
             dark: '#ba000d',
-            contrastText: '#000',
+            // contrastText: '#000',
+        },
+        accent: {
+            main: '#36EEE0'
+        },
+        tiffany: {
+            main: '#BCECE0'
         },
         body: 'white',
         bodyConstract: 'black',
         backgroundColor: '#FAFBFC',
         shadow: '0 0 5px #00000070',
-        cardBackground: 'white'
+        cardBackground: 'white',
+        footerText: '#4C5270'
     },
 });
 
@@ -29,10 +36,23 @@ export const darkTheme = createTheme({
         primary: {
             main: '#CC3363'
         },
+        secondary: {
+            light: '#ff7961',
+            main: '#f44336',
+            dark: '#ba000d',
+            // contrastText: '#000',
+        },
+        accent: {
+            main: '#36EEE0'
+        },
+        tiffany: {
+            main: '#BCECE0'
+        },
         body: 'black',
         bodyConstract: 'white',
         backgroundColor: '#010203',
         shadow: '0 0 2px #FFFFFF70',
-        cardBackground: '#212223'
+        cardBackground: '#212223',
+        footerText: '#CC3363',
     }
 });

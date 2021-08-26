@@ -5,17 +5,19 @@ import { useRef, useEffect } from 'react';
 import { TextPlugin } from 'gsap/dist/TextPlugin';
 import { useTheme } from '@material-ui/styles';
 import Footer from 'src/components/footer';
+import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
+import WritingCard from 'src/components/WritingCard';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import { useSelector } from 'react-redux';
+import { Button, TextField } from '@material-ui/core';
+import WorkCard from 'src/components/WorkCard';
 
-gsap.registerPlugin(TextPlugin);
+gsap.registerPlugin(TextPlugin, ScrollTrigger);
 
 const words = [
     'Kai Wang.',
     'A Computer Scientist.',
     'A Software Engineer.'
-];
-
-const works = [
-    0, 1, 2
 ];
 
 const writings = [
@@ -40,13 +42,46 @@ export default function HomeView() {
     const textRef = useRef();
     const cursorRef = useRef();
 
+    const headerRef = useRef();
     const workRef = useRef();
     const writingRef = useRef();
     const contactRef = useRef();
 
     const theme = useTheme();
+    const themeValue = useSelector(state => state.theme.value);
+
+    const mainRef = useRef();
+    const q = gsap.utils.selector(mainRef);
+    const moreRef = useRef();
+
+    const works = [
+        {
+            name: 'KLEA',
+            icon: 'web',
+            color: '#B8E1FF',
+            description: 'A express-like web server written in C++.',
+            action: () => {
+                window.open('https://github.com/bruce1198/klea.git', '_blank')
+            }
+        },
+        {
+            name: 'KKAPP',
+            icon: 'app',
+            color: '#F3C178',
+            description: 'A personal side-project for trying new tech.',
+            action: () => { }
+        },
+        {
+            name: 'OverSea See',
+            icon: 'plane',
+            color: '#E8AEB7',
+            description: 'A platform for students who\'d like to study abroad.',
+            action: () => { }
+        }
+    ];
 
     useEffect(() => {
+
         gsap.to(cursorRef.current, { opacity: 0, ease: 'power2.inOut', repeat: -1 });
         let boxTL = gsap.timeline();
         boxTL.to(boxRef.current, { duration: 1, width: '17vw', delay: 0.5, ease: 'power4.inOut' })
@@ -61,13 +96,36 @@ export default function HomeView() {
             tl.to(textRef.current, { duration: 1, text: word });
             masterTL.add(tl);
         });
+
+        let moreTL = gsap.timeline({ repeat: -1, yoyo: true });
+        moreTL.from(moreRef.current, { y: '-5px', ease: 'power2.in', duration: 0.2 })
+            .to(moreRef.current, { y: '5px', ease: 'power2.out', duration: 0.2 });
+
+        const panels = q('section, header');
+        gsap.to(panels, {
+            yPercent: -100 * (panels.length - 1),
+            ease: 'none',
+            scrollTrigger: {
+                trigger: mainRef.current,
+                pin: true,
+                start: 'top top',
+                scrub: 1,
+                snap: {
+                    snapTo: 1 / (panels.length - 1),
+                    duration: { min: 0.1, max: 0.1 },
+                    ease: 'power2.inOut'
+                },
+                pinSpacing: false,
+                end: () => "+=" + (window.innerHeight * (panels.length - 1) + 100)
+            }
+        })
+
     }, []);
 
     function scrollIntoView(target) {
         const bodyRect = document.body.getBoundingClientRect().top;
-        const offset = 20;
         window.scrollTo({
-            top: target.getBoundingClientRect().top - bodyRect - offset,
+            top: target.getBoundingClientRect().top - bodyRect,
             behavior: 'smooth'
         });;
     }
@@ -92,8 +150,9 @@ export default function HomeView() {
     return (
         <>
             <Nav scrollTo={scrollTo} />
-            <main className={styles.main} style={{ backgroundColor: theme.palette.backgroundColor }}>
-                <div className={styles.header}>
+            <main className={styles.main} style={{ backgroundColor: theme.palette.backgroundColor }} ref={mainRef}>
+                <header className={styles.header} ref={headerRef}>
+                    <h4></h4>
                     <h1 style={{ color: theme.palette.bodyConstract }}>
                         <span className={styles.box} ref={boxRef}></span>
                         <span className={styles.hi} ref={hiRef}>Hi, I'm</span>
@@ -105,58 +164,50 @@ export default function HomeView() {
                         I major in DAG scheduling algo. in DL.<br />
                         Also, I work at Skymizer as an intern & focus on optimizing the performance of DL inference.
                     </h2>
-                </div>
-                <div className={styles.work} ref={workRef}>
+                    <h4 style={{ color: theme.palette.bodyConstract }}>
+                        Scroll Down<br />
+                        <ExpandMoreIcon ref={moreRef} />
+                    </h4>
+                </header>
+                <section className={[styles.work, themeValue === 'dark' ? styles.darkCover : ''].join(' ')} ref={workRef}>
+                    {/* <div className={styles.background}><img src="/images/work.jpg" /></div> */}
                     <h1 style={{ color: theme.palette.bodyConstract }}>
                         <span>01.</span> Works
                     </h1>
                     <div className={styles.workList}>
-                        <div className={styles.workCard} style={{ backgroundColor: theme.palette.cardBackground, boxShadow: theme.palette.boxShadow }}>
-
-                        </div>
-                        <div className={styles.workCard} style={{ backgroundColor: theme.palette.cardBackground, boxShadow: theme.palette.boxShadow }}>
-
-                        </div>
-                        <div className={styles.workCard} style={{ backgroundColor: theme.palette.cardBackground, boxShadow: theme.palette.boxShadow }}>
-
-                        </div>
+                        {
+                            works.map((work, i) => <WorkCard work={work} index={i} key={i} sectionRef={ref => (workRef => ref)} />)
+                        }
                     </div>
-                </div>
-                <div className={styles.writing} ref={writingRef}>
+                </section>
+                <section className={[styles.writing, themeValue === 'dark' ? styles.darkCover : ''].join(' ')} ref={writingRef}>
                     <h1 style={{ color: theme.palette.bodyConstract }}>
                         <span>02.</span> Writings
                     </h1>
                     <div className={styles.writingList}>
                         {
-                            writings.map((writing, i) => {
-                                return (
-                                    <div key={i} className={styles.writingCard} style={{ backgroundColor: theme.palette.cardBackground, boxShadow: theme.palette.boxShadow }}>
-                                        <div className={styles.wrapper}>
-                                            <div className={styles.tags}>
-                                                {
-                                                    writing.tags.map((tag, tid) => {
-                                                        return <span key={tid} className={styles.tag}>{tag}</span>
-                                                    })
-                                                }
-                                            </div>
-                                            <div className={styles.title} style={{ color: theme.palette.bodyConstract }}>
-                                                {writing.title}
-                                            </div>
-                                            <div className={styles.content}>
-                                                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-                                            </div>
-                                        </div>
-                                    </div>
-                                );
-                            })
+                            writings.map((writing, i) => <WritingCard writing={writing} index={i} key={i} />)
                         }
                     </div>
-                </div>
-                <div className={styles.contact} ref={contactRef}>
+                </section>
+                <section className={[styles.contact, themeValue === 'dark' ? styles.darkCover : ''].join(' ')} ref={contactRef}>
                     <h1 style={{ color: theme.palette.bodyConstract }}>
                         <span>03.</span> Contact
                     </h1>
-                </div>
+                    <div className={styles.contactRow}>
+                        <div className={styles.contactCard} style={{ backgroundColor: theme.palette.cardBackground, boxShadow: theme.palette.boxShadow }}>
+                            <h1 style={{ color: theme.palette.bodyConstract }}>Drop me a line</h1>
+                            <h2 style={{ color: theme.palette.bodyConstract }}>Name (required)</h2>
+                            <TextField size="small" variant="outlined" className={styles.input} /><br />
+                            <h2 style={{ color: theme.palette.bodyConstract }}>Email Address (required)</h2>
+                            <TextField size="small" variant="outlined" className={styles.input} /><br />
+                            <h2 style={{ color: theme.palette.bodyConstract }}>Message (required)</h2>
+                            <TextField size="small" variant="outlined" className={styles.input} multiline={true} maxRows={3} /><br />
+                            <Button className={styles.button} variant="outlined" color="primary">Send</Button>
+                        </div>
+                        <div className={styles.contactImage}></div>
+                    </div>
+                </section>
             </main>
             <Footer />
         </>

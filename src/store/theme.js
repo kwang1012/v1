@@ -7,10 +7,10 @@ export const themeSlice = createSlice({
     },
     reducers: {
         dark: state => {
-            state.value = 'dark'
+            state.value = 'dark';
         },
         light: state => {
-            state.value = 'light'
+            state.value = 'light';
         }
     }
 });

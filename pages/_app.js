@@ -1,13 +1,15 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import 'styles/globals.css';
 import { ThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import { Provider, useSelector, useStore } from 'react-redux';
-import { wrapper, store } from 'src/store';
+import { Provider, useSelector } from 'react-redux';
+import { wrapper, store, persistor } from 'src/store';
 import { darkTheme, lightTheme } from 'styles/theme'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fab } from '@fortawesome/free-brands-svg-icons'
+import { Head } from 'next/head';
+import { PersistGate } from 'redux-persist/integration/react';
 
 library.add(fab);
 
@@ -26,11 +28,13 @@ function App({ Component, pageProps }) {
   return (
     <React.StrictMode>
       <Provider store={store}>
-        <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
-          {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
-          <CssBaseline />
-          <Component {...pageProps} />
-        </ThemeProvider>
+        <PersistGate loading={<h1>Loading...</h1>} persistor={persistor}>
+          <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
+            {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+            <CssBaseline />
+            <Component {...pageProps} />
+          </ThemeProvider>
+        </PersistGate>
       </Provider>
     </React.StrictMode>
   );

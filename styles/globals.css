@@ -12,6 +12,28 @@ html, body {
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 
+body {
+  overflow: overlay;
+}
+
+body::-webkit-scrollbar {
+  width: 10px;
+}
+/* Track */
+body::-webkit-scrollbar-track {
+  display: none;
+  background-color: transparent;
+  box-shadow: inset 0 0 10px 10px transparent;
+  border: solid 3px transparent;
+}
+/* Handle */
+body::-webkit-scrollbar-thumb {
+  /* background: #333;  */
+  border-radius: 10px;
+  box-shadow: inset 0 0 10px 10px #CC3363;
+  border: solid 3px transparent;
+}
+
 a {
   color: inherit;
   text-decoration: none;

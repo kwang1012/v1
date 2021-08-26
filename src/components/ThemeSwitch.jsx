@@ -21,9 +21,9 @@ export default function ThemeSwitch({ checked, onChange }) {
 
     return (
         <div className={styles.container} onClick={onClick}>
-            <NightStayIcon style={{ color: '#1b3e7a' }} />
-            <Brightness7Icon style={{ color: '#FF5733' }} />
-            <div className={styles.handler} style={{ transform: value ? 'translateX(0)' : 'translateX(28px)' }}></div>
+            <NightStayIcon className={[styles.icon, styles.night].join(' ')} />
+            <Brightness7Icon className={[styles.icon, styles.day].join(' ')} />
+            <div className={[styles.handler, value ? styles.light : styles.dark].join(' ')}></div>
         </div>
     );
 }
