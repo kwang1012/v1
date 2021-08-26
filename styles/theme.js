@@ -18,7 +18,8 @@ export const lightTheme = createTheme({
         body: 'white',
         bodyConstract: 'black',
         backgroundColor: '#FAFBFC',
-        shadow: '0 0 5px #00000070'
+        shadow: '0 0 5px #00000070',
+        cardBackground: 'white'
     },
 });
 
@@ -31,6 +32,7 @@ export const darkTheme = createTheme({
         body: 'black',
         bodyConstract: 'white',
         backgroundColor: '#010203',
-        shadow: '0 0 2px #FFFFFF70'
+        shadow: '0 0 2px #FFFFFF70',
+        cardBackground: '#212223'
     }
 });

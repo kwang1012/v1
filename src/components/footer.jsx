@@ -32,9 +32,9 @@ export default function Footer() {
         <footer className={styles.footer}>
             <div className={styles.mediaList}>
                 {
-                    providers.map(provider => {
+                    providers.map((provider, i) => {
                         return (
-                            <FontAwesomeIcon className={styles.media} icon={['fab', provider]} size="2x" onClick={() => goto(provider)} />
+                            <FontAwesomeIcon key={i} className={styles.media} icon={['fab', provider]} size="2x" onClick={() => goto(provider)} />
                         );
                     })
                 }

@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 import { useTheme } from '@material-ui/styles';
 import { useEffect } from 'react';
 
-export default function Nav() {
+export default function Nav({ scrollTo }) {
 
     const dispatch = useDispatch();
     let theme = useTheme();
@@ -22,10 +22,10 @@ export default function Nav() {
     return (
         <nav className={styles.nav} style={{ backgroundColor: theme.palette.body, boxShadow: theme.palette.shadow }}>
             <ul style={{ color: theme.palette.bodyConstract }}>
-                <li>Kai Wang</li>
-                <li>Works<span></span></li>
-                <li>Writings<span></span></li>
-                <li>Contact<span></span></li>
+                <li onClick={() => scrollTo('top')}>Kai Wang</li>
+                <li onClick={() => scrollTo('work')}>Works<span></span></li>
+                <li onClick={() => scrollTo('writing')}>Writings<span></span></li>
+                <li onClick={() => scrollTo('contact')}>Contact<span></span></li>
                 <div className={styles.flexRight}>
                     <ThemeSwitch checked={true} onChange={setTheme} />
                     <Button className={styles.resume} color="primary" variant="outlined">Resume</Button>
