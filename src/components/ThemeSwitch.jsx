@@ -8,7 +8,7 @@ export default function ThemeSwitch({ checked, onChange }) {
     const [value, setValue] = useState(checked);
 
     useEffect(() => {
-        setValue(checked)
+        setValue(checked);
     }, [checked]);
 
     useEffect(() => {

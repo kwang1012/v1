@@ -31,14 +31,10 @@ export default function WorkCard({ work, index, sectionRef }) {
                 x: '-100vw',
                 duration: 2,
             });
-        // ScrollTrigger.create({
-        //     animation: tl,
-        //     start: 'top top',
-        // })
     }, []);
 
     return (
-        <div className={styles.workCard} style={{ backgroundColor: work.color, boxShadow: theme.palette.boxShadow }} ref={ref}>
+        <div className={styles.workCard} style={{ backgroundColor: work.color, boxShadow: theme.palette.boxShadow }} ref={ref} onClick={work.action}>
             {
                 {
                     'web': <LanguageIcon style={{ fontSize: '30px' }} />,

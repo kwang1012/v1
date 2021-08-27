@@ -26,15 +26,22 @@ const words = [
 const writings = [
     {
         title: 'Using Nest.js to build a well-structured backend project.',
-        tags: ['nest.js']
+        tags: ['nest.js'],
+        action: () => {
+            window.open('https://bruce1198.medium.com/using-nest-js-to-build-a-well-structured-backend-project-28d62054fa19', '_blank')
+        }
     },
     {
         title: 'DAG scheduling in the AI world.',
-        tags: ['research', 'DAG']
+        tags: ['research', 'DAG'],
+        action: () => { }
     },
     {
         title: 'Flutter: Create a beautiful cross-platform mobile app in hours.',
-        tags: ['Flutter', 'APP']
+        tags: ['Flutter', 'APP'],
+        action: () => {
+            window.open('https://bruce1198.medium.com/lets-learn-flutter-4054ea5c43a1', '_blank')
+        }
     }
 ];
 
@@ -50,7 +57,6 @@ export default function HomeView() {
     const writingRef = useRef();
     const contactRef = useRef();
 
-    const theme = useTheme();
     const themeValue = useSelector(state => state.theme.value);
 
     const mainRef = useRef();
@@ -116,7 +122,7 @@ export default function HomeView() {
                 snap: {
                     snapTo: 1 / (panels.length - 1),
                     duration: { min: 0.1, max: 0.6 },
-                    ease: 'power2.inOut'
+                    ease: 'power2.out'
                 },
                 pinSpacing: false,
                 end: () => "+=" + (window.innerHeight * (panels.length - 1))
@@ -160,16 +166,16 @@ export default function HomeView() {
                 break
             case 'instagram':
                 window.open(
-                    'https://www.facebook.com/kwang871012',
+                    'https://www.instagram.com/kwang871012',
                     '_blank' // <- This is what makes it open in a new window.
                 );
                 break;
             case 'twitter':
                 window.open(
-                    'https://www.facebook.com/kwang871012',
+                    'https://twitter.com/kwang871012',
                     '_blank' // <- This is what makes it open in a new window.
                 );
-                break;;
+                break;
         }
     }
 

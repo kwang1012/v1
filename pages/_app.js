@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import 'styles/globals.css';
 import { ThemeProvider } from '@material-ui/core/styles';
@@ -28,16 +28,14 @@ function App({ Component, pageProps }) {
   const Theme = theme === 'light' ? createTheme(lightTheme) : createTheme(darkTheme);
 
   return (
-    <React.StrictMode>
-      <Provider store={store}>
-        <PersistGate loading={<h1>Loading...</h1>} persistor={persistor}>
-          <ThemeProvider theme={Theme}>
-            <CssBaseline />
-            <Component {...pageProps} />
-          </ThemeProvider>
-        </PersistGate>
-      </Provider>
-    </React.StrictMode>
+    <Provider store={store}>
+      <PersistGate loading={<h1>Loading...</h1>} persistor={persistor}>
+        <ThemeProvider theme={Theme}>
+          <CssBaseline />
+          <Component {...pageProps} />
+        </ThemeProvider>
+      </PersistGate>
+    </Provider>
   );
 }
 
