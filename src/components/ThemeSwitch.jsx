@@ -2,17 +2,18 @@ import { useState, useEffect } from "react";
 import styles from 'styles/ThemeSwitch.module.scss';
 import NightStayIcon from '@material-ui/icons/NightsStay';
 import Brightness7Icon from '@material-ui/icons/Brightness7';
+import { Box } from "@material-ui/core";
 
-export default function ThemeSwitch({ checked, onChange }) {
+export default function ThemeSwitch(props) {
 
-    const [value, setValue] = useState(checked);
-
-    useEffect(() => {
-        setValue(checked);
-    }, [checked]);
+    const [value, setValue] = useState(props.checked);
 
     useEffect(() => {
-        onChange(value);
+        setValue(props.checked);
+    }, [props.checked]);
+
+    useEffect(() => {
+        props.onChange(value);
     }, [value]);
 
     function onClick() {
@@ -20,10 +21,12 @@ export default function ThemeSwitch({ checked, onChange }) {
     }
 
     return (
-        <div className={styles.container} onClick={onClick}>
-            <NightStayIcon className={[styles.icon, styles.night].join(' ')} />
-            <Brightness7Icon className={[styles.icon, styles.day].join(' ')} />
-            <div className={[styles.handler, value ? styles.light : styles.dark].join(' ')}></div>
-        </div>
+        <Box {...props}>
+            <div className={styles.container} onClick={onClick}>
+                <NightStayIcon className={[styles.icon, styles.night].join(' ')} />
+                <Brightness7Icon className={[styles.icon, styles.day].join(' ')} />
+                <div className={[styles.handler, value ? styles.light : styles.dark].join(' ')}></div>
+            </div>
+        </Box>
     );
 }

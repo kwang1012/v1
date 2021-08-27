@@ -71,3 +71,21 @@
         }
     }
 }
+
+@media (max-width: 1264px) {
+    .writingCard {
+        padding-top: 50%;
+    }
+}
+
+@media (max-width: 800px) {
+    .writingCard {
+        padding-top: 150px;
+    }
+}
+
+@media (max-width: 600px) {
+    .writingCard .content{
+        -webkit-line-clamp: 2; /* number of lines to show */
+    }
+}

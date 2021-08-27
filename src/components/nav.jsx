@@ -8,7 +8,7 @@ import { useEffect } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import { useRef } from 'react';
-import { useState } from 'react';
+import MenuIcon from '@material-ui/icons/Menu';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -56,11 +56,12 @@ export default function Nav({ scrollTo }) {
             style={{ boxShadow: theme.palette.shadow }}>
             <ul>
                 <li onClick={() => scrollTo('top')}>Kai Wang</li>
-                <li onClick={() => scrollTo('work')}><span>01.</span>Works<span></span></li>
-                <li onClick={() => scrollTo('writing')}><span>02.</span>Writings<span></span></li>
-                <li onClick={() => scrollTo('contact')}><span>03.</span>Contact<span></span></li>
-                <ThemeSwitch checked={currentTheme == 'light'} onChange={setTheme} className={styles.switch} />
-                <Button className={styles.resume} color="primary" variant="outlined">Resume</Button>
+                <li onClick={() => scrollTo('work')} className={styles.normal}><span>01.</span>Works<span></span></li>
+                <li onClick={() => scrollTo('writing')} className={styles.normal}><span>02.</span>Writings<span></span></li>
+                <li onClick={() => scrollTo('contact')} className={styles.normal}><span>03.</span>Contact<span></span></li>
+                <ThemeSwitch checked={currentTheme == 'light'} onChange={setTheme} className={[styles.switch, styles.normal].join(' ')} />
+                <Button className={[styles.resume, styles.normal].join(' ')} color="primary" variant="outlined">Resume</Button>
+                <MenuIcon className={[styles.hamburger, styles.rwd].join(' ')} />
             </ul>
         </Box >
     )

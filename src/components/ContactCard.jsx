@@ -10,7 +10,7 @@ const initialFormValues = {
     message: ''
 }
 
-export default function ContactCard() {
+export default function ContactCard(props) {
 
     const [values, setValues] = useState(initialFormValues);
 
@@ -59,31 +59,33 @@ export default function ContactCard() {
     }
 
     return (
-        <form onSubmit={handleFormSubmit}>
-            <Box
-                display='flex' flexDirection='column' alignItems='center'
-                bgcolor="card.background"
-                width={800} height='60vh'
-                borderRadius={5}
-                px='5%' py={5}>
+        <Box {...props}>
+            <form onSubmit={handleFormSubmit}>
+                <Box
+                    display='flex' flexDirection='column' alignItems='center'
+                    bgcolor="card.background"
+                    width={1} height={1}
+                    borderRadius={5}
+                    px='5%' py={5}>
 
-                <Box component='h1' fontSize={30} mb={10}>Drop me a line</Box>
-                <Box display='grid' gridTemplateColumns='1fr 1fr' width={1}>
-                    <Box mr={1}>
-                        <Box component='h2' width={1} fontSize={14} ma={0} mb={1}>Name (required)</Box>
-                        <TextField size="small" variant="outlined" fullWidth className={styles.input} name='name' value={values.name} onChange={handleInput} />
+                    <Box component='h1' my='1.5vw'>Drop me a line</Box>
+                    <Box display='grid' gridTemplateColumns='1fr 1fr' width={1}>
+                        <Box mr={1}>
+                            <Box component='h2' width={1} fontSize={14} ma={0} mb={1}>Name*</Box>
+                            <TextField size="small" variant="outlined" fullWidth className={styles.input} name='name' value={values.name} onChange={handleInput} />
+                        </Box>
+                        <Box ml={1}>
+                            <Box component='h2' width={1} fontSize={14} ma={0} mb={1}>Email Address*</Box>
+                            <TextField size="small" variant="outlined" fullWidth className={styles.input} name='email' value={values.email} onChange={handleInput} /><br />
+                        </Box>
                     </Box>
-                    <Box ml={1}>
-                        <Box component='h2' width={1} fontSize={14} ma={0} mb={1}>Email Address (required)</Box>
-                        <TextField size="small" variant="outlined" fullWidth className={styles.input} name='email' value={values.email} onChange={handleInput} /><br />
+                    <Box component='h2' width={1} fontSize={14} my={1}>Message*</Box>
+                    <TextField size="small" variant="outlined" fullWidth multiline={true} maxRows={3} name='message' value={values.message} onChange={handleInput} /><br />
+                    <Box mt='auto'>
+                        <Button className={styles.button} variant="outlined" color="primary" type='submit'>Send</Button>
                     </Box>
                 </Box>
-                <Box component='h2' width={1} fontSize={14} my={1}>Message (required)</Box>
-                <TextField size="small" variant="outlined" fullWidth multiline={true} maxRows={3} name='message' value={values.message} onChange={handleInput} /><br />
-                <Box mt='auto'>
-                    <Button className={styles.button} variant="outlined" color="primary" type='submit'>Send</Button>
-                </Box>
-            </Box>
-        </form >
+            </form >
+        </Box>
     )
 }

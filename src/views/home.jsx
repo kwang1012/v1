@@ -231,8 +231,8 @@ export default function HomeView() {
                         <span>03.</span> Contact
                     </h1>
                     <div className={styles.contactRow}>
-                        <ContactCard />
-                        <div className={styles.contactImage}>
+                        <ContactCard className={styles.contactCard} />
+                        <div className={styles.contactInfo}>
                             <h3>Email</h3>
                             <p>kswang@lsalab.cs.nthu.edu.tw</p>
                             <h3>Social Media</h3>

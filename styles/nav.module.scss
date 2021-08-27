@@ -56,6 +56,13 @@
     .switch {
         margin-left: 20px;
     }
+    .hamburger {
+        cursor: pointer;
+        margin-left: auto;
+    }
+    .rwd {
+        display: none;
+    }
 }
 
 @media (max-width: $xl) {
@@ -73,5 +80,19 @@
 }
 
 @media (max-width: 800px) {
+    .nav {
+        padding: 0 5%;
+    }
+    .nav .normal {
+        display: none;
+    }
+    .nav .rwd {
+        display: block;
+    }
+}
 
+@media (max-width: 600px) {
+    .nav {
+        padding: 0 20px;
+    }
 }
