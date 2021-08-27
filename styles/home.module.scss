@@ -6,7 +6,7 @@
         position: relative;
         width: 100%;
         height: 100vh;
-        padding: 70px calc(50% - 850px);
+        padding: 60px calc(50% - 850px);
         overflow: hidden;
         // clip-path: polygon(0 0, 0 50%, 100%, 100%, 100%);
         .background {
@@ -158,12 +158,12 @@
 
 @media (max-width: $xl) {
     .main section{
-        padding: 70px calc(50% - 620px);
+        padding: 50px calc(50% - 620px);
     }
 }
 
 @media (max-width: 1264px) {
     .main section {
-        padding: 70px 10%;
+        padding: 50px 10%;
     }
 }
