@@ -4,13 +4,16 @@ import { gsap } from 'gsap';
 import { useRef, useEffect } from 'react';
 import { TextPlugin } from 'gsap/dist/TextPlugin';
 import { useTheme } from '@material-ui/styles';
-import Footer from 'src/components/footer';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import WritingCard from 'src/components/WritingCard';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { useSelector } from 'react-redux';
-import { Button, TextField } from '@material-ui/core';
+import { Box, Button, TextField } from '@material-ui/core';
 import WorkCard from 'src/components/WorkCard';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import ContactCard from 'src/components/ContactCard';
+
+const providers = ['facebook', 'instagram', 'twitter'];
 
 gsap.registerPlugin(TextPlugin, ScrollTrigger);
 
@@ -109,14 +112,14 @@ export default function HomeView() {
                 trigger: mainRef.current,
                 pin: true,
                 start: 'top top',
-                scrub: 1,
+                scrub: true,
                 snap: {
                     snapTo: 1 / (panels.length - 1),
-                    duration: { min: 0.1, max: 0.1 },
+                    duration: { min: 0.1, max: 0.6 },
                     ease: 'power2.inOut'
                 },
                 pinSpacing: false,
-                end: () => "+=" + (window.innerHeight * (panels.length - 1) + 100)
+                end: () => "+=" + (window.innerHeight * (panels.length - 1))
             }
         })
 
@@ -145,15 +148,42 @@ export default function HomeView() {
                 scrollIntoView(contactRef.current);
                 break;;
         }
+
     }
+    function goto(provider) {
+        switch (provider) {
+            case 'facebook':
+                window.open(
+                    'https://www.facebook.com/kwang871012',
+                    '_blank' // <- This is what makes it open in a new window.
+                );
+                break
+            case 'instagram':
+                window.open(
+                    'https://www.facebook.com/kwang871012',
+                    '_blank' // <- This is what makes it open in a new window.
+                );
+                break;
+            case 'twitter':
+                window.open(
+                    'https://www.facebook.com/kwang871012',
+                    '_blank' // <- This is what makes it open in a new window.
+                );
+                break;;
+        }
+    }
+
 
     return (
         <>
             <Nav scrollTo={scrollTo} />
-            <main className={styles.main} style={{ backgroundColor: theme.palette.backgroundColor }} ref={mainRef}>
-                <header className={styles.header} ref={headerRef}>
+            <main className={styles.main} ref={mainRef}>
+                <Box component='header' display='flex' flexDirection='column' width={1} height='100vh'
+                    overflow='hidden'
+                    textAlign='center'
+                    className={styles.header} ref={headerRef}>
                     <h4></h4>
-                    <h1 style={{ color: theme.palette.bodyConstract }}>
+                    <h1>
                         <span className={styles.box} ref={boxRef}></span>
                         <span className={styles.hi} ref={hiRef}>Hi, I'm</span>
                         <span className={styles.text} ref={textRef}></span>
@@ -164,14 +194,14 @@ export default function HomeView() {
                         I major in DAG scheduling algo. in DL.<br />
                         Also, I work at Skymizer as an intern & focus on optimizing the performance of DL inference.
                     </h2>
-                    <h4 style={{ color: theme.palette.bodyConstract }}>
+                    <h4 >
                         Scroll Down<br />
                         <ExpandMoreIcon ref={moreRef} />
                     </h4>
-                </header>
+                </Box>
                 <section className={[styles.work, themeValue === 'dark' ? styles.darkCover : ''].join(' ')} ref={workRef}>
                     {/* <div className={styles.background}><img src="/images/work.jpg" /></div> */}
-                    <h1 style={{ color: theme.palette.bodyConstract }}>
+                    <h1 >
                         <span>01.</span> Works
                     </h1>
                     <div className={styles.workList}>
@@ -181,7 +211,7 @@ export default function HomeView() {
                     </div>
                 </section>
                 <section className={[styles.writing, themeValue === 'dark' ? styles.darkCover : ''].join(' ')} ref={writingRef}>
-                    <h1 style={{ color: theme.palette.bodyConstract }}>
+                    <h1>
                         <span>02.</span> Writings
                     </h1>
                     <div className={styles.writingList}>
@@ -191,25 +221,30 @@ export default function HomeView() {
                     </div>
                 </section>
                 <section className={[styles.contact, themeValue === 'dark' ? styles.darkCover : ''].join(' ')} ref={contactRef}>
-                    <h1 style={{ color: theme.palette.bodyConstract }}>
+                    <h1>
                         <span>03.</span> Contact
                     </h1>
                     <div className={styles.contactRow}>
-                        <div className={styles.contactCard} style={{ backgroundColor: theme.palette.cardBackground, boxShadow: theme.palette.boxShadow }}>
-                            <h1 style={{ color: theme.palette.bodyConstract }}>Drop me a line</h1>
-                            <h2 style={{ color: theme.palette.bodyConstract }}>Name (required)</h2>
-                            <TextField size="small" variant="outlined" className={styles.input} /><br />
-                            <h2 style={{ color: theme.palette.bodyConstract }}>Email Address (required)</h2>
-                            <TextField size="small" variant="outlined" className={styles.input} /><br />
-                            <h2 style={{ color: theme.palette.bodyConstract }}>Message (required)</h2>
-                            <TextField size="small" variant="outlined" className={styles.input} multiline={true} maxRows={3} /><br />
-                            <Button className={styles.button} variant="outlined" color="primary">Send</Button>
+                        <ContactCard />
+                        <div className={styles.contactImage}>
+                            <h3>Email</h3>
+                            <p>kswang@lsalab.cs.nthu.edu.tw</p>
+                            <h3>Social Media</h3>
+
+                            <div className={styles.mediaList}>
+                                {
+                                    providers.map((provider, i) => {
+                                        return (
+                                            <FontAwesomeIcon key={i} className={styles.media} icon={['fab', provider]} size="2x" onClick={() => goto(provider)} />
+                                        );
+                                    })
+                                }
+                            </div>
+                            <Box component='h3' color='footer.text'>© 2021 by Kai Wang.</Box>
                         </div>
-                        <div className={styles.contactImage}></div>
                     </div>
                 </section>
             </main>
-            <Footer />
         </>
     );
 }

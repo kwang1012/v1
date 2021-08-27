@@ -8,8 +8,8 @@ import { wrapper, store, persistor } from 'src/store';
 import { darkTheme, lightTheme } from 'styles/theme'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fab } from '@fortawesome/free-brands-svg-icons'
-import { Head } from 'next/head';
 import { PersistGate } from 'redux-persist/integration/react';
+import { createTheme } from '@material-ui/core/styles';
 
 library.add(fab);
 
@@ -25,12 +25,13 @@ function App({ Component, pageProps }) {
 
   const theme = useSelector(state => state.theme.value);
 
+  const Theme = theme === 'light' ? createTheme(lightTheme) : createTheme(darkTheme);
+
   return (
     <React.StrictMode>
       <Provider store={store}>
         <PersistGate loading={<h1>Loading...</h1>} persistor={persistor}>
-          <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
-            {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+          <ThemeProvider theme={Theme}>
             <CssBaseline />
             <Component {...pageProps} />
           </ThemeProvider>

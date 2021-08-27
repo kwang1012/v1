@@ -5,7 +5,6 @@
     padding-top: 40%;
     border-radius: 5px;
     background-color: white;
-    box-shadow: 0 0 1px #00000070;
     cursor: pointer;
     position: relative;
     &::after {
@@ -29,17 +28,20 @@
     }
     .wrapper {
         position: absolute;
-        width: calc(100% - 40px);
-        height: calc(100% - 40px);
+        width: calc(100% - 2vw);
+        height: calc(100% - 2vw);
         top: 0;
         left: 0;
-        margin: 20px;
+        margin: 1vw;
         overflow: hidden;
     }
     .title {
         font-size: 1.5vw;
         font-weight: bolder;
         margin-top: 10px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
     }
     .tags {
         font-size: 16px;

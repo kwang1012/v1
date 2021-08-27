@@ -1,5 +1,5 @@
 import styles from 'styles/nav.module.scss';
-import { Button } from '@material-ui/core';
+import { Button, Box } from '@material-ui/core';
 import ThemeSwitch from './ThemeSwitch';
 import { dark, light } from "src/store/theme";
 import { useDispatch, useSelector } from "react-redux";
@@ -51,9 +51,10 @@ export default function Nav({ scrollTo }) {
     }
 
     return (
-        <nav className={styles.nav} ref={ref}
-            style={{ backgroundColor: theme.palette.body, boxShadow: theme.palette.shadow }}>
-            <ul style={{ color: theme.palette.bodyConstract }}>
+        <Box component='nav' className={styles.nav} ref={ref}
+            bgcolor='background.default'
+            style={{ boxShadow: theme.palette.shadow }}>
+            <ul>
                 <li onClick={() => scrollTo('top')}>Kai Wang</li>
                 <li onClick={() => scrollTo('work')}><span>01.</span>Works<span></span></li>
                 <li onClick={() => scrollTo('writing')}><span>02.</span>Writings<span></span></li>
@@ -61,6 +62,6 @@ export default function Nav({ scrollTo }) {
                 <ThemeSwitch checked={currentTheme == 'light'} onChange={setTheme} className={styles.switch} />
                 <Button className={styles.resume} color="primary" variant="outlined">Resume</Button>
             </ul>
-        </nav >
+        </Box >
     )
 }

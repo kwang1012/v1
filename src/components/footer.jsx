@@ -44,7 +44,7 @@ export default function Footer() {
                     })
                 }
             </div>
-            <h3 style={{ color: theme.palette.footerText }}>© 2021 by Kai Wang.</h3>
+            <Box component='h3' color='footer.text'>© 2021 by Kai Wang.</Box>
         </footer>
     );
 }

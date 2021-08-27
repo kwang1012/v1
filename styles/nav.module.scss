@@ -7,7 +7,6 @@
     height: 70px;
     line-height: 70px;
     padding: 0 calc(100% - 1700px);
-    box-shadow: 0 0 5px #00000070;
     z-index: 10;
     ul {
         font-size: 16px;
@@ -62,6 +61,8 @@
 @media (max-width: $xl) {
     .nav {
         padding: 0 calc(50% - 620px);
+        height: 60px;
+        line-height: 60px;
     }
 }
 

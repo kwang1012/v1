@@ -1,6 +1,10 @@
-import { createTheme } from '@material-ui/core/styles';
 
-export const lightTheme = createTheme({
+const baseTheme = {
+    spacing: 4
+}
+
+export const lightTheme = {
+    ...baseTheme,
     palette: {
         type: 'light',
         primary: {
@@ -21,16 +25,25 @@ export const lightTheme = createTheme({
         tiffany: {
             main: '#BCECE0'
         },
-        body: 'white',
-        bodyConstract: 'black',
-        backgroundColor: '#FAFBFC',
+        background: {
+            default: '#FAFBFC'
+        },
+        text: {
+            primary: '#000000'
+        },
         shadow: '0 0 5px #00000070',
-        cardBackground: 'white',
-        footerText: '#4C5270'
+        card: {
+            background: 'white',
+            shadow: '0 0 5px #00000070'
+        },
+        footer: {
+            text: '#4C5270',
+        }
     },
-});
+};
 
-export const darkTheme = createTheme({
+export const darkTheme = {
+    ...baseTheme,
     palette: {
         type: 'dark',
         primary: {
@@ -48,11 +61,19 @@ export const darkTheme = createTheme({
         tiffany: {
             main: '#BCECE0'
         },
-        body: 'black',
-        bodyConstract: 'white',
-        backgroundColor: '#010203',
+        background: {
+            default: '#010203'
+        },
+        text: {
+            primary: '#ffffff'
+        },
         shadow: '0 0 2px #FFFFFF70',
-        cardBackground: '#212223',
-        footerText: '#CC3363',
+        card: {
+            background: '#212223',
+            shadow: '0 0 2px #FFFFFF70'
+        },
+        footer: {
+            text: '#CC3363',
+        }
     }
-});
+};
