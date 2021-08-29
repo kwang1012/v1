@@ -205,7 +205,7 @@ export default function HomeView() {
                         <ExpandMoreIcon ref={moreRef} />
                     </h4>
                 </Box>
-                <section className={[styles.work, themeValue === 'dark' ? styles.darkCover : ''].join(' ')} ref={workRef}>
+                <section className={[styles.work, themeValue === 'dark' && styles.darkCover].join(' ')} ref={workRef}>
                     {/* <div className={styles.background}><img src="/images/work.jpg" /></div> */}
                     <h1 >
                         <span>01.</span> Works
@@ -216,7 +216,7 @@ export default function HomeView() {
                         }
                     </div>
                 </section>
-                <section className={[styles.writing, themeValue === 'dark' ? styles.darkCover : ''].join(' ')} ref={writingRef}>
+                <section className={[styles.writing, themeValue === 'dark' && styles.darkCover].join(' ')} ref={writingRef}>
                     <h1>
                         <span>02.</span> Writings
                     </h1>
@@ -226,7 +226,7 @@ export default function HomeView() {
                         }
                     </div>
                 </section>
-                <section className={[styles.contact, themeValue === 'dark' ? styles.darkCover : ''].join(' ')} ref={contactRef}>
+                <section className={[styles.contact, themeValue === 'dark' && styles.darkCover].join(' ')} ref={contactRef}>
                     <h1>
                         <span>03.</span> Contact
                     </h1>

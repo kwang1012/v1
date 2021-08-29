@@ -22,7 +22,7 @@ export default function ThemeSwitch(props) {
 
     return (
         <Box {...props}>
-            <div className={styles.container} onClick={onClick}>
+            <div className={styles.container} onClick={onClick} style={{ backgroundColor: props.inMenu ? '#eaebec' : '#5a5b5c' }}>
                 <NightStayIcon className={[styles.icon, styles.night].join(' ')} />
                 <Brightness7Icon className={[styles.icon, styles.day].join(' ')} />
                 <div className={[styles.handler, value ? styles.light : styles.dark].join(' ')}></div>

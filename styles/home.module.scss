@@ -170,6 +170,11 @@
     .main section {
         padding: 50px 5%;
     }
+    .main .header {
+        h4 {
+            font-size: 3vw;
+        }
+    }
     .main .writing .writingList {
         grid-template-columns: 1fr;
     }
