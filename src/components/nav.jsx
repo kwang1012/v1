@@ -1,16 +1,16 @@
 import styles from 'styles/nav.module.scss';
-import { Button, Box } from '@material-ui/core';
+import { Button, Box } from '@mui/material';
 import ThemeSwitch from './ThemeSwitch';
 import { dark, light } from "src/store/theme";
 import { useDispatch, useSelector } from "react-redux";
-import { useTheme } from '@material-ui/styles';
+import { useTheme } from '@mui/material/styles';
 import { useEffect, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import { useRef } from 'react';
-import MenuIcon from '@material-ui/icons/Menu';
-import HighlightOffIcon from '@material-ui/icons/HighlightOff';
-import WorkOutlineOutlinedIcon from '@material-ui/icons/WorkOutlineOutlined';
+import MenuIcon from '@mui/icons-material/Menu';
+import HighlightOffIcon from '@mui/icons-material/HighlightOff';
+import WorkOutlineOutlinedIcon from '@mui/icons-material/WorkOutlineOutlined';
 
 gsap.registerPlugin(ScrollTrigger);
 

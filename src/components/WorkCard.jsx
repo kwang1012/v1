@@ -1,8 +1,8 @@
 import styles from 'styles/WorkCard.module.scss';
-import LanguageIcon from '@material-ui/icons/Language';
-import WhatshotIcon from '@material-ui/icons/Whatshot';
-import FlightTakeoffIcon from '@material-ui/icons/FlightTakeoff';
-import { useTheme } from '@material-ui/core';
+import LanguageIcon from '@mui/icons-material/Language';
+import WhatshotIcon from '@mui/icons-material/Whatshot';
+import FlightTakeoffIcon from '@mui/icons-material/FlightTakeoff';
+import { useTheme } from '@mui/material';
 import gsap from 'gsap';
 import { useRef } from 'react';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';

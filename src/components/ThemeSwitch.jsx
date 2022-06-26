@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import styles from 'styles/ThemeSwitch.module.scss';
-import NightStayIcon from '@material-ui/icons/NightsStay';
-import Brightness7Icon from '@material-ui/icons/Brightness7';
-import { Box } from "@material-ui/core";
+import NightStayIcon from '@mui/icons-material/NightsStay';
+import Brightness7Icon from '@mui/icons-material/Brightness7';
+import { Box } from "@mui/material";
 
 export default function ThemeSwitch(props) {
 

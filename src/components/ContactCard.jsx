@@ -1,14 +1,13 @@
-import { Box, TextField, Button } from "@mui/material";
-import axios from "axios";
-import { useEffect, useState } from "react";
-import styles from "styles/footer.module.scss";
-import CircularProgress from "@material-ui/core/CircularProgress";
-// style={{ boxShadow: theme.palette.shadow }}
+import { Box, TextField, Button } from '@mui/material';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
+import styles from 'styles/footer.module.scss';
+import CircularProgress from '@mui/material/CircularProgress';
 
 const initialFormValues = {
-  name: "",
-  email: "",
-  message: "",
+  name: '',
+  email: '',
+  message: '',
 };
 
 export default function ContactCard(props) {
@@ -38,7 +37,7 @@ export default function ContactCard(props) {
     if (validate()) {
       setLoading(true);
       axios
-        .post("/api/message", values)
+        .post('/api/message', values)
         .then((res) => {
           console.log(res);
           setSent(true);
@@ -61,29 +60,29 @@ export default function ContactCard(props) {
 
     let isValid = true;
 
-    if ("name" in fieldValues) {
+    if ('name' in fieldValues) {
       if (fieldValues.name) {
         tmp.name = undefined;
       } else {
-        tmp.name = "Required";
+        tmp.name = 'Required';
         isValid = false;
       }
     }
 
-    if ("email" in fieldValues) {
+    if ('email' in fieldValues) {
       if (/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(fieldValues.email)) {
         tmp.email = undefined;
       } else {
-        tmp.email = "Please provide a valid email";
+        tmp.email = 'Please provide a valid email';
         isValid = false;
       }
     }
 
-    if ("message" in fieldValues) {
+    if ('message' in fieldValues) {
       if (fieldValues.message) {
         tmp.message = undefined;
       } else {
-        tmp.message = "Required";
+        tmp.message = 'Required';
         isValid = false;
       }
     }
@@ -188,17 +187,8 @@ export default function ContactCard(props) {
             )}
           </Box>
           <Box mt={5}>
-            <Button
-              className={styles.button}
-              variant="outlined"
-              color="primary"
-              type="submit"
-            >
-              {loading ? (
-                <CircularProgress color="primary" size={24} />
-              ) : (
-                "Send"
-              )}
+            <Button className={styles.button} variant="outlined" color="primary" type="submit">
+              {loading ? <CircularProgress color="primary" size={24} /> : 'Send'}
             </Button>
           </Box>
         </Box>

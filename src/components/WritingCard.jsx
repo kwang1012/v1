@@ -1,4 +1,4 @@
-import { Box, useTheme } from '@material-ui/core';
+import { Box, useTheme } from '@mui/material';
 import gsap from 'gsap';
 import { useRef } from 'react';
 import styles from 'styles/WritingCard.module.scss';

@@ -1,15 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import 'styles/globals.css';
-import { ThemeProvider } from '@material-ui/core/styles';
-import CssBaseline from '@material-ui/core/CssBaseline';
+import { ThemeProvider } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
 import { Provider, useSelector } from 'react-redux';
 import { wrapper, store, persistor } from 'src/store';
 import { darkTheme, lightTheme } from 'styles/theme'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fab } from '@fortawesome/free-brands-svg-icons'
 import { PersistGate } from 'redux-persist/integration/react';
-import { createTheme } from '@material-ui/core/styles';
+import { createTheme } from '@mui/material/styles';
 
 library.add(fab);
 
