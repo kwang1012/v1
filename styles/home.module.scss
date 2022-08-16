@@ -116,7 +116,8 @@
       position: relative;
       width: 90%;
       padding: 5px;
-      &::before, &::after {
+      &::before,
+      &::after {
         position: absolute;
         opacity: 0;
         content: '';
@@ -133,13 +134,16 @@
         right: 0;
         background: linear-gradient(-90deg, #cc336365, #cc336300);
       }
-      &:hover::before, &:hover::after {
+      &:hover::before,
+      &:hover::after {
         opacity: 1;
+      }
+      &:hover .list::-webkit-scrollbar-thumb {
+        box-shadow: inset 0 0 10px 10px #cc3363;
       }
       .list {
         display: flex;
         overflow: auto;
-        // margin-top: 30px;
         border-radius: 5px;
         &::-webkit-scrollbar {
           width: 10px;
@@ -156,8 +160,9 @@
         &::-webkit-scrollbar-thumb {
           /* background: #333;  */
           border-radius: 10px;
-          box-shadow: inset 0 0 10px 10px #cc3363;
+          box-shadow: inset 0 0 10px 10px transparent;
           border: solid 3px transparent;
+          transition: box-shadow 0.2s;
         }
       }
     }
