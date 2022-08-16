@@ -1,19 +1,23 @@
-import { combineReducers, configureStore, createSerializableStateInvariantMiddleware, isPlain } from "@reduxjs/toolkit";
-import { createWrapper } from "next-redux-wrapper";
-import themeReducer from "./theme";
-import { persistStore, persistReducer } from "redux-persist";
+import { combineReducers, configureStore, createSerializableStateInvariantMiddleware, isPlain } from '@reduxjs/toolkit';
+import { createWrapper } from 'next-redux-wrapper';
+import themeReducer from './theme';
+import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import { Iterable } from 'immutable';
 
 const persistConfig = {
-    key: 'root',
-    storage
-}
+  key: 'root',
+  storage,
+};
 
 const persistedReducer = persistReducer(persistConfig, combineReducers({ theme: themeReducer }));
 
 export const store = configureStore({
-    reducer: persistedReducer,
+  reducer: persistedReducer,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }),
 });
 
 export const persistor = persistStore(store);

@@ -187,7 +187,7 @@ export default function ContactCard(props) {
             )}
           </Box>
           <Box mt={5}>
-            <Button className={styles.button} variant="outlined" color="primary" type="submit">
+            <Button className={styles.button} style={{ width: 200 }} variant="outlined" color="primary" type="submit">
               {loading ? <CircularProgress color="primary" size={24} /> : 'Send'}
             </Button>
           </Box>
