@@ -226,7 +226,7 @@ export default function HomeView() {
         </Box>
         <section className={[styles.writing, themeValue === 'dark' && styles.darkCover].join(' ')} ref={writingRef}>
           <h1>
-            <span>02.</span> Publications
+            <span>01.</span> Publications
           </h1>
           <div className={styles.writingList}>
             <div className={styles.list}>
@@ -238,7 +238,7 @@ export default function HomeView() {
         </section>
         <section className={[styles.work, themeValue === 'dark' && styles.darkCover].join(' ')} ref={workRef}>
           <h1>
-            <span>01.</span> Experiences
+            <span>02.</span> Experiences
           </h1>
           <div className={styles.workList}>
             {works.map((work, i) => (
