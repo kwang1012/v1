@@ -5,21 +5,18 @@ import moment from 'moment';
 import { Close } from '@mui/icons-material';
 import { IconButton } from '@mui/material';
 import { useMemo } from 'react';
-export const format = (date) => {
-  if (typeof date === 'string') date = new Date(date);
-  if (date.getMinutes()) return moment(date).format('h:m a');
-  else return moment(date).format('h a');
-};
+import { format } from 'src/utils';
+import AppEventCard from 'src/components/AppEventCard';
 
 export function ScheduleView({ events }) {
   const [selectedDate, setSelectedDate] = useState(null);
   const selectedEvents = useMemo(() => {
     if (!selectedDate) return null;
-    return events[selectedDate.getFullYear()][selectedDate.getMonth() + 1][selectedDate.getDate()];
+    return events[selectedDate.getFullYear()]?.[selectedDate.getMonth() + 1]?.[selectedDate.getDate()] || [];
   }, [selectedDate, events]);
   const todayEvents = useMemo(() => {
     const today = new Date();
-    return events[today.getFullYear()][today.getMonth() + 1][today.getDate()];
+    return events[today.getFullYear()]?.[today.getMonth() + 1]?.[today.getDate()] || [];
   }, [events]);
   return (
     <div className="flex">
@@ -31,14 +28,10 @@ export function ScheduleView({ events }) {
             <Close />
           </IconButton>
         </div>
-        <div className="p-4">
+        <div className="p-4 pt-0">
           <h1 className="text-black text-xl m-0">Today's Events</h1>
           {todayEvents && todayEvents.length !== 0 ? (
-            todayEvents.map((evt, i) => (
-              <div key={i} className="text-gray-900">
-                {i}
-              </div>
-            ))
+            todayEvents.map((evt, i) => <AppEventCard key={i} event={evt} />)
           ) : (
             <div className=" text-gray-400 text-center my-3">none</div>
           )}
@@ -46,11 +39,7 @@ export function ScheduleView({ events }) {
             <h1 className="text-black text-xl m-0">{moment(selectedDate).format('yyyy-MM-DD')} Events</h1>
           )}
           {selectedEvents && selectedEvents.length !== 0 ? (
-            selectedEvents.map((evt, i) => (
-              <div key={i} className="text-gray-900 my-2">
-                {evt.summary}
-              </div>
-            ))
+            selectedEvents.map((evt, i) => <AppEventCard key={i} event={evt}/>)
           ) : (
             <div className=" text-gray-400 text-center my-3">none</div>
           )}

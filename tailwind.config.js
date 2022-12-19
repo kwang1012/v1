@@ -1,11 +1,13 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: [
-    "./pages/**/*.{js,ts,jsx,tsx}",
-    "./src/**/*.{js,ts,jsx,tsx}",
-  ],
+  content: ['./pages/**/*.{js,ts,jsx,tsx}', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
-    extend: {},
+    extend: {
+      boxShadow: {
+        5: '0 3px 8px rgba(0, 0, 0, 0.24)',
+        app: '0 4px 12px rgba(0,0,0,0.1)',
+      },
+    },
   },
-  plugins: [require("@tailwindcss/line-clamp")],
-}
+  plugins: [require('@tailwindcss/line-clamp')],
+};
