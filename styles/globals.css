@@ -1,5 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
 @import '~material-design-icons/iconfont/material-icons.css';
+/* @tailwind base; */
+@tailwind components;
+@tailwind utilities;
 
 * {
     font-family: 'Roboto Mono', monospace;

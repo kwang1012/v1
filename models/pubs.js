@@ -1,16 +1,20 @@
 import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 
-const message = new Schema({
-    name: {
+const publication = new Schema({
+    venueName: {
         type: String,
         required: true
     },
-    email: {
+    author: {
         type: String,
         required: true
     },
-    message: {
+    title: {
+        type: String,
+        required: true
+    },
+    abstract: {
         type: String,
         required: true
     },
@@ -20,4 +24,4 @@ const message = new Schema({
     }
 });
 
-export default mongoose.models.Message || mongoose.model('Message', message);
+export default mongoose.models.Publication ||  mongoose.model('Publication', publication);
