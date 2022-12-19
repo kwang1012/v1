@@ -1,5 +1,5 @@
 .react-calendar {
-  width: 100vw;
+  flex: 1;
   height: 100vh;
   background: white;
   font-family: Arial, Helvetica, sans-serif;
@@ -26,11 +26,12 @@
 .react-calendar__navigation {
   display: flex;
   height: 44px;
-  margin-bottom: 1em;
+  border-left: 1px solid rgba(239, 239, 245, 1);
 }
 .react-calendar__navigation button {
   min-width: 44px;
   background: none;
+  font-size: 20px;
 }
 .react-calendar__navigation button:disabled {
   background-color: #f0f0f0;
@@ -53,13 +54,18 @@
 .react-calendar__month-view > div > div{
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 .react-calendar__month-view__weekdays {
-  text-align: center;
-  text-transform: uppercase;
-  font-weight: bold;
-  font-size: 0.75em;
-  color: black;
+  position: absolute;
+  width: 100%;
+  flex: 1;
+  text-align: right;
+  font-size: .8em;
+  color: #c2c2c2;
+}
+.react-calendar__month-view__weekdays abbr {
+  text-decoration: none;
 }
 .react-calendar__month-view__days {
   flex: 1;
@@ -79,9 +85,6 @@
   font-size: 0.75em;
   font-weight: bold;
 }
-.react-calendar__month-view__days__day--weekend {
-  color: #d10000;
-}
 .react-calendar__month-view__days__day--neighboringMonth {
   color: #757575;
 }
@@ -95,11 +98,23 @@
   text-align: left;
   background: none;
   display: flex;
+  position: relative;
   flex-direction: column;
   border-left: 1px solid rgba(239, 239, 245, 1) !important;
   border-top: 1px solid rgba(239, 239, 245, 1) !important;
-  /* flex: 1 !important; */
   flex-shrink: 0 !important;
+}
+.react-calendar__tile.disabled .react-calendar__tile-title {
+  color: #c2c2c2;
+}
+.react-calendar__tile.today::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  background-color: #006edc;
+  bottom: 0;
+  left: 0;
 }
 .react-calendar__tile-title {
   border-radius: 50%;
@@ -123,7 +138,7 @@
 .react-calendar__tile--hasActive:enabled:focus {
   background: #a9d4ff;
 }
-.react-calendar__tile--active .react-calendar__tile-title {
+.react-calendar__tile--now .react-calendar__tile-title {
   background: #006edc;
   color: white;
 }
