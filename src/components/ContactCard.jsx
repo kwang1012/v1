@@ -39,12 +39,10 @@ export default function ContactCard(props) {
       axios
         .post('/api/message', values)
         .then((res) => {
-          console.log(res);
           setSent(true);
           setError(null);
         })
         .catch((err) => {
-          console.log(err);
           setError(err.message);
         })
         .finally(() => {

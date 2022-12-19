@@ -16,7 +16,6 @@ export default function Publication({ events }) {
 export async function getServerSideProps() {
   const today = new Date();
   const data = await getEvents(today.getFullYear(), today.getMonth() + 1);
-  console.log(data)
   const events = {};
   for (const evt of data) {
     const dateTime = new Date(evt.start.dateTime);

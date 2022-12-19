@@ -14,7 +14,6 @@ async function handler(req, res) {
                 const msgCreated = await msg.save();
                 res.status(201).send(msgCreated);
             } catch (err) {
-                console.log(err)
                 res.status(500).send(err.message);
             }
         }
