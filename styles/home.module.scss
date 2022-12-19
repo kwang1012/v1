@@ -74,6 +74,9 @@
       }
     }
     div {
+      display: flex;
+      flex-wrap: wrap;
+      width: 60%;
       h2 {
         margin: 20px auto;
         color: #555;
@@ -226,6 +229,20 @@
     padding: 50px 5%;
   }
   .main .header {
+    div {
+      width: 80%;
+      h2 {
+        width: 100%;
+        margin: 0;
+        font-size: 3vw;
+      }
+      img {
+        width: 50vw;
+        height: 60vw;
+        margin-top: 20px;
+        object-fit: contain;
+      }
+    }
     h4 {
       font-size: 3vw;
     }

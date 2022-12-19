@@ -21,6 +21,22 @@ const words = ['Kai Wang.', 'A Computer Scientist.', 'A Software Engineer.'];
 
 const writings = [
   {
+    title: 'A Reservation-Based List Scheduling for Embedded Systems with Memory Constraints',
+    tags: ['PDCAT’22', 'First Author'],
+    action: () => {
+      // window.open('https://bruce1198.medium.com/lets-learn-flutter-4054ea5c43a1', '_blank')
+    },
+    content:
+      'Many embedded systems have hard resource constraints that make schedules found by list scheduling heuristics invalid. In this paper, we show the problems caused by memory constraints and deadlocks during the scheduling process. We propose new extensions for list scheduling algorithms and make them take memory constraints into account. The experiment shows that our methods can solve deadlocks effectively and reduce total memory usage drastically compared to original scheduling heuristics.',
+  },
+  {
+    title: 'Optimal Static Bidding Strategy for Running Batch Jobs with Hard Deadline Constraints on Spot Instances',
+    tags: ['Submitted to CLOSER’23', 'First Author'],
+    action: () => {},
+    content:
+      'Spot-instances(SI) is an auction-based pricing scheme used by cloud providers. It allows users to place bids for spare computing instances and rent them at a substantially lower price compared to the fixed on-demand price. This inexpensive computational power is at the cost of availability, because a spot instance can be revoked whenever the spot market price exceeds the bid. Therefore, SI has become an attractive option for applications without requiring real-time availability constraints, such as the batch jobs in different application domains, including big data analytics, scientific computing, and deep learning. For batch jobs, service interruptions and execution delays can be tolerated as long as their service quality is gauged by an execution deadline. Hence, this paper aims to develop a static bidding strategy for minimizing the monetary cost of a batch job with hard deadline constraints. We formulate the problem as a Markov chain process and use Dynamic Programming to find the optimal bid in polynomial time. Experiments conducted on real workloads from Amazon Spot Instance historical prices show that our proposed strategy successfully outperformed two state-of-art dynamic bidding strategies~(Amazing, DBA), and several deadline agnostic static bidding strategies with lower cost and fault tolerance overhead. ',
+  },
+  {
     title:
       'An automatic learning based execution and resource management system for optimizing Hadoop workload in clouds',
     tags: ['JPDC’22', 'Co-author'],
@@ -29,22 +45,6 @@ const writings = [
     },
     content:
       'Hadoop is a popular computing framework designed to deliver timely and cost-effective data processing on a large cluster of commodity machines. It relieves the burden of the programmers dealing with distributed programming, and an ecosystem of Big Data solutions has developed around it. However, Hadoop’s job execution time can greatly depend on its runtime configurations and resource selections. Given the more than 100 job configuration settings provided by Hadoop, and diverse resource instance options in a cloud or virtualized computing environment, running Hadoop jobs still requires a substantial amount of expertise and experience. To address this challenge, we apply a deep neural network to predict Hadoop’s job time based on historical execution data, and propose optimization methods to reduce job execution time and cost. The results show that our prediction method achieves almost 90% time prediction accuracy and clearly outperforms three other state-of-the-art regression-based prediction methods. Based on the time prediction, our proposed configuration search method and job scheduling algorithm successfully shorten the execution time of a single Hadoop job by more than a factor of 2 and reduce the time of processing a batch of Hadoop jobs by 40% ~65%.',
-  },
-  {
-    title: 'Optimal Static Bidding Strategy for Running Batch Jobs with Hard Deadline Constraints on Spot Instances',
-    tags: ['Submitted to UCC’22', 'First Author'],
-    action: () => {},
-    content:
-      'Spot-instances(SI) is an auction-based pricing scheme used by cloud providers. It allows users to place bids for spare computing instances and rent them at a substantially lower price compared to the fixed on-demand price. This inexpensive computational power is at the cost of availability, because a spot instance can be revoked whenever the spot market price exceeds the bid. Therefore, SI has become an attractive option for applications without requiring real-time availability constraints, such as the batch jobs in different application domains, including big data analytics, scientific computing, and deep learning. For batch jobs, service interruptions and execution delays can be tolerated as long as their service quality is gauged by an execution deadline. Hence, this paper aims to develop a static bidding strategy for minimizing the monetary cost of a batch job with hard deadline constraints. We formulate the problem as a Markov chain process and use Dynamic Programming to find the optimal bid in polynomial time. Experiments conducted on real workloads from Amazon Spot Instance historical prices show that our proposed strategy successfully outperformed two state-of-art dynamic bidding strategies~(Amazing, DBA), and several deadline agnostic static bidding strategies with lower cost and fault tolerance overhead. ',
-  },
-  {
-    title: 'A Reservation-Based List Scheduling for Embedded Systems with Memory Constraints',
-    tags: ['Submitted to SC’22', 'First Author'],
-    action: () => {
-      // window.open('https://bruce1198.medium.com/lets-learn-flutter-4054ea5c43a1', '_blank')
-    },
-    content:
-      'Many embedded systems have hard resource constraints that make schedules found by list scheduling heuristics invalid. In this paper, we show the problems caused by memory constraints and deadlocks during the scheduling process. We propose new extensions for list scheduling algorithms and make them take memory constraints into account. The experiment shows that our methods can solve deadlocks effectively and reduce total memory usage drastically compared to original scheduling heuristics.',
   },
 ];
 
@@ -92,6 +92,7 @@ export default function HomeView() {
   ];
 
   useEffect(() => {
+    if (navigator.userAgentData.mobile) return;
     gsap.to(cursorRef.current, { opacity: 0, ease: 'power2.inOut', repeat: -1 });
     let boxTL = gsap.timeline();
     boxTL.to(boxRef.current, { duration: 1, width: '17vw', delay: 0.5, ease: 'power4.inOut' }).from(hiRef.current, {
@@ -207,7 +208,7 @@ export default function HomeView() {
               _
             </span>
           </h1>
-          <div style={{ display: 'flex', width: '60%', margin: '20px auto' }}>
+          <div style={{ margin: '20px auto' }}>
             <h2 style={{ flex: 1, paddingRight: 10 }}>
               I'm currently a graduate student at NTHU.
               <br />
