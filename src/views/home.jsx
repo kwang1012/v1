@@ -12,6 +12,7 @@ import { Box, Button, TextField } from '@mui/material';
 import WorkCard from 'src/components/WorkCard';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import ContactCard from 'src/components/ContactCard';
+import { useRouter } from 'next/router';
 
 const providers = ['facebook', 'instagram', 'twitter'];
 
@@ -19,7 +20,7 @@ gsap.registerPlugin(TextPlugin, ScrollTrigger);
 
 const words = ['Kai Wang.', 'A Computer Scientist.', 'A Software Engineer.'];
 
-export default function HomeView({pubs}) {
+export default function HomeView({ pubs }) {
   const boxRef = useRef();
   const hiRef = useRef();
   const textRef = useRef();
@@ -35,6 +36,7 @@ export default function HomeView({pubs}) {
   const mainRef = useRef();
   const q = gsap.utils.selector(mainRef);
   const moreRef = useRef();
+  const router = useRouter();
 
   const works = [
     {
@@ -42,23 +44,21 @@ export default function HomeView({pubs}) {
       icon: 'app',
       color: '#B8E1FF',
       description: 'Implement NVDLA using C++.',
-      action: () => {
-        window.open('https://github.com/bruce1198/klea.git', '_blank');
-      },
+      action: () => router.push('/project/itri'),
     },
     {
       name: 'Twister5',
       icon: 'web',
       color: '#F3C178',
       description: 'Use Vuejs to build the admin panel monitor the status of servers',
-      action: () => {},
+      action: () => router.push('/project/twister5'),
     },
     {
       name: 'Skymizer',
       icon: 'plane',
       color: '#E8AEB7',
       description: 'Forest Runtime - \n Runtime that can execute executables provided by ONNC.',
-      action: () => {},
+      action: () => router.push('/project/skymizer'),
     },
   ];
 
@@ -154,7 +154,7 @@ export default function HomeView({pubs}) {
   }
 
   return (
-    <>
+    <div>
       <Nav scrollTo={scrollTo} />
       <main className={styles.main} ref={mainRef}>
         <Box
@@ -249,6 +249,6 @@ export default function HomeView({pubs}) {
           </div>
         </section>
       </main>
-    </>
+    </div>
   );
 }

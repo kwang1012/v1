@@ -1,8 +1,6 @@
 import { google } from 'googleapis';
 
-const credentials = JSON.parse(
-  Buffer.from(process.env.GOOGLE_SERVICE_KEY, "base64").toString()
-);
+const credentials = JSON.parse(Buffer.from(process.env.GOOGLE_SERVICE_KEY, 'base64').toString());
 
 const auth = new google.auth.GoogleAuth({
   credentials,
@@ -14,9 +12,9 @@ const calendar = google.calendar({
   auth,
 });
 
-const calendarId = 'bruce1198@gmail.com';
+const calendarId = ['bruce1198@gmail.com', 'kswang@lsalab.cs.nthu.edu.tw', 'bruce@skymizer.com'];
 
-export async function getEvents(year, month) {
+async function getEventsByCalendarId(year, month, cid) {
   const startYear = month === 1 ? year - 1 : year;
   let startMonth = (((month - 1) % 12) + 12) % 12;
   if (startMonth === 0) startMonth = 12;
@@ -29,7 +27,7 @@ export async function getEvents(year, month) {
     const {
       data: { items, nextPageToken },
     } = await calendar.events.list({
-      calendarId,
+      calendarId: cid,
       pageToken,
       singleEvents: true,
       timeMin: `${startYear}-${startMonth}-01T00:00:00-08:00`,
@@ -39,6 +37,21 @@ export async function getEvents(year, month) {
     returnItems = returnItems.concat(items);
     pageToken = nextPageToken;
   } while (pageToken);
+  return returnItems;
+}
+
+export async function getEvents(year, month) {
+  if (typeof calendarId === 'string') return getEventsByCalendarId(year, month, calendarId);
+
+  let returnItems = [];
+  for (const cid of calendarId) {
+    try {
+      const items = await getEventsByCalendarId(year, month, cid);
+      returnItems = returnItems.concat(items);
+    } catch (e) {
+      console.log(e.message);
+    }
+  }
   return returnItems;
 }
 

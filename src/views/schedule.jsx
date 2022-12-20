@@ -36,7 +36,7 @@ export function ScheduleView({ events }) {
             <div className=" text-gray-400 text-center my-3">none</div>
           )}
           {selectedDate && (
-            <h1 className="text-black text-xl m-0">{moment(selectedDate).format('yyyy-MM-DD')} Events</h1>
+            <h1 className="text-black text-xl m-0 mt-5">{moment(selectedDate).format('yyyy-MM-DD')} Events</h1>
           )}
           {selectedEvents && selectedEvents.length !== 0 ? (
             selectedEvents.map((evt, i) => <AppEventCard key={i} event={evt}/>)
