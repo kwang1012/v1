@@ -1,14 +1,50 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Calendar from 'react-calendar';
 
 import moment from 'moment';
 import { Close } from '@mui/icons-material';
-import { IconButton } from '@mui/material';
+import { IconButton, CircularProgress } from '@mui/material';
 import { useMemo } from 'react';
 import { format } from 'src/utils';
 import AppEventCard from 'src/components/AppEventCard';
+import axios from 'axios';
 
-export function ScheduleView({ events }) {
+export function ScheduleView() {
+  const [events, setEvents] = useState([]);
+  const [loading, setLoading] = useState(false);
+  async function updateEvents() {
+    setLoading(true);
+    const today = new Date();
+    axios
+      .get('/api/schedule', {
+        params: {
+          year: today.getFullYear(),
+          month: today.getMonth() + 1,
+        },
+      })
+      .then(({ data }) => {
+        const events = {};
+        for (const evt of data) {
+          const dateTime = new Date(evt.start.dateTime);
+          const year = dateTime.getFullYear();
+          const month = dateTime.getMonth() + 1;
+          const date = dateTime.getDate();
+          if (!events[year]) events[year] = {};
+          if (!events[year][month]) events[year][month] = {};
+          if (!events[year][month][date]) events[year][month][date] = [evt];
+          else {
+            const exist = events[year][month][date].find((event) => event.id === evt.id);
+            if (!exist) events[year][month][date].push(evt);
+          }
+        }
+        setEvents(events);
+      })
+      .finally(() => setLoading(false));
+  }
+
+  useEffect(() => {
+    updateEvents();
+  }, []);
   const [selectedDate, setSelectedDate] = useState(null);
   const selectedEvents = useMemo(() => {
     if (!selectedDate) return null;
@@ -49,6 +85,13 @@ export function ScheduleView({ events }) {
         value={selectedDate}
         calendarType="US"
         onClickDay={setSelectedDate}
+        minDetail="year"
+        navigationLabel={({ label }) => (
+          <div className='flex items-center justify-center'>
+            <div>{label}</div>
+            {loading && <CircularProgress color="primary" className='ml-2' size={10} />}
+          </div>
+        )}
         tileClassName={({ date, activeStartDate }) => {
           return date.getTime() === selectedDate?.getTime()
             ? 'today'
