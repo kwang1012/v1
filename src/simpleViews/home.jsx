@@ -32,7 +32,7 @@ export default function SimpleHomeView({ pubs }) {
             </div>
             <div>
               Email:{' '}
-              <Link href="mailto:kswang@lsalab.cs.nthu.edu.tw">
+              <Link href="mailto:kswang@lsalab.cs.nthu.edu.tw" target='_blank'>
                 <span className="text-blue-500 hover:underline cursor-pointer">kswang@lsalab.cs.nthu.edu.tw</span>
               </Link>
             </div>

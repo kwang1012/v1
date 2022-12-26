@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import { ScheduleView } from 'src/views/schedule';
 
-export default function Publication() {
+export default function Schedule() {
   return (
     <>
       <Head>

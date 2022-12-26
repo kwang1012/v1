@@ -49,7 +49,7 @@ export async function getServerSideProps() {
   return {
     props: {
       pubs,
-      isSimple: process.env.SIMPLE,
+      isSimple: process.env.SIMPLE ? true : false,
     },
   };
 }
