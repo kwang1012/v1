@@ -3,8 +3,9 @@ import styles from 'styles/ThemeSwitch.module.scss';
 import NightStayIcon from '@mui/icons-material/NightsStay';
 import Brightness7Icon from '@mui/icons-material/Brightness7';
 import { Box } from "@mui/material";
+import { classNames } from "src/utils";
 
-export default function ThemeSwitch({inMenu, ...props}) {
+export default function ThemeSwitch({inMenu, size, ...props}) {
 
     const [value, setValue] = useState(props.checked);
 
@@ -22,7 +23,7 @@ export default function ThemeSwitch({inMenu, ...props}) {
 
     return (
         <Box {...props}>
-            <div className={styles.container} onClick={onClick} style={{ backgroundColor: inMenu ? '#eaebec' : '#5a5b5c' }}>
+            <div className={[styles.container, styles[size]].join(' ')} onClick={onClick} style={{ backgroundColor: inMenu ? '#eaebec' : '#5a5b5c' }}>
                 <NightStayIcon className={[styles.icon, styles.night].join(' ')} />
                 <Brightness7Icon className={[styles.icon, styles.day].join(' ')} />
                 <div className={[styles.handler, value ? styles.light : styles.dark].join(' ')}></div>

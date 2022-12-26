@@ -13,8 +13,8 @@ import WorkCard from 'src/components/WorkCard';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import ContactCard from 'src/components/ContactCard';
 import { useRouter } from 'next/router';
-
-const providers = ['facebook', 'instagram', 'twitter'];
+import { providers } from 'src/const';
+import { onClickProvider } from 'src/utils';
 
 gsap.registerPlugin(TextPlugin, ScrollTrigger);
 
@@ -130,28 +130,6 @@ export default function HomeView({ pubs }) {
         break;
     }
   }
-  function goto(provider) {
-    switch (provider) {
-      case 'facebook':
-        window.open(
-          'https://www.facebook.com/kwang871012',
-          '_blank' // <- This is what makes it open in a new window.
-        );
-        break;
-      case 'instagram':
-        window.open(
-          'https://www.instagram.com/kwang871012',
-          '_blank' // <- This is what makes it open in a new window.
-        );
-        break;
-      case 'twitter':
-        window.open(
-          'https://twitter.com/kwang871012',
-          '_blank' // <- This is what makes it open in a new window.
-        );
-        break;
-    }
-  }
 
   return (
     <div>
@@ -237,13 +215,13 @@ export default function HomeView({ pubs }) {
                       className={styles.media}
                       icon={['fab', provider]}
                       size="2x"
-                      onClick={() => goto(provider)}
+                      onClick={() => onClickProvider(provider)}
                     />
                   );
                 })}
               </div>
               <Box component="h3" color="footer.text">
-                © 2021 by Kai Wang.
+                Copyright © 2021-2022 Kai Wang.
               </Box>
             </div>
           </div>
