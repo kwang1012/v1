@@ -1,13 +1,13 @@
 import Head from 'next/head';
-import { MiscellaneousView } from 'src/simpleViews/miscellaneous';
+import ExperienceView from 'src/simpleViews/experience';
 
 export default function Experience() {
   return (
     <>
       <Head>
-        <title>Kai Wang - Miscellaneous</title>
+        <title>Kai Wang - Experiences</title>
       </Head>
-      <MiscellaneousView />
+      <ExperienceView />
     </>
   );
 }

@@ -35,7 +35,7 @@ export default function ProjectCard({ project, index }) {
     >
       <div className={styles.wrapper}>
         {/* <div className={styles.tags}>
-          <span className={styles.tag}>{project.venueName}</span>
+          <span className={styles.tag}>{project.venueShort}</span>
           <span className={styles.tag}>{project.author}</span>
         </div> */}
         <Tooltip title={project.title}>

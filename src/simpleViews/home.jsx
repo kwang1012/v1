@@ -3,11 +3,12 @@ import Nav from 'src/components/nav';
 import { simpleProviders } from 'src/const';
 import { onClickProvider } from 'src/utils';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import SimplePublicationCard from 'src/components/SimplePublicationCard';
 
 export default function SimpleHomeView({ pubs }) {
   return (
     <div>
-      <Nav isSimple={true}/>
+      <Nav isSimple={true} />
       <div className="pt-32 max-w-[900px] mx-auto">
         <div className=" flex">
           <img
@@ -32,7 +33,7 @@ export default function SimpleHomeView({ pubs }) {
             </div>
             <div>
               Email:{' '}
-              <Link href="mailto:kswang@lsalab.cs.nthu.edu.tw" target='_blank'>
+              <Link href="mailto:kswang@lsalab.cs.nthu.edu.tw" target="_blank">
                 <span className="text-blue-500 hover:underline cursor-pointer">kswang@lsalab.cs.nthu.edu.tw</span>
               </Link>
             </div>
@@ -53,15 +54,7 @@ export default function SimpleHomeView({ pubs }) {
         </ul>
         <div className="mt-10 pb-2 text-2xl font-bold border-0 border-b border-gray-200 border-solid">Publictions</div>
         {pubs.map((pub, i) => (
-          <div key={i} className="shadow-md mt-4 border border-solid border-gray-200 p-5 rounded-md flex">
-            <div className=" w-[120px] flex-shrink-0">{pub.venueName}</div>
-            <div className="ml-5">
-              <div>{pub.title}</div>
-              <div>
-                <span className="font-bold">Kai-Siang Wang</span>, Jerry Chou
-              </div>
-            </div>
-          </div>
+          <SimplePublicationCard key={i} pub={pub} />
         ))}
         <div className="mt-10 pb-2 text-2xl font-bold border-0 border-b border-gray-200 border-solid">Blog</div>
         <p>Coming Soon</p>

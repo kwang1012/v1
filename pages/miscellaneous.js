@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import { MiscellaneousView } from 'src/simpleViews/miscellaneous';
+import MiscellaneousView from 'src/simpleViews/miscellaneous';
 
 export default function Miscellaneous() {
   return (

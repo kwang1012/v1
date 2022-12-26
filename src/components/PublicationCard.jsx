@@ -42,7 +42,7 @@ export default function PublicationCard({ pub, index }) {
     >
       <div className={styles.wrapper}>
         <div className={styles.tags}>
-          <span className={styles.tag}>{pub.venueName}</span>
+          <span className={styles.tag}>{pub.venueShort}</span>
           <span className={styles.tag}>{pub.author}</span>
         </div>
         <Tooltip title={pub.title}>
