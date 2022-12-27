@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import PublicationView from 'src/simpleViews/pubs';
+import { api } from 'src/utils/api';
 
 export default function Publication({ pubs }) {
   return (
@@ -12,14 +13,16 @@ export default function Publication({ pubs }) {
   );
 }
 
-import { getPubs } from './api/pubs';
-
 // This function gets called at build time
 export async function getServerSideProps() {
-  const pubs = await getPubs();
+  const { data } = await api.get('publications', {
+    params: {
+      'sort[0]': 'date:desc',
+    },
+  });
   return {
     props: {
-      pubs,
+      pubs: data.data.map((d) => d.attributes),
     },
   };
 }

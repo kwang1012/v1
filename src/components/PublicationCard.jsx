@@ -42,8 +42,8 @@ export default function PublicationCard({ pub, index }) {
     >
       <div className={styles.wrapper}>
         <div className={styles.tags}>
-          <span className={styles.tag}>{pub.venueShort}</span>
-          <span className={styles.tag}>{pub.author}</span>
+          <span className={styles.tag}>{pub.venue.short}</span>
+          <span className={styles.tag}>{pub.authorList.find(a => a.name === 'Kai-Siang Wang').type}</span>
         </div>
         <Tooltip title={pub.title}>
           <div className={styles.title}>{pub.title}</div>

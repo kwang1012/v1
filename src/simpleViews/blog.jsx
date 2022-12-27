@@ -2,8 +2,9 @@ import Nav from 'src/components/nav';
 import { faUser, faCalendar, faFolderOpen } from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useRouter } from 'next/router';
+import moment from 'moment';
 
-export default function BlogView() {
+export default function BlogView({posts}) {
   const router = useRouter()
   return (
     <div>
@@ -16,21 +17,21 @@ export default function BlogView() {
         </p>
         <div className="flex mt-20">
           <div className="flex-grow mr-4">
-            {[1, 2, 3].map((_, i) => (
-              <div key={i} onClick={() => router.push('/blog/2023_Fall_CS_PhD_application')} className="shadow-md mb-4 border border-solid border-gray-200 p-5 rounded-md text-left cursor-pointer hover:shadow-2xl transition-shadow">
+            {posts.map((post, i) => (
+              <div key={i} onClick={() => router.push(`/blog/${post.slug}`)} className="shadow-md mb-4 border border-solid border-gray-200 p-5 rounded-md text-left cursor-pointer hover:shadow-2xl transition-shadow">
                 <div className="border-0 border-b border-gray-300 border-solid pb-2">
-                  <div className="text-xl font-bold">2023 Fall CS PhD申請總結</div>
+                  <div className="text-xl font-bold">{post.title}</div>
                   <div className="flex mt-3 items-center">
                     <FontAwesomeIcon icon={faUser} />
                     <span className="ml-1">Kai</span>
                     <FontAwesomeIcon className="ml-4" icon={faCalendar} />
-                    <span className="ml-1">2022/12/26</span>
+                    <span className="ml-1">{moment(post.updatedAt).format('YYYY/MM/DD')}</span>
                     <FontAwesomeIcon className="ml-4" icon={faFolderOpen} />
-                    <span className="ml-1">PhD</span>
+                    <span className="ml-1">{post.category}</span>
                   </div>
                 </div>
                 <div className="line-clamp-2 mt-5">
-                  選擇讀博算是人生中數一數二的重大決定了，這條路很難，尤其是現在CV領域競爭白熱化，很多次想過放棄，但萬幸遇到了很多良師益友，最終一步步走了過來。在此做個記錄，希望能給之後打算申請PhD的同學一些幫助。
+                  {post.abstract}
                 </div>
                 <div className="flex justify-end text-[#CC3363] mt-5 cursor-pointer">Read More</div>
               </div>

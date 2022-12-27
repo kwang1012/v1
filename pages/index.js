@@ -2,6 +2,7 @@ import Head from 'next/head';
 import SimpleHomeView from 'src/simpleViews/home';
 import HomeView from '../src/views/home';
 import { library } from '@fortawesome/fontawesome-svg-core';
+import { api } from 'src/utils/api';
 
 const faCVStyle = {
   prefix: 'fac',
@@ -41,14 +42,16 @@ export default function Home({ pubs, isSimple }) {
   );
 }
 
-import { getPubs } from './api/pubs';
-
 // This function gets called at build time
 export async function getServerSideProps() {
-  const pubs = await getPubs();
+  const { data } = await api.get('publications', {
+    params: {
+      'sort[0]': 'date:desc',
+    },
+  });
   return {
     props: {
-      pubs,
+      pubs: data.data.map((d) => d.attributes),
       isSimple: process.env.SIMPLE ? true : false,
     },
   };

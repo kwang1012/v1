@@ -1,17 +1,34 @@
 import { useRouter } from 'next/router';
 import BlogDetailView from 'src/simpleViews/blog-detail';
 import Head from 'next/head';
+import { api } from 'src/utils/api';
 
-export default function BlogDetail() {
-  const router = useRouter();
-  const { slug } = router.query;
-
+export default function BlogDetail({ post }) {
   return (
     <>
       <Head>
-        <title>2023 Fall CS PhD申請總結</title>
+        <title>{post.title}</title>
       </Head>
-      <BlogDetailView blog={slug} />
+      <BlogDetailView post={post} />
     </>
   );
+}
+
+export async function getServerSideProps({ params }) {
+  const { slug } = params;
+  try {
+    const { data } = await api.get(`posts/${slug}`);
+    return {
+      props: {
+        post: data.data.attributes,
+      },
+    };
+  } catch {
+    return {
+      redirect: {
+        permanet: true,
+        destination: '/blog',
+      },
+    };
+  }
 }
