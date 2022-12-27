@@ -47,10 +47,10 @@ export default function Nav({ scrollTo, isSimple }) {
           text: 'Blog',
           onClick: () => router.push('/blog'),
         },
-        {
-          text: 'Miscellaneous',
-          onClick: () => router.push('/miscellaneous'),
-        },
+        // {
+        //   text: 'Miscellaneous',
+        //   onClick: () => router.push('/miscellaneous'),
+        // },
       ];
     } else {
       return [

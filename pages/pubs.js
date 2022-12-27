@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import PublicationView from 'src/simpleViews/pubs';
+import { normalize } from 'src/utils';
 import { api } from 'src/utils/api';
 
 export default function Publication({ pubs }) {
@@ -22,7 +23,7 @@ export async function getServerSideProps() {
   });
   return {
     props: {
-      pubs: data.data.map((d) => d.attributes),
+      pubs: normalize(data),
     },
   };
 }

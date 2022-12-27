@@ -3,9 +3,11 @@ import Nav from 'src/components/nav';
 import { simpleProviders } from 'src/const';
 import { onClickProvider } from 'src/utils';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import SimplePublicationCard from 'src/components/SimplePublicationCard';
+import moment from 'moment';
 
-export default function SimpleHomeView({ pubs }) {
+export default function SimpleHomeView({ pubs, posts }) {
   return (
     <div>
       <Nav isSimple={true} />
@@ -56,8 +58,38 @@ export default function SimpleHomeView({ pubs }) {
         {pubs.map((pub, i) => (
           <SimplePublicationCard key={i} pub={pub} />
         ))}
+        <Link href="/pubs">
+          <div className="mt-6 text-[#cc3363] cursor-pointer hover:underline">
+            <FontAwesomeIcon icon={faArrowRight} />
+            <span className="ml-2">Full list</span>
+          </div>
+        </Link>
         <div className="mt-10 pb-2 text-2xl font-bold border-0 border-b border-gray-200 border-solid">Blog</div>
-        <p>Coming Soon</p>
+        <p>
+          A place to record my feelings, exploration, and growth. I intend to be casual here, so I decided to use
+          Mandarin for some posts. Despite me being a CS student, this will not be a technical blog.
+        </p>
+        {posts?.map((post, i) => (
+          <div key={i}>
+            <ul className="pl-6">
+              <li>
+                [{moment(post.createdAt).format('DD/MM/YYYY')}]{' '}
+                <Link href={`/blog/${post.slug}`}>
+                  <a className="cursor-pointer text-blue-500 hover:underline">{post.title}</a>
+                </Link>
+              </li>
+            </ul>
+            <div className="pl-4 italic line-clamp-2 border-0 border-l-4 border-gray-300 border-solid">
+              {post.abstract}
+            </div>
+          </div>
+        ))}
+        <Link href="/blog">
+          <div className="mt-6 text-[#cc3363] cursor-pointer hover:underline">
+            <FontAwesomeIcon icon={faArrowRight} />
+            <span className="ml-2">Full list</span>
+          </div>
+        </Link>
         <div className="mt-10 pb-2 text-2xl font-bold border-0 border-b border-gray-200 border-solid">
           Academic Services
         </div>

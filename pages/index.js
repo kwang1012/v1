@@ -3,6 +3,7 @@ import SimpleHomeView from 'src/simpleViews/home';
 import HomeView from '../src/views/home';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { api } from 'src/utils/api';
+import { normalize } from 'src/utils';
 
 const faCVStyle = {
   prefix: 'fac',
@@ -31,13 +32,13 @@ const faGoogleScholarStyle = {
 library.add(faCVStyle);
 library.add(faGoogleScholarStyle);
 
-export default function Home({ pubs, isSimple }) {
+export default function Home({ pubs, posts, isSimple }) {
   return (
     <>
       <Head>
         <title>Kai Wang</title>
       </Head>
-      {isSimple ? <SimpleHomeView pubs={pubs} /> : <HomeView pubs={pubs}></HomeView>}
+      {isSimple ? <SimpleHomeView pubs={pubs} posts={posts} /> : <HomeView pubs={pubs}></HomeView>}
     </>
   );
 }
@@ -49,10 +50,22 @@ export async function getServerSideProps() {
       'sort[0]': 'date:desc',
     },
   });
+  const isSimple = process.env.SIMPLE ? true : false;
+  const props = {
+    pubs: normalize(data),
+    isSimple,
+  };
+  if (isSimple) {
+    try {
+      const { data: d } = await api.get('posts', {
+        params: {
+          'sort[0]': 'createdAt:desc',
+        },
+      });
+      props.posts = normalize(d).slice(0, 2);
+    } catch {}
+  }
   return {
-    props: {
-      pubs: data.data.map((d) => d.attributes),
-      isSimple: process.env.SIMPLE ? true : false,
-    },
+    props,
   };
 }

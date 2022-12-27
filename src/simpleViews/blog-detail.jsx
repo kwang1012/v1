@@ -1,8 +1,8 @@
 import Nav from 'src/components/nav';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faXmark } from '@fortawesome/free-solid-svg-icons';
-import { faUser, faCalendar, faFolderOpen } from '@fortawesome/free-regular-svg-icons';
-import { useState, useEffect, useMemo } from 'react';
+import { faUser, faCalendar } from '@fortawesome/free-regular-svg-icons';
+import { useState, useEffect } from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import rehypeRaw from 'rehype-raw';
@@ -10,6 +10,9 @@ import { useSelector } from 'react-redux';
 import { flat } from 'src/utils';
 import SimpleFooter from 'src/components/SimpleFooter';
 import moment from 'moment';
+import { usePageTracking } from 'src/hooks/ga';
+import ReactGA from 'react-ga'
+import { useRouter } from 'next/router';
 
 function collectHeaders(el, n, position) {
   if (n === 6)
@@ -143,6 +146,9 @@ export default function BlogDetailView({ post }) {
     }
   }, [scrollOffset, headerList]);
 
+  usePageTracking();
+  const router = useRouter()
+
   return (
     <div>
       <Nav isSimple={true} />
@@ -162,7 +168,7 @@ export default function BlogDetailView({ post }) {
               <FontAwesomeIcon icon={faUser} />
               <span className="ml-1 text-sm">Kai</span>
               <FontAwesomeIcon className="ml-4" icon={faCalendar} />
-              <span className="ml-1 text-sm">{moment(post.updatedAt).format('YYYY/MM/DD')}</span>
+              <span className="ml-1 text-sm">{moment(post.updatedAt).format('DD/MM/YYYY')}</span>
             </div>
           </div>
           <h1 className="text-3xl mb-10">{post.title}</h1>
