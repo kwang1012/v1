@@ -168,7 +168,7 @@ export default function BlogDetailView({ post }) {
               <FontAwesomeIcon icon={faUser} />
               <span className="ml-1 text-sm">Kai</span>
               <FontAwesomeIcon className="ml-4" icon={faCalendar} />
-              <span className="ml-1 text-sm">{moment(post.updatedAt).format('DD/MM/YYYY')}</span>
+              <span className="ml-1 text-sm">{moment(post.createdAt).format('DD/MM/YYYY')}</span>
             </div>
           </div>
           <h1 className="text-3xl mb-10">{post.title}</h1>
