@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useRouter } from 'next/router';
 import moment from 'moment';
 import { faMedal } from '@fortawesome/free-solid-svg-icons';
+import SimpleFooter from 'src/components/SimpleFooter';
 
 export default function BlogView({ posts, categories }) {
   const router = useRouter();
@@ -74,6 +75,7 @@ export default function BlogView({ posts, categories }) {
           </div>
         </div>
       </div>
+      <SimpleFooter />
     </div>
   );
 }

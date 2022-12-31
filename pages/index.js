@@ -48,6 +48,7 @@ export async function getServerSideProps() {
   const { data } = await api.get('publications', {
     params: {
       'sort[0]': 'date:desc',
+      'filters[selected][$eq]': true
     },
   });
   const isSimple = process.env.SIMPLE ? true : false;

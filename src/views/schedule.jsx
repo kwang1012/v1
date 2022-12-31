@@ -81,11 +81,13 @@ export function ScheduleView() {
           )}
         </div>
       </div>
+
       <Calendar
         value={selectedDate}
         calendarType="US"
         onClickDay={setSelectedDate}
         minDetail="year"
+        className='full'
         navigationLabel={({ label }) => (
           <div className='flex items-center justify-center'>
             <div>{label}</div>

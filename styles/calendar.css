@@ -1,11 +1,35 @@
 .react-calendar {
   flex: 1;
-  height: 100vh;
   background: white;
   font-family: Arial, Helvetica, sans-serif;
   line-height: 1.125em;
   display: flex;
   flex-direction: column;
+  height: 100%;
+}
+.react-calendar.full {
+  height: 100vh;
+}
+.react-calendar.hide-navigation .react-calendar__navigation {
+  display: none; 
+}
+.react-calendar.tile-center .react-calendar__tile abbr {
+  margin: 2px 0;
+  width: 100%;
+}
+.react-calendar.tile-center .react-calendar__tile-title {
+  width: 1.4em;
+  height: 1.4em;
+  margin: 0 auto;
+  font-size: .9em;
+  text-align: center;
+}
+.react-calendar.tile-center .react-calendar__month-view__weekdays {
+  transform: translateY(-90%);
+}
+.react-calendar.tile-center .react-calendar__month-view__weekdays__weekday {
+  display: flex;
+  justify-content: center;
 }
 .react-calendar,
 .react-calendar *,

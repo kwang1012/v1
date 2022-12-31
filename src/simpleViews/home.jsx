@@ -6,8 +6,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import SimplePublicationCard from 'src/components/SimplePublicationCard';
 import moment from 'moment';
+import SimpleFooter from 'src/components/SimpleFooter';
+import { useState } from 'react';
 
 export default function SimpleHomeView({ pubs, posts }) {
+  const [showMoreNews, setShowMoreNews] = useState(false);
+
   return (
     <div>
       <Nav isSimple={true} />
@@ -54,7 +58,31 @@ export default function SimpleHomeView({ pubs, posts }) {
           <li>ML Systems</li>
           <li>Algorithmic optimization</li>
         </ul>
-        <div className="mt-10 pb-2 text-2xl font-bold border-0 border-b border-gray-200 border-solid">Publictions</div>
+        <div className="mt-10 pb-2 text-2xl font-bold border-0 border-b border-gray-200 border-solid">News</div>
+        <ul className="pl-6">
+          <li>[12/07/2022] Attend the conference, PDCAT'22, Sendai, Japan</li>
+          <li>
+            [10/23/2022] One paper is accepted to <span className="font-bold">PDCAT 2022</span>
+          </li>
+          {/* <li>[12/07/2022] Attend the conference, PDCAT'22, Sendai, Japan</li>
+          <li>
+            [10/23/2022] One paper is accepted to <span className="font-bold">PDCAT 2022</span>
+          </li> */}
+          {showMoreNews && (
+            <>
+              <li>[12/07/2022] Attend the conference, PDCAT'22, Sendai, Japan</li>
+              <li>
+                [10/23/2022] One paper is accepted to <span className="font-bold">PDCAT 2022</span>
+              </li>
+            </>
+          )}
+        </ul>
+        {/* <span className="text-blue-500 cursor-pointer hover:underline" onClick={() => setShowMoreNews((show) => !show)}>
+          {showMoreNews ? 'view less' : 'view more'}
+        </span> */}
+        <div className="mt-10 pb-2 text-2xl font-bold border-0 border-b border-gray-200 border-solid">
+          Selected Publictions
+        </div>
         {pubs.map((pub, i) => (
           <SimplePublicationCard key={i} pub={pub} />
         ))}
@@ -91,18 +119,48 @@ export default function SimpleHomeView({ pubs, posts }) {
           </div>
         </Link>
         <div className="mt-10 pb-2 text-2xl font-bold border-0 border-b border-gray-200 border-solid">
+          Research Experiences
+        </div>
+        <div className="px-4 mt-4">
+          <div>
+            <a
+              className="font-bold text-blue-500 hover:underline cursor-pointer"
+              href="http://hscc.cs.nthu.edu.tw/2011newpage/sh1-1.htm"
+            >
+              HSCC Lab
+            </a>
+            <span className="font-bold"> @ National Tsing Hua University, </span>
+            <span>Hsichu, Taiwan</span>
+          </div>
+          <div className="text-sm">Research Assistant. Sep 2020 - Jan 2021</div>
+          <div className="text-sm">Advisor: Prof. Jang-Ping Sheu</div>
+        </div>
+        <div className="mt-4 px-4">
+          <div>
+            <a className="font-bold text-blue-500 hover:underline cursor-pointer" href="https://lsalab.cs.nthu.edu.tw">
+              LSA Lab
+            </a>
+            <span className="font-bold"> @ National Tsing Hua University, </span>
+            <span>Hsichu, Taiwan</span>
+          </div>
+          <div className="text-sm">Research Assistant. March 2021 - Present</div>
+          <div className="text-sm">Advisor: Prof. Jerry Chou</div>
+        </div>
+        <div className="mt-4 px-4">
+          <div>
+            <a className="font-bold text-blue-500 hover:underline cursor-pointer" href="https://skymizer.com/">
+              Skymier
+            </a>
+            <span>, Taipei, Taiwan</span>
+          </div>
+          <div className="text-sm">System Architect. May 2021 - Present</div>
+        </div>
+        <div className="mt-10 pb-2 text-2xl font-bold border-0 border-b border-gray-200 border-solid">
           Academic Services
         </div>
         <p>Coming Soon</p>
       </div>
-      <div
-        className="text-center h-[180px] mt-40 flex flex-col justify-end p-5"
-        style={{
-          background: 'linear-gradient(transparent, #CC336390)',
-        }}
-      >
-        Copyright © 2021-2022 Kai Wang
-      </div>
+      <SimpleFooter />
     </div>
   );
 }
