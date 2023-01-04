@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "deploy": "pm2 restart next-me"
   },
   "dependencies": {
     "@emotion/cache": "^11.9.3",
@@ -36,6 +37,7 @@
     "next-redux-wrapper": "^7.0.2",
     "node-sass": "^7.0.1",
     "nprogress": "^0.2.0",
+    "pm2": "^5.2.2",
     "react": "17.0.2",
     "react-calendar": "^4.0.0",
     "react-dom": "17.0.2",
