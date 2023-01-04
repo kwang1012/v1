@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { useState } from 'react';
 
 export default function SimplePublicationCard({ pub, ...props }) {
@@ -6,7 +7,7 @@ export default function SimplePublicationCard({ pub, ...props }) {
     <div {...props} className="shadow-md mt-4 border border-solid border-gray-200 p-5 rounded-md flex">
       <div className=" w-[120px] flex-shrink-0 relative">
         <div className="absolute bg-[#CC3363] text-white p-1 rounded-md text-sm">{pub.venue.short}</div>
-        {pub.image && <img src={pub.image} className="w-full h-full object-contain" />}
+        {pub.image && <Image src={pub.image} width='100%' height='100%' objectFit='contain' />}
       </div>
       <div className="ml-5">
         <div className=" font-extrabold">{pub.title}</div>

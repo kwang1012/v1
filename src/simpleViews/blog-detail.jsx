@@ -283,7 +283,7 @@ export default function BlogDetailView({ post }) {
             rehypePlugins={[rehypeRaw]}
           />
           <div className="mt-36 min-h-[400px] shadow-md p-8 border border-solid border-gray-200 rounded-md">
-            <div className="flex">
+            <div className="flex mb-2">
               <div className=" w-40">
                 <TextField
                   size="small"
@@ -324,7 +324,6 @@ export default function BlogDetailView({ post }) {
               </div>
             </div>
             <TextField
-              className="mt-2"
               size="small"
               variant="outlined"
               fullWidth

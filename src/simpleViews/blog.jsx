@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import moment from 'moment';
 import { faMedal } from '@fortawesome/free-solid-svg-icons';
 import SimpleLayout from 'src/layouts/simple-layout';
+import Image from 'next/image';
 
 export default function BlogView({ posts, categories }) {
   const router = useRouter();
@@ -40,7 +41,7 @@ export default function BlogView({ posts, categories }) {
         </div>
         <div className="w-[245px] flex-shrink-0">
           <div className="rounded-md overflow-hidden shadow-md mb-4 border border-solid border-gray-200">
-            <img src="https://lsalab.cs.nthu.edu.tw/~kswang/avatar.png" className="w-full aspect-[9/10] object-cover" />
+              <Image src="https://lsalab.cs.nthu.edu.tw/~kswang/avatar.png" width={245} height={272} objectFit="cover" />
             <div className="px-4">
               <h3>Kai Wang</h3>
             </div>

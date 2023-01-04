@@ -1,4 +1,3 @@
-import { useRouter } from 'next/router';
 import BlogDetailView from 'src/simpleViews/blog-detail';
 import Head from 'next/head';
 import { api } from 'src/utils/api';

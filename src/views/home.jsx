@@ -15,6 +15,7 @@ import ContactCard from 'src/components/ContactCard';
 import { useRouter } from 'next/router';
 import { providers } from 'src/const';
 import { onClickProvider } from 'src/utils';
+import Image from 'next/image';
 
 gsap.registerPlugin(TextPlugin, ScrollTrigger);
 
@@ -166,7 +167,7 @@ export default function HomeView({ pubs }) {
               <br />
               In addition, I work at Skymizer as an intern & focus on optimizing the performance of DL inference.
             </h2>
-            <img src="https://lsalab.cs.nthu.edu.tw/~kswang/avatar.png" alt="" />
+            <Image src="https://lsalab.cs.nthu.edu.tw/~kswang/avatar.png" width={150} height={150} />
           </div>
           <h4>
             Scroll Down

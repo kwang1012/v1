@@ -7,6 +7,7 @@ import SimplePublicationCard from 'src/components/SimplePublicationCard';
 import moment from 'moment';
 import { useState } from 'react';
 import SimpleLayout from 'src/layouts/simple-layout';
+import Image from 'next/image';
 
 export default function SimpleHomeView({ pubs, posts }) {
   const [showMoreNews, setShowMoreNews] = useState(false);
@@ -14,9 +15,12 @@ export default function SimpleHomeView({ pubs, posts }) {
   return (
     <SimpleLayout contentWidth={900} paddingTop={160}>
       <div className=" flex">
-        <img
+        <Image
           src="https://lsalab.cs.nthu.edu.tw/~kswang/avatar.png"
-          className="w-[182px] h-[182px] object-cover rounded-full"
+          width={182}
+          height={182}
+          objectFit='cover'
+          className="rounded-full"
         />
         <div className="ml-10">
           <h1 className="mb-0">Kai Wang</h1>
