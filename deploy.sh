@@ -2,4 +2,5 @@ node -v
 git pull origin main
 yarn install
 yarn build
-yarn start
+pm2 delete 0
+pm2 --name next-me start yarn -- start
