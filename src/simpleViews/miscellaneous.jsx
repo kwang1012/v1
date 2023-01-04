@@ -1,8 +1,7 @@
-import Nav from 'src/components/nav';
+import SimpleLayout from 'src/layouts/simple-layout';
 export default function MiscellaneousView() {
   return (
-    <div>
-      <Nav isSimple={true} />
+    <SimpleLayout>
       <div className="mt-[200px] max-w-[650px] mx-auto bg-gray-300 rounded-md pt-16 shadow-lg flex flex-col items-center relative">
         <img
           src="https://lsalab.cs.nthu.edu.tw/~kswang/avatar.png"
@@ -13,6 +12,6 @@ export default function MiscellaneousView() {
           <p>Hi, this is Kai Wang,</p>
         </div>
       </div>
-    </div>
+    </SimpleLayout>
   );
 }

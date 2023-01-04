@@ -1,11 +1,8 @@
-import Nav from 'src/components/nav';
-import SimpleFooter from 'src/components/SimpleFooter';
+import SimpleLayout from 'src/layouts/simple-layout';
 
 export default function ExperienceView() {
   return (
-    <div>
-      <Nav isSimple={true} />
-      <div className="pt-20 max-w-[800px] mx-auto min-h-screen">
+    <SimpleLayout>
         <h2>Experiences</h2>
         <div className="mt-10 pb-2 text-2xl font-bold border-0 border-b border-gray-200 border-solid">
           Research Experiences
@@ -56,8 +53,6 @@ export default function ExperienceView() {
             <li>Pipeline Parallelism for Deep Learning</li>
           </ul>
         </div>
-      </div>
-      <SimpleFooter />
-    </div>
+    </SimpleLayout>
   );
 }

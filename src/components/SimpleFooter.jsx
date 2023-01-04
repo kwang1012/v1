@@ -7,7 +7,7 @@ import Link from 'next/link';
 
 export default function SimpleFooter() {
   const [events, setEvents] = useState([]);
-  async function updateEvents() {
+  async function updateEvents(isMounted) {
     const today = new Date();
     axios
       .get('/api/schedule', {
@@ -27,13 +27,14 @@ export default function SimpleFooter() {
           if (!events[year][month]) events[year][month] = {};
           if (!events[year][month][date]) events[year][month][date] = true;
         }
-        setEvents(events);
+        if (isMounted) setEvents(events);
       });
   }
 
   const [loading, setLoading] = useState(true);
   useEffect(() => {
-    updateEvents();
+    let isMounted = true;
+    updateEvents(isMounted);
 
     // map script
     const script = document.createElement('script');
@@ -42,18 +43,23 @@ export default function SimpleFooter() {
       '//cdn.clustrmaps.com/map_v2.js?cl=ffffff&w=a&t=m&d=-buCz0retZ5htBaa04-Q4KlBSbCTjKPNCloS21z6WhU&co=cc3363&cmo=ff7272&cmn=78f778';
     script.id = 'clustrmaps';
 
-    script.onload = () => setLoading(false);
+    script.onload = () => {
+      if (isMounted) setLoading(false);
+    };
 
     document.getElementById('map-container').appendChild(script);
     return () => {
-      document.getElementById('map-container')?.removeChild(script);
+      isMounted = false;
+      try {
+        document.getElementById('map-container')?.removeChild(script);
+      } catch {}
     };
   }, []);
 
   return (
     <div className="text-center mt-40 flex flex-col justify-end p-5">
       <div className="flex w-[600px] mx-auto">
-        <div className="flex-1 flex-shrink-0 mr-2" id="map-container" key='unique-map'></div>
+        <div className="flex-1 flex-shrink-0 mr-2" id="map-container" key="unique-map"></div>
         <Link href="/schedule">
           <div className="flex-1 flex-shrink-0 ml-2 h-[176px]">
             <Calendar
