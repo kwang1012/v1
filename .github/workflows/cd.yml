@@ -17,15 +17,17 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
+    - uses: actions/setup-node@v3
     - name: Deploy using ssh
       uses: appleboy/ssh-action@master
       with:
         host: ${{ secrets.SSH_HOST }}
         username: ${{ secrets.SSH_USERNAME }}
         key: ${{ secrets.SSH_PRIVATE_KEY }}
-        port: 22
+        node-version: 16.x
         script: |
-          cd ~/home/kswang/kkapp
+          node -v
+          cd ~/next-me
           git pull origin main
           yarn install
           yarn build
