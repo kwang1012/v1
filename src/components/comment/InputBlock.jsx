@@ -248,7 +248,7 @@ export default function InputBlock({
               ],
             }}
           >
-            <IconButton className="p-0">
+            <IconButton style={{ padding: 0 }}>
               <Face />
             </IconButton>
           </Tooltip>
@@ -261,7 +261,7 @@ export default function InputBlock({
               <FontAwesomeIcon icon={faMarkdown} className="cursor-pointer text-gray-500" />
             </a>
             {onCancel && (
-              <Button size="small" variant="outlined" disableElevation className="ml-2" onClick={onCancel}>
+              <Button size="small" variant="outlined" disableElevation sx={{ marginLeft: 2 }} onClick={onCancel}>
                 <span className="normal-case">Cancel</span>
               </Button>
             )}
@@ -269,7 +269,10 @@ export default function InputBlock({
               size="small"
               variant="outlined"
               disableElevation
-              className="mx-2"
+              sx={{
+                marginLeft: 2,
+                marginRight: 2,
+              }}
               onClick={() => setPreview((state) => !state)}
             >
               <span className="normal-case">Preview</span>
