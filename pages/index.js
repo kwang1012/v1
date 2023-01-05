@@ -4,6 +4,7 @@ import HomeView from '../src/views/home';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { api } from 'src/utils/api';
 import { normalize } from 'src/utils';
+import SimpleLayout from 'src/layouts/simple-layout';
 
 const faCVStyle = {
   prefix: 'fac',
@@ -43,12 +44,20 @@ export default function Home({ pubs, posts, isSimple }) {
   );
 }
 
+Home.getLayout = function getLayout(page) {
+  return (
+    <SimpleLayout contentWidth={900} paddingTop={160}>
+      {page}
+    </SimpleLayout>
+  );
+};
+
 // This function gets called at build time
 export async function getServerSideProps() {
   const { data } = await api.get('publications', {
     params: {
       'sort[0]': 'date:desc',
-      'filters[selected][$eq]': true
+      'filters[selected][$eq]': true,
     },
   });
   const isSimple = process.env.SIMPLE ? true : false;

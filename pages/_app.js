@@ -14,7 +14,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 import { createTheme } from '@mui/material/styles';
 import { Router } from 'next/router';
 import NProgress from 'nprogress';
-import "nprogress/nprogress.css";
+import 'nprogress/nprogress.css';
 
 NProgress.configure({
   minimum: 0.3,
@@ -26,7 +26,6 @@ NProgress.configure({
 library.add(fab);
 
 function App({ Component, pageProps }) {
-
   React.useEffect(() => {
     // Remove the server-side injected CSS.
     const jssStyles = document.querySelector('#jss-server-side');
@@ -36,10 +35,10 @@ function App({ Component, pageProps }) {
 
     // page loading
     const start = () => {
-      NProgress.start()
+      NProgress.start();
     };
     const end = () => {
-      NProgress.done()
+      NProgress.done();
     };
     Router.events.on('routeChangeStart', start);
     Router.events.on('routeChangeComplete', end);
@@ -55,12 +54,14 @@ function App({ Component, pageProps }) {
 
   const Theme = theme === 'light' ? createTheme(lightTheme) : createTheme(darkTheme);
 
+  const getLayout = Component.getLayout || ((page) => page);
+
   return (
     <Provider store={store}>
       <PersistGate loading={<h1>Loading...</h1>} persistor={persistor}>
         <ThemeProvider theme={Theme}>
           <CssBaseline />
-          <Component {...pageProps} />
+          {getLayout(<Component {...pageProps} />)}
         </ThemeProvider>
       </PersistGate>
     </Provider>

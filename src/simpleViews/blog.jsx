@@ -3,13 +3,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useRouter } from 'next/router';
 import moment from 'moment';
 import { faMedal } from '@fortawesome/free-solid-svg-icons';
-import SimpleLayout from 'src/layouts/simple-layout';
 import Image from 'next/image';
 
 export default function BlogView({ posts, categories }) {
   const router = useRouter();
   return (
-    <SimpleLayout contentWidth={900}>
+    <>
       <h1>Kai's Blog</h1>
       <p>
         A place to record my feelings, exploration, and growth. I intend to be casual here, so I decided to use Mandarin
@@ -29,7 +28,7 @@ export default function BlogView({ posts, categories }) {
                   <FontAwesomeIcon icon={faUser} />
                   <span className="ml-1">Kai</span>
                   <FontAwesomeIcon className="ml-4" icon={faCalendar} />
-                  <span className="ml-1">{moment(post.updatedAt).format('MM/DD/YYYY')}</span>
+                  <span className="ml-1">{moment(post.createdAt).format('MM/DD/YYYY')}</span>
                   <FontAwesomeIcon className="ml-4" icon={faFolderOpen} />
                   <span className="ml-1">{post.category}</span>
                 </div>
@@ -41,7 +40,7 @@ export default function BlogView({ posts, categories }) {
         </div>
         <div className="w-[245px] flex-shrink-0">
           <div className="rounded-md overflow-hidden shadow-md mb-4 border border-solid border-gray-200">
-              <Image src="https://lsalab.cs.nthu.edu.tw/~kswang/avatar.png" width={245} height={272} objectFit="cover" />
+            <Image src="https://lsalab.cs.nthu.edu.tw/~kswang/avatar.png" width={245} height={272} objectFit="cover" />
             <div className="px-4">
               <h3>Kai Wang</h3>
             </div>
@@ -70,6 +69,6 @@ export default function BlogView({ posts, categories }) {
           </div>
         </div>
       </div>
-    </SimpleLayout>
+    </>
   );
 }

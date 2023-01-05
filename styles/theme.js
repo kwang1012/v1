@@ -6,12 +6,13 @@ const baseTheme = {
 export const lightTheme = {
     ...baseTheme,
     palette: {
+        mode: 'light',
         type: 'light',
         primary: {
             light: '#757ce8',
             main: '#CC3363',
-            dark: '#002884',
-            contrastText: 'black',
+            dark: '#bf2857',
+            contrastText: 'white',
         },
         secondary: {
             light: '#ff7961',
@@ -45,6 +46,7 @@ export const lightTheme = {
 export const darkTheme = {
     ...baseTheme,
     palette: {
+        mode: 'dark',
         type: 'dark',
         primary: {
             main: '#CC3363'

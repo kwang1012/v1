@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import SimpleLayout from 'src/layouts/simple-layout';
 import MiscellaneousView from 'src/simpleViews/miscellaneous';
 
 export default function Miscellaneous() {
@@ -11,3 +12,7 @@ export default function Miscellaneous() {
     </>
   );
 }
+
+Miscellaneous.getLayout = function getLayout(page) {
+  return <SimpleLayout>{page}</SimpleLayout>;
+};

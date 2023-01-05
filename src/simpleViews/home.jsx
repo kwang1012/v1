@@ -6,20 +6,19 @@ import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import SimplePublicationCard from 'src/components/SimplePublicationCard';
 import moment from 'moment';
 import { useState } from 'react';
-import SimpleLayout from 'src/layouts/simple-layout';
 import Image from 'next/image';
 
 export default function SimpleHomeView({ pubs, posts }) {
   const [showMoreNews, setShowMoreNews] = useState(false);
 
   return (
-    <SimpleLayout contentWidth={900} paddingTop={160}>
+    <>
       <div className=" flex">
         <Image
           src="https://lsalab.cs.nthu.edu.tw/~kswang/avatar.png"
           width={182}
           height={182}
-          objectFit='cover'
+          objectFit="cover"
           className="rounded-full"
         />
         <div className="ml-10">
@@ -159,6 +158,6 @@ export default function SimpleHomeView({ pubs, posts }) {
         Academic Services
       </div>
       <p>Coming Soon</p>
-    </SimpleLayout>
+    </>
   );
 }

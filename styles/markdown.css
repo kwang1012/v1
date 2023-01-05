@@ -108,6 +108,21 @@
   font-size: 16px;
   line-height: 1.5;
   word-wrap: break-word;
+  --h1: 2em;
+  --h2: 1.5em;
+  --h3: 1.25em;
+  --h4: 1em;
+  --h5: 0.875em;
+  --h6: 0.85em;
+}
+
+.markdown-body.small {
+  --h1: 1.5em;
+  --h2: 1.2em;
+  --h3: 1em;
+  --h4: .9em;
+  --h5: 0.7em;
+  --h6: 0.6em;
 }
 
 .markdown-body .octicon {
@@ -174,8 +189,11 @@
   margin: 0.67em 0;
   font-weight: 600;
   padding-bottom: 0.3em;
-  font-size: 2em;
+  font-size: var(--h1);
   border-bottom: 1px solid var(--color-border-muted);
+}
+.markdown-body.small h1 {
+  margin: 0.335em 0;
 }
 
 .markdown-body mark {
@@ -356,38 +374,53 @@
   font-weight: 600;
   line-height: 1.25;
 }
+.markdown-body.small h1,
+.markdown-body.small h2,
+.markdown-body.small h3,
+.markdown-body.small h4,
+.markdown-body.small h5,
+.markdown-body.small h6 {
+  margin-top: 12px;
+  margin-bottom: 8px;
+}
 
 .markdown-body h2 {
   font-weight: 600;
   padding-bottom: 0.3em;
-  font-size: 1.5em;
+  font-size: var(--h2);
   border-bottom: 1px solid var(--color-border-muted);
 }
 
 .markdown-body h3 {
   font-weight: 600;
-  font-size: 1.25em;
+  font-size: var(--h3);
 }
 
 .markdown-body h4 {
   font-weight: 600;
-  font-size: 1em;
+  font-size: var(--h4);
 }
 
 .markdown-body h5 {
   font-weight: 600;
-  font-size: 0.875em;
+  font-size: var(--h5);
 }
 
 .markdown-body h6 {
   font-weight: 600;
-  font-size: 0.85em;
+  font-size: var(--h6);
   color: var(--color-fg-muted);
 }
 
 .markdown-body p {
   margin-top: 0;
   margin-bottom: 10px;
+}
+
+.markdown-body.small p {
+  margin-top: 0;
+  margin-bottom: 5px;
+  font-size: var(--h4);
 }
 
 .markdown-body blockquote {

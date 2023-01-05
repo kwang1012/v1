@@ -1,7 +1,6 @@
 import Calendar from 'react-calendar';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import Script from 'next/script';
 import moment from 'moment';
 import Link from 'next/link';
 

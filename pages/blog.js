@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import SimpleLayout from 'src/layouts/simple-layout';
 import BlogView from 'src/simpleViews/blog';
 import { normalize } from 'src/utils';
 import { api } from 'src/utils/api';
@@ -13,6 +14,10 @@ export default function Blog({ posts, categories }) {
     </>
   );
 }
+
+Blog.getLayout = function getLayout(page) {
+  return <SimpleLayout>{page}</SimpleLayout>;
+};
 
 export async function getServerSideProps() {
   var { data } = await api.get('posts', {
