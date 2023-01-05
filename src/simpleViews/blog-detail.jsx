@@ -69,7 +69,6 @@ function Header({ h, level }) {
 }
 
 export default function BlogDetailView({ post }) {
-
   const themeValue = useSelector((state) => state.theme.value);
   const headers = [
     { field: 'university', headerName: 'university' },
@@ -181,11 +180,12 @@ export default function BlogDetailView({ post }) {
           <h1 className="text-3xl mb-10">{post.title}</h1>
           <ReactMarkdown
             className={`markdown-body markdown-content ${themeValue}`}
-            children={post.content}
             remarkPlugins={[remarkGfm]}
             rehypePlugins={[rehypeRaw]}
-          />
-          <CommentBlock post={post}/>
+          >
+            {post.content}
+          </ReactMarkdown>
+          <CommentBlock post={post} />
         </div>
       </div>
     </>

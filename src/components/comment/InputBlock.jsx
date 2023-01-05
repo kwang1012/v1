@@ -211,10 +211,11 @@ export default function InputBlock({
             >
               <ReactMarkdown
                 className={`p-1 markdown-body small ${themeValue} `}
-                children={values.content}
                 remarkPlugins={[remarkGfm]}
                 rehypePlugins={[rehypeRaw]}
-              />
+              >
+                {values.content}
+              </ReactMarkdown>
             </div>
           )}
         </div>
@@ -255,6 +256,7 @@ export default function InputBlock({
             <a
               href="https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax"
               target="_blank"
+              rel="noreferrer"
             >
               <FontAwesomeIcon icon={faMarkdown} className="cursor-pointer text-gray-500" />
             </a>

@@ -64,10 +64,11 @@ export default function Comment({ comment, post }) {
 
               <ReactMarkdown
                 className={`p-1 markdown-body small ${themeValue}`}
-                children={comment.content}
                 remarkPlugins={[remarkGfm]}
                 rehypePlugins={[rehypeRaw]}
-              />
+              >
+                {comment.content}
+              </ReactMarkdown>
               {/* <div className="mt-3">{comment.content}</div> */}
             </div>
             <div className="w-10 flex items-center">
