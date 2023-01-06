@@ -1,20 +1,28 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
 export const themeSlice = createSlice({
-    name: 'theme',
-    initialState: {
-        value: 'dark'
+  name: 'theme',
+  initialState: {
+    value: 'light',
+    modified: false,
+  },
+  reducers: {
+    dark: (state) => {
+      state.value = 'dark';
+      state.modified = true;
     },
-    reducers: {
-        dark: state => {
-            state.value = 'dark';
-        },
-        light: state => {
-            state.value = 'light';
-        }
-    }
+    light: (state) => {
+      state.value = 'light';
+      state.modified = true;
+    },
+    onBrowserThemeChange: (state, { payload }) => {
+      if (!state.modified) {
+        state.value = payload ? 'dark' : 'light';
+      }
+    },
+  },
 });
 
-export const { dark, light } = themeSlice.actions;
+export const { dark, light, onBrowserThemeChange } = themeSlice.actions;
 
 export default themeSlice.reducer;

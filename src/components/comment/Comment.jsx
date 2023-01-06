@@ -58,9 +58,15 @@ export default function Comment({ comment, post }) {
           <div className="flex items-start">
             <div className="flex-1">
               <div>
-                <span className="text-[#cc3363] font-bold">{comment.name}</span>
+                <span className="text-[#cc3363] font-bold cursor-pointer">{comment.name}</span>
                 <span className="text-sm text-gray-400"> {moment(comment.createdAt).format('YYYY-MM-DD')}</span>
               </div>
+
+              {comment.parent && (
+                <div className="text-sm px-1 my-2 text-gray-600">
+                  Reply <span className="cursor-pointer text-blue-500 font-bold">@{comment.parent.name}</span>:
+                </div>
+              )}
 
               <ReactMarkdown
                 className={`p-1 markdown-body small ${themeValue}`}

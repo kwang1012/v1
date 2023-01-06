@@ -175,7 +175,14 @@ export default function InputBlock({
           <div
             className="mr-1 p-1 border rounded-[4px] border-solid flex-1 h-[109px] scrollbar"
             style={{
-              borderColor: themeValue === 'light' ? 'rgba(0,0,0,0.23)' : 'rgba(255,255,255,0.23)',
+              borderColor:
+                themeValue === 'light'
+                  ? errors.content
+                    ? '#d32f2f'
+                    : 'rgba(0,0,0,0.23)'
+                  : errors.content
+                  ? '#f44336'
+                  : 'rgba(255,255,255,0.23)',
             }}
           >
             <TextField
@@ -219,16 +226,6 @@ export default function InputBlock({
             </div>
           )}
         </div>
-        {/* {errors.content && (
-            <Box component="label" fontSize={12} color="red">
-              {errors.content}
-            </Box>
-          )} */}
-        {/* {sent && (
-              <Box component="p" color="#5C9EAD">
-                Your message has been sent!
-              </Box>
-            )} */}
         {error && (
           <Box component="p" color="red">
             {error}
@@ -248,7 +245,7 @@ export default function InputBlock({
               ],
             }}
           >
-            <IconButton style={{ padding: 0 }}>
+            <IconButton className="p-0">
               <Face />
             </IconButton>
           </Tooltip>
@@ -261,18 +258,15 @@ export default function InputBlock({
               <FontAwesomeIcon icon={faMarkdown} className="cursor-pointer text-gray-500" />
             </a>
             {onCancel && (
-              <Button size="small" variant="outlined" disableElevation sx={{ marginLeft: 2 }} onClick={onCancel}>
+              <Button className="ml-2" size="small" variant="outlined" disableElevation onClick={onCancel}>
                 <span className="normal-case">Cancel</span>
               </Button>
             )}
             <Button
+              className="mx-2"
               size="small"
               variant="outlined"
               disableElevation
-              sx={{
-                marginLeft: 2,
-                marginRight: 2,
-              }}
               onClick={() => setPreview((state) => !state)}
             >
               <span className="normal-case">Preview</span>

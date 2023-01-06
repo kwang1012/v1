@@ -1,5 +1,5 @@
 node -v
 git pull origin main
-yarn install
+yarn install --frozen-lockfile
 yarn build
 yarn deploy
