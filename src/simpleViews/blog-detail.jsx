@@ -66,8 +66,13 @@ export default function BlogDetailView({ post }) {
           className="opacity-0 xl:opacity-100 transition-opacity flex fixed left-0 pt-24 pr-10 h-screen w-[calc(50%-400px)] flex-shrink-0 justify-end"
         />
         <IconButton
-          className="xl:opacity-0 transition-opacity fixed bottom-16 left-16 bg-[#e6e6e6] text-[#868686] rounded-md shadow-app"
+          className="xl:opacity-0 transition-opacity fixed bottom-2 left-2 sm:bottom-4 sm:left-4 md:bottom-8 md:left-8 lg:bottom-16 lg:left-16 bg-[#e6e6e6] text-[#868686] rounded-md shadow-app"
           onClick={handleClick}
+          sx={{
+            '&:hover': {
+              backgroundColor: '#b6b6b6'
+            }
+          }}
         >
           <MenuIcon fontSize="small" />
         </IconButton>
@@ -79,6 +84,7 @@ export default function BlogDetailView({ post }) {
           transformOrigin={{ horizontal: 'left', vertical: 'bottom' }}
           elevation={0}
           container={anchorEl?.parentNode}
+          className="xl:hidden"
           sx={{
             '& .MuiPaper-root': {
               padding: 2,

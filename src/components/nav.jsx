@@ -1,5 +1,5 @@
 import styles from 'styles/nav.module.scss';
-import { Button, Box, Link } from '@mui/material';
+import { Button, Box, Link, IconButton, Backdrop } from '@mui/material';
 import ThemeSwitch from './ThemeSwitch';
 import { dark, light } from 'src/store/theme';
 import { useDispatch, useSelector } from 'react-redux';
@@ -154,8 +154,14 @@ export default function Nav({ scrollTo, isSimple }) {
           <MenuIcon className={[styles.hamburger, styles.rwd].join(' ')} />
         </Box>
       </ul>
-      <Box className={[styles.mobileMenu, styles.rwd, isMenuOpen ? styles.open : ''].join(' ')}>
-        <Box className={styles.wrapper}>
+      <Backdrop
+        open={isMenuOpen}
+        className={[styles.mobileMenu, styles.rwd, isMenuOpen ? styles.open : ''].join(' ')}
+        onClick={(e) => {
+          if (e.target.id === 'overlay') setIsMenuOpen(false);
+        }}
+      >
+        <Box id="overlay" className={styles.wrapper}>
           <Box className={[styles.bg, isMenuOpen && styles.open].join(' ')}></Box>
           <Box className={[styles.bg1, isMenuOpen && styles.open].join(' ')}></Box>
           <Box className={styles.menu}>
@@ -163,20 +169,28 @@ export default function Nav({ scrollTo, isSimple }) {
               {tabs.map((tab, i) => {
                 if (i === 0)
                   return (
-                    <li key={i} onClick={tab.onClick}>
+                    <li
+                      key={i}
+                      onClick={() => {
+                        tab.onClick();
+                        setIsMenuOpen(false);
+                      }}
+                    >
                       {tab.text}
                     </li>
                   );
                 return (
-                  <li key={i} onClick={tab.onClick}>
+                  <li
+                    key={i}
+                    onClick={() => {
+                      tab.onClick();
+                      setIsMenuOpen(false);
+                    }}
+                  >
                     {`0${i}.${tab.text}`}
                   </li>
                 );
               })}
-              {/* <li onClick={() => scrollTo('top')}>Kai Wang</li>
-              <li onClick={() => scrollTo('writing')}>01.Publications</li>
-              <li onClick={() => scrollTo('work')}>02.Experiences</li>
-              <li onClick={() => scrollTo('contact')}>03.Contact</li> */}
               <Button className={styles.resume} color="primary" variant="outlined">
                 <Link
                   style={{ textDecoration: 'none' }}
@@ -195,11 +209,11 @@ export default function Nav({ scrollTo, isSimple }) {
               />
             </ul>
           </Box>
-          <Box className={styles.closeBtn} onClick={() => setIsMenuOpen(false)}>
+          <IconButton className={styles.closeBtn} onClick={() => setIsMenuOpen(false)}>
             <HighlightOffIcon color="primary" style={{ fontSize: '40px' }} />
-          </Box>
+          </IconButton>
         </Box>
-      </Box>
+      </Backdrop>
     </Box>
   );
 }

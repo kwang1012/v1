@@ -24,7 +24,7 @@ export default function ThemeSwitch({ inMenu, size, ...props }) {
       <div
         className={[styles.container, styles[size]].join(' ')}
         onClick={onClick}
-        style={{ backgroundColor: inMenu ? '#eaebec' : value ? '#cacbcc' : '#5a5b5c' }}
+        style={{ backgroundColor: value ? '#cacbcc' : '#5a5b5c' }}
       >
         <NightStayIcon className={[styles.icon, styles.night].join(' ')} />
         <Brightness7Icon className={[styles.icon, styles.day].join(' ')} />
