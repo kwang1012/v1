@@ -57,10 +57,10 @@ export default function SimpleFooter() {
 
   return (
     <div className="text-center mt-40 flex flex-col justify-end p-5">
-      <div className="flex w-[600px] mx-auto">
-        <div className="flex-1 flex-shrink-0 mr-2" id="map-container" key="unique-map"></div>
+      <div className="flex justify-center flex-wrap gap-4">
+        <div className="flex-shrink-0 w-[300px] mb-4" id="map-container" key="unique-map"></div>
         <Link href="/schedule">
-          <div className="flex-1 flex-shrink-0 ml-2 h-[176px]">
+          <div className="flex-shrink-0 w-[300px] h-[176px]">
             <Calendar
               calendarType="US"
               minDetail="year"

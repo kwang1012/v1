@@ -13,7 +13,7 @@ export default function SimpleHomeView({ pubs, posts }) {
 
   return (
     <>
-      <div className=" flex">
+      <div className="flex flex-wrap justify-center md:justify-start">
         <Image
           src="https://lsalab.cs.nthu.edu.tw/~kswang/avatar.png"
           width={182}

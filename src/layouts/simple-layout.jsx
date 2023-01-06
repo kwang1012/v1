@@ -9,7 +9,7 @@ export default function SimpleLayout({ children, contentWidth = 800, paddingTop 
         children
       ) : (
         <div
-          className={'mx-auto min-h-screen'}
+          className={'mx-auto min-h-screen px-5'}
           style={{
             paddingTop: `${paddingTop}px`,
             maxWidth: `${contentWidth}px`,
