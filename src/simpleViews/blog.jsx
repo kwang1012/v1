@@ -15,7 +15,7 @@ export default function BlogView({ posts, categories }) {
         for some posts. Despite me being a CS student, this will not be a technical blog.
       </p>
       <div className="flex mt-20">
-        <div className="flex-grow mr-4">
+        <div className="flex-grow md:mr-4">
           {posts.map((post, i) => (
             <div
               key={i}
@@ -39,13 +39,23 @@ export default function BlogView({ posts, categories }) {
           ))}
         </div>
         <div className="w-[245px] flex-shrink-0 hidden md:block">
-          <div className="rounded-md overflow-hidden shadow-md mb-4 border border-solid border-gray-200">
+          <div className="rounded-md overflow-hidden shadow-md mb-4 border border-solid border-gray-200 flex flex-col aspect-[9/13]">
             <Image src="https://lsalab.cs.nthu.edu.tw/~kswang/avatar.png" width={245} height={272} objectFit="cover" />
-            <div className="px-4">
+            <div
+              className="px-4 flex-1"
+              style={{
+                background: 'linear-gradient(90deg, #fc5c7d70, #6a82fb70)',
+              }}
+            >
               <h3>Kai Wang</h3>
             </div>
           </div>
-          <div className="p-4 text-left rounded-md overflow-hidden shadow-md mb-4 border border-solid border-gray-200">
+          <div
+            className="p-4 text-left rounded-md overflow-hidden shadow-md mb-4 border border-solid border-gray-200"
+            style={{
+              background: 'linear-gradient(60deg, #fc5c7d70, #6a82fb70)',
+            }}
+          >
             <div>
               <FontAwesomeIcon icon={faFolderOpen}></FontAwesomeIcon>
               <span className="ml-2">Article Category</span>
@@ -57,7 +67,12 @@ export default function BlogView({ posts, categories }) {
               </div>
             ))}
           </div>
-          <div className="p-4 rounded-md overflow-hidden shadow-md mb-4 border border-solid border-gray-200">
+          <div
+            className="p-4 rounded-md overflow-hidden shadow-md mb-4 border border-solid border-gray-200"
+            style={{
+              background: 'linear-gradient(30deg, #fc5c7d70, #6a82fb70)',
+            }}
+          >
             <div className="text-sm">
               <FontAwesomeIcon icon={faMedal}></FontAwesomeIcon>
               <span className="ml-2">Web Info</span>

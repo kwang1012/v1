@@ -1,6 +1,8 @@
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 import { useState } from 'react';
 import { flat } from 'src/utils';
+import { IconButton, Menu } from '@mui/material';
+import { Menu as MenuIcon } from '@mui/icons-material';
 
 function collectHeaders(el, n, position, prefix = '') {
   if (n === 6)
@@ -58,7 +60,18 @@ function Header({ h, level }) {
   );
 }
 
-export default function BlogOutline({ id = '', className, content, scrollOffset, width }) {
+function HeaderList({ id = '', className, scrollOffset, content, width }) {
+  // menu
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [openOutline, setOpenOutline] = useState(false);
+  const handleClick = (event) => {
+    setOpenOutline(true);
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setOpenOutline(false);
+  };
+
   const [headerList, setHeaderList] = useState([]);
 
   const updateHeaderList = () => {
@@ -76,7 +89,6 @@ export default function BlogOutline({ id = '', className, content, scrollOffset,
     }
   };
   useEffect(updateHeaderList, [content, width]);
-
   const [progress, setProgress] = useState(0);
   useEffect(() => {
     const flatList = flat(headerList);
@@ -98,7 +110,8 @@ export default function BlogOutline({ id = '', className, content, scrollOffset,
       }
     }
   }, [scrollOffset, headerList]);
-  return (
+
+  const component = (
     <div className={className || 'flex'}>
       <div className="w-[2px] h-10 bg-[#CC3363] mr-5 transition-all" style={{ height: `${progress}px` }} />
       <div>
@@ -108,5 +121,58 @@ export default function BlogOutline({ id = '', className, content, scrollOffset,
       </div>
       {!className && <div className="w-[2px] h-10 ml-5" />}
     </div>
+  );
+  return id === 'menu'
+    ? headerList.length && (
+        <>
+          <IconButton
+            className="xl:opacity-0 transition-opacity fixed bottom-2 left-2 sm:bottom-4 sm:left-4 md:bottom-8 md:left-8 lg:bottom-16 lg:left-16 bg-[#e6e6e6] text-[#868686] rounded-md shadow-app"
+            onClick={handleClick}
+            sx={{
+              '&:hover': {
+                backgroundColor: '#b6b6b6',
+              },
+            }}
+          >
+            <MenuIcon fontSize="small" />
+          </IconButton>
+          <Menu
+            anchorEl={anchorEl}
+            open={openOutline}
+            onClose={handleClose}
+            anchorOrigin={{ horizontal: 'left', vertical: 'top' }}
+            transformOrigin={{ horizontal: 'left', vertical: 'bottom' }}
+            elevation={0}
+            container={anchorEl?.parentNode}
+            className="xl:hidden"
+            sx={{
+              '& .MuiPaper-root': {
+                padding: 2,
+                border: '1px solid rgba(229, 231, 235, 1)',
+                boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+              },
+              '& .MuiList-root': {
+                padding: 0,
+              },
+            }}
+          >
+            {component}
+          </Menu>
+        </>
+      )
+    : component;
+}
+
+export default function BlogOutline({ content, scrollOffset, width }) {
+  return (
+    <>
+      <HeaderList
+        content={content}
+        scrollOffset={scrollOffset}
+        width={width}
+        className="opacity-0 xl:opacity-100 transition-opacity flex fixed left-0 pt-24 pr-10 h-screen w-[calc(50%-400px)] flex-shrink-0 justify-end"
+      />
+      <HeaderList id="menu" content={content} scrollOffset={scrollOffset} width={width} />
+    </>
   );
 }

@@ -16,7 +16,7 @@ export default function Blog({ posts, categories }) {
 }
 
 Blog.getLayout = function getLayout(page) {
-  return <SimpleLayout>{page}</SimpleLayout>;
+  return <SimpleLayout contentWidth={1000}>{page}</SimpleLayout>;
 };
 
 export async function getServerSideProps() {
