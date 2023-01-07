@@ -49,8 +49,8 @@ export default function BlogDetailView({ post }) {
         <BlogOutline content={post.content} scrollOffset={scrollOffset} width={width} />
         <div className="pt-24 px-5 max-w-[800px] mx-auto">
           <div className="flex justify-between items-center">
-            <div className="bg-[#CC3363] py-[2px] px-2 rounded-sm table text-white text-sm">
-              {post.post_category.name}
+            <div className="bg-primary py-[2px] px-2 rounded-sm table text-white text-sm">
+              {post.post_category?.name}
             </div>
             <div className="flex mt-3 items-center">
               <FontAwesomeIcon icon={faUser} />
@@ -68,9 +68,9 @@ export default function BlogDetailView({ post }) {
             {post.content}
           </ReactMarkdown>
           <CommentBlock post={post} />
-          {post.related_posts.length > 0 && <h3 className="mt-20 text-[#cc3363]">Maybe you'd like to read...</h3>}
+          {post.related_posts?.length > 0 && <h3 className="mt-20 text-primary">Maybe you'd like to read...</h3>}
           <div className="flex scrollbar w-full horz">
-            {post.related_posts.map((related_post, i) => (
+            {post.related_posts?.map((related_post, i) => (
               <Link
                 key={i}
                 href={{
@@ -83,7 +83,7 @@ export default function BlogDetailView({ post }) {
                 <div className="flex flex-col w-60 aspect-[16/10] flex-shrink-0 mr-2 shadow-md border border-solid border-gray-200 p-3 rounded-md text-left cursor-pointer hover:shadow-2xl transition-shadow">
                   <div className="text-lg font-bold line-clamp-1">{related_post.title}</div>
                   <div className="line-clamp-2 mt-3">{related_post.abstract}</div>
-                  <div className="flex justify-end text-[#CC3363] mt-auto cursor-pointer text-sm">Read More</div>
+                  <div className="flex justify-end text-primary mt-auto cursor-pointer text-sm">Read More</div>
                 </div>
               </Link>
             ))}

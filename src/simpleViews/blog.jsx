@@ -37,7 +37,7 @@ export default function BlogView({ posts, categories, pagination }) {
                 </div>
               </div>
               <div className="line-clamp-2 mt-5">{post.abstract}</div>
-              <div className="flex justify-end text-[#CC3363] mt-5 cursor-pointer">Read More</div>
+              <div className="flex justify-end text-primary mt-5 cursor-pointer">Read More</div>
             </div>
           ))}
           <Pagination
@@ -86,7 +86,7 @@ export default function BlogView({ posts, categories, pagination }) {
             {categories.map((category, i) => (
               <div key={i} className="flex justify-between mt-3 items-center">
                 <span className="text-sm">{category.name}</span>
-                <div className="bg-[#cc3363] py-[2px] px-2 rounded-xl text-xs text-white">{category.posts.count}</div>
+                <div className="bg-primary py-[2px] px-2 rounded-xl text-xs text-white">{category.posts.count}</div>
               </div>
             ))}
           </div>

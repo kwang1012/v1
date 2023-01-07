@@ -113,7 +113,7 @@ function HeaderList({ id = '', className, scrollOffset, content, width }) {
 
   const component = (
     <div className={className || 'flex'}>
-      <div className="w-[2px] h-10 bg-[#CC3363] mr-5 transition-all" style={{ height: `${progress}px` }} />
+      <div className="w-[2px] h-10 bg-primary mr-5 transition-all" style={{ height: `${progress}px` }} />
       <div>
         {headerList.map((h, i) => (
           <Header key={i} h={h} level={0} />

@@ -111,7 +111,7 @@ export function ScheduleView() {
             <>
               {events[year][month][day].map((evt, i) => (
                 <div key={i} className="flex items-center last:mb-2">
-                  <div className="h-2 w-2 flex-shrink-0 rounded-full bg-[#CC3363]" />
+                  <div className="h-2 w-2 flex-shrink-0 rounded-full bg-primary" />
                   <div className="ml-2 hidden flex-shrink-0 text-sm lg:block">{format(evt.start.dateTime)}</div>
                   <div className="ml-2 text-xs line-clamp-1 md:text-sm">{evt.summary}</div>
                 </div>

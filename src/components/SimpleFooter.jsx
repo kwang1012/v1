@@ -74,7 +74,7 @@ export default function SimpleFooter() {
                 const month = date.getMonth() + 1;
                 const day = date.getDate();
                 if (!events[year] || !events[year][month] || !events[year][month][day]) return <></>;
-                return <div className="h-1 w-1 flex-shrink-0 rounded-full bg-[#CC3363] mx-auto" />;
+                return <div className="h-1 w-1 flex-shrink-0 rounded-full bg-primary mx-auto" />;
               }}
               formatDay={(_, date) => <div className="react-calendar__tile-title">{date.getDate()}</div>}
             />

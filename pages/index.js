@@ -45,10 +45,12 @@ export default function Home({ pubs, posts, isSimple }) {
 }
 
 Home.getLayout = function getLayout(page) {
-  return (
+  return page.props.isSimple ? (
     <SimpleLayout contentWidth={900} paddingTop={160}>
       {page}
     </SimpleLayout>
+  ) : (
+    page
   );
 };
 

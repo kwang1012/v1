@@ -86,7 +86,7 @@ export default function SimpleHomeView({ pubs, posts }) {
         <SimplePublicationCard key={i} pub={pub} />
       ))}
       <Link href="/pubs">
-        <div className="mt-6 text-[#cc3363] cursor-pointer hover:underline">
+        <div className="mt-6 text-primary cursor-pointer hover:underline">
           <FontAwesomeIcon icon={faArrowRight} />
           <span className="ml-2">Full list</span>
         </div>
@@ -112,7 +112,7 @@ export default function SimpleHomeView({ pubs, posts }) {
         </div>
       ))}
       <Link href="/blog">
-        <div className="mt-6 text-[#cc3363] cursor-pointer hover:underline">
+        <div className="mt-6 text-primary cursor-pointer hover:underline">
           <FontAwesomeIcon icon={faArrowRight} />
           <span className="ml-2">Full list</span>
         </div>

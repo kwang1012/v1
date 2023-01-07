@@ -167,7 +167,12 @@ export default function HomeView({ pubs }) {
               <br />
               In addition, I work at Skymizer as an intern & focus on optimizing the performance of DL inference.
             </h2>
-            <Image src="https://lsalab.cs.nthu.edu.tw/~kswang/avatar.png" width={150} height={150} />
+            <Image
+              src="https://lsalab.cs.nthu.edu.tw/~kswang/avatar.png"
+              width={150}
+              height={150}
+              objectFit="contain"
+            />
           </div>
           <h4>
             Scroll Down

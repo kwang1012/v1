@@ -6,7 +6,7 @@ export default function SimplePublicationCard({ pub, ...props }) {
   return (
     <div {...props} className="shadow-md mt-4 border border-solid border-gray-200 p-5 rounded-md flex flex-wrap">
       <div className=" w-[120px] flex-shrink-0 relative flex items-center">
-        <div className="absolute bg-[#CC3363] text-white p-1 rounded-md text-sm z-10 top-0">{pub.venue.short}</div>
+        <div className="absolute bg-primary text-white p-1 rounded-md text-sm z-10 top-0">{pub.venue.short}</div>
         {pub.image && <Image src={pub.image} width='100%' height='100%' objectFit='contain' />}
       </div>
       <div className="ml-5 flex-1">

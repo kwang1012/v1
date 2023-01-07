@@ -65,7 +65,7 @@ export default function Comment({ comment, post }) {
           <div className="flex items-start">
             <div className="flex-1">
               <div>
-                <span className="text-[#cc3363] font-bold cursor-pointer">{comment.name}</span>
+                <span className="text-primary font-bold cursor-pointer">{comment.name}</span>
                 <span className="text-sm text-gray-400"> {moment(comment.createdAt).format('YYYY-MM-DD')}</span>
               </div>
 
@@ -86,7 +86,7 @@ export default function Comment({ comment, post }) {
             <div className="flex items-center">
               <IconButton
                 size="small"
-                className="text-[#cc3363] p-1"
+                className="text-primary p-1"
                 onClick={() => {
                   dispatch(thumb(comment.id));
                   setLike((like) => like + (!thumbUp ? 1 : -1));
@@ -115,11 +115,11 @@ export default function Comment({ comment, post }) {
               >
                 {thumbUp ? <ThumbUp fontSize="small" /> : <ThumbUpOutlined fontSize="small" />}
               </IconButton>
-              {like !== 0 && <span className="text-[#cc3363] text-sm">{like}</span>}
-              <IconButton size="small" className="text-[#cc3363] p-1" onClick={() => setEditting(true)}>
+              {like !== 0 && <span className="text-primary text-sm">{like}</span>}
+              <IconButton size="small" className="text-primary p-1" onClick={() => setEditting(true)}>
                 {comment.children.count ? <ChatBubble fontSize="small" /> : <ChatBubbleOutline fontSize="small" />}
               </IconButton>
-              {comment.children.count !== 0 && <span className="text-[#cc3363] text-sm">{comment.children.count}</span>}
+              {comment.children.count !== 0 && <span className="text-primary text-sm">{comment.children.count}</span>}
             </div>
           </div>
           {editting && (

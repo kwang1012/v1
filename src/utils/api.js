@@ -1,5 +1,5 @@
 import axios from 'axios';
 
 export const api = axios.create({
-  baseURL: 'https://admin.kwang.cc/api',
+  baseURL: process.env.NEXT_API_URL,
 });
