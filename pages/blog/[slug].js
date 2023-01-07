@@ -29,12 +29,10 @@ export async function getServerSideProps({ params }) {
       },
     };
   } catch (e) {
-    console.log(e);
     return {
       redirect: {
         permanet: true,
         destination: '/blog',
-        props: {},
       },
     };
   }

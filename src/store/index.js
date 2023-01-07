@@ -1,16 +1,16 @@
-import { combineReducers, configureStore, createSerializableStateInvariantMiddleware, isPlain } from '@reduxjs/toolkit';
+import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { createWrapper } from 'next-redux-wrapper';
-import themeReducer from './theme';
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
-import { Iterable } from 'immutable';
+import themeReducer from './theme';
+import localReducer from './local';
 
 const persistConfig = {
   key: 'root',
   storage,
 };
 
-const persistedReducer = persistReducer(persistConfig, combineReducers({ theme: themeReducer }));
+const persistedReducer = persistReducer(persistConfig, combineReducers({ theme: themeReducer, local: localReducer }));
 
 export const store = configureStore({
   reducer: persistedReducer,

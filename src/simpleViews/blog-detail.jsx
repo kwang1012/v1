@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser, faCalendar } from '@fortawesome/free-regular-svg-icons';
+import { faUser, faCalendar, faFolderOpen } from '@fortawesome/free-regular-svg-icons';
 import { useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
@@ -10,6 +10,7 @@ import { usePageTracking } from 'src/hooks/ga';
 import CommentBlock from 'src/components/comment/CommentBlock';
 import { useEffect } from 'react';
 import BlogOutline from 'src/components/BlogOutline';
+import Link from 'next/link';
 
 export default function BlogDetailView({ post }) {
   const themeValue = useSelector((state) => state.theme.value);
@@ -67,6 +68,26 @@ export default function BlogDetailView({ post }) {
             {post.content}
           </ReactMarkdown>
           <CommentBlock post={post} />
+          {post.related_posts.length > 0 && <h3 className="mt-20 text-[#cc3363]">Maybe you'd like to read...</h3>}
+          <div className="flex scrollbar w-full horz">
+            {post.related_posts.map((related_post, i) => (
+              <Link
+                key={i}
+                href={{
+                  pathname: '/blog/[slug]',
+                  query: {
+                    slug: related_post.slug,
+                  },
+                }}
+              >
+                <div className="flex flex-col w-60 aspect-[16/10] flex-shrink-0 mr-2 shadow-md border border-solid border-gray-200 p-3 rounded-md text-left cursor-pointer hover:shadow-2xl transition-shadow">
+                  <div className="text-lg font-bold line-clamp-1">{related_post.title}</div>
+                  <div className="line-clamp-2 mt-3">{related_post.abstract}</div>
+                  <div className="flex justify-end text-[#CC3363] mt-auto cursor-pointer text-sm">Read More</div>
+                </div>
+              </Link>
+            ))}
+          </div>
         </div>
       </div>
     </>

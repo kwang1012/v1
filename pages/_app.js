@@ -43,7 +43,7 @@ function App({ Component, pageProps }) {
     });
 
     // page loading
-    const start = () => {
+    const start = (e) => {
       NProgress.start();
     };
     const end = () => {

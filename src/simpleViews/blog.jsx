@@ -4,9 +4,12 @@ import { useRouter } from 'next/router';
 import moment from 'moment';
 import { faMedal } from '@fortawesome/free-solid-svg-icons';
 import Image from 'next/image';
+import { Pagination, PaginationItem } from '@mui/material';
+import Link from 'next/link';
 
-export default function BlogView({ posts, categories }) {
+export default function BlogView({ posts, categories, pagination }) {
   const router = useRouter();
+  const page = parseInt(router.query.page || '1');
   return (
     <>
       <h1>Kai's Blog</h1>
@@ -37,6 +40,26 @@ export default function BlogView({ posts, categories }) {
               <div className="flex justify-end text-[#CC3363] mt-5 cursor-pointer">Read More</div>
             </div>
           ))}
+          <Pagination
+            className="mt-10"
+            page={page}
+            count={pagination.pageCount}
+            color="primary"
+            shape="rounded"
+            variant="outlined"
+            renderItem={(item) => (
+              <Link
+                href={{
+                  query: {
+                    ...(item.page !== 1 && { page: item.page }),
+                  },
+                }}
+                scroll={false}
+              >
+                <PaginationItem {...item} />
+              </Link>
+            )}
+          />
         </div>
         <div className="w-[245px] flex-shrink-0 hidden md:block">
           <div className="rounded-md overflow-hidden shadow-md mb-4 border border-solid border-gray-200 flex flex-col aspect-[9/13]">

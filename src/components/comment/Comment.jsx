@@ -1,6 +1,6 @@
 import { faUser } from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { ChatBubbleOutline, ThumbUpOutlined } from '@mui/icons-material';
+import { ChatBubble, ChatBubbleOutline, ThumbUp, ThumbUpOutlined } from '@mui/icons-material';
 import { IconButton } from '@mui/material';
 import moment from 'moment';
 import { ReactSVG } from 'react-svg';
@@ -13,11 +13,17 @@ import { useState } from 'react';
 import { api } from 'src/utils/api';
 import { normalize } from 'src/utils';
 import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { thumb } from 'src/store/local';
 
 export default function Comment({ comment, post }) {
   const themeValue = useSelector((state) => state.theme.value);
   const [editting, setEditting] = useState(false);
 
+  const [like, setLike] = useState(comment.like);
+  useEffect(() => {
+    setLike(like);
+  }, [comment.like]);
   const fetchComments = (isMounted) => {
     setLoading(true);
     api
@@ -43,7 +49,8 @@ export default function Comment({ comment, post }) {
   }, []);
   const [loading, setLoading] = useState(false);
   const [comments, setComments] = useState([]);
-
+  const thumbUp = useSelector((state) => state.local.likes[comment.id]);
+  const dispatch = useDispatch();
   return (
     <>
       <div className="flex my-2 items-start">
@@ -75,15 +82,44 @@ export default function Comment({ comment, post }) {
               >
                 {comment.content}
               </ReactMarkdown>
-              {/* <div className="mt-3">{comment.content}</div> */}
             </div>
-            <div className="w-10 flex items-center">
-              <IconButton size="small" className="text-[#cc3363]">
-                <ThumbUpOutlined fontSize="small" />
+            <div className="flex items-center">
+              <IconButton
+                size="small"
+                className="text-[#cc3363] p-1"
+                onClick={() => {
+                  dispatch(thumb(comment.id));
+                  setLike((like) => like + (!thumbUp ? 1 : -1));
+                  api
+                    .patch(`/comment/${!thumbUp ? 'like' : 'unlike'}`, null, {
+                      params: {
+                        id: comment.id,
+                      },
+                    })
+                    .then(() => {
+                      api
+                        .get('/comment/like/view', {
+                          params: {
+                            id: comment.id,
+                          },
+                        })
+                        .then(({ data }) => {
+                          setLike(data);
+                        });
+                    })
+                    .catch(() => {
+                      dispatch(thumb(comment.id));
+                      setLike((like) => like - (!thumbUp ? 1 : -1));
+                    });
+                }}
+              >
+                {thumbUp ? <ThumbUp fontSize="small" /> : <ThumbUpOutlined fontSize="small" />}
               </IconButton>
-              <IconButton size="small" className="text-[#cc3363]" onClick={() => setEditting(true)}>
-                <ChatBubbleOutline fontSize="small" />
+              {like !== 0 && <span className="text-[#cc3363] text-sm">{like}</span>}
+              <IconButton size="small" className="text-[#cc3363] p-1" onClick={() => setEditting(true)}>
+                {comment.children.count ? <ChatBubble fontSize="small" /> : <ChatBubbleOutline fontSize="small" />}
               </IconButton>
+              {comment.children.count !== 0 && <span className="text-[#cc3363] text-sm">{comment.children.count}</span>}
             </div>
           </div>
           {editting && (
