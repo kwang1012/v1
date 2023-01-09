@@ -210,4 +210,6 @@ const ContactCard = forwardRef(({ inputOnly, ...props }, ref) => {
   );
 });
 
+ContactCard.displayName = 'ContactCard';
+
 export default ContactCard;
