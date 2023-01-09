@@ -30,27 +30,32 @@ export default function Nav({ scrollTo, isSimple }) {
         {
           text: 'Kai Wang',
           onClick: () => router.push('/'),
+          url: '/',
         },
-        {
-          text: 'Home',
-          onClick: () => router.push('/'),
-        },
+        // {
+        //   text: 'Home',
+        //   onClick: () => router.push('/'),
+        // },
         {
           text: 'Publications',
           onClick: () => router.push('/pubs'),
+          url: '/pubs',
         },
         {
           text: 'Experiences',
           onClick: () => router.push('/experiences'),
+          url: '/experiences',
         },
         {
           text: 'Blog',
           onClick: () => router.push('/blog'),
+          url: '/blog',
         },
-        // {
-        //   text: 'Miscellaneous',
-        //   onClick: () => router.push('/miscellaneous'),
-        // },
+        {
+          text: 'Miscellaneous',
+          onClick: () => router.push('/miscellaneous'),
+          url: '/miscellaneous',
+        },
       ];
     } else {
       return [
@@ -121,14 +126,18 @@ export default function Nav({ scrollTo, isSimple }) {
           if (i === 0)
             return (
               <li key={i} onClick={tab.onClick}>
-                {tab.text}
+                <Link href={tab.url} className="no-underline text-inherit">
+                  {tab.text}
+                </Link>
               </li>
             );
           return (
-            <li key={i} onClick={tab.onClick} className={styles.normal}>
-              <span>{`0${i}.`}</span>
-              {tab.text}
-              <span></span>
+            <li key={i} className={styles.normal}>
+              <Link href={tab.url} className="no-underline text-inherit">
+                <span>{`0${i}.`}</span>
+                {tab.text}
+                <span></span>
+              </Link>
             </li>
           );
         })}

@@ -1,8 +1,10 @@
 import { Box, TextField, Button } from '@mui/material';
 import axios from 'axios';
-import { useEffect, useState } from 'react';
+import { forwardRef, useEffect, useState } from 'react';
 import styles from 'styles/footer.module.scss';
 import CircularProgress from '@mui/material/CircularProgress';
+import { useImperativeHandle } from 'react';
+import { api } from 'src/utils/api';
 
 const initialFormValues = {
   name: '',
@@ -10,7 +12,13 @@ const initialFormValues = {
   message: '',
 };
 
-export default function ContactCard(props) {
+const ContactCard = forwardRef(({ inputOnly, ...props }, ref) => {
+  useImperativeHandle(ref, () => ({
+    submit() {
+      handleFormSubmit();
+    },
+  }));
+
   const [values, setValues] = useState(initialFormValues);
 
   const [errors, setErrors] = useState({});
@@ -33,21 +41,21 @@ export default function ContactCard(props) {
   }
 
   function handleFormSubmit(e) {
-    e.preventDefault();
+    e?.preventDefault();
+    setSent(false);
     if (validate()) {
       setLoading(true);
-      axios
-        .post('/api/message', values)
-        .then((res) => {
+      api
+        .post('messages', { data: values })
+        .then(() => {
+          setValues(initialFormValues);
           setSent(true);
-          setError(null);
+          setErrors({});
         })
         .catch((err) => {
           setError(err.message);
         })
         .finally(() => {
-          setValues(initialFormValues);
-          setErrors({});
           setLoading(false);
         });
     }
@@ -92,105 +100,114 @@ export default function ContactCard(props) {
     return isValid;
   }
 
+  const inputFields = (
+    <>
+      <Box display="grid" gridTemplateColumns="1fr 1fr" width={1}>
+        <Box mr={1}>
+          <Box component="h2" width={1} fontSize={14} ma={0} mb={1}>
+            Name*
+          </Box>
+          <TextField
+            size="small"
+            variant="outlined"
+            fullWidth
+            className={styles.input}
+            name="name"
+            value={values.name}
+            onChange={handleInput}
+            error={errors.name !== undefined}
+          />
+          {errors.name && (
+            <Box component="label" fontSize={12} color="red">
+              {errors.name}
+            </Box>
+          )}
+        </Box>
+        <Box ml={1}>
+          <Box component="h2" width={1} fontSize={14} ma={0} mb={1}>
+            Email Address*
+          </Box>
+          <TextField
+            size="small"
+            variant="outlined"
+            fullWidth
+            className={styles.input}
+            name="email"
+            value={values.email}
+            onChange={handleInput}
+            error={errors.email !== undefined}
+          />
+          <br />
+          {errors.email && (
+            <Box component="label" fontSize={12} color="red">
+              {errors.email}
+            </Box>
+          )}
+        </Box>
+      </Box>
+      <Box component="h2" width={1} fontSize={14} my={1}>
+        Message*
+      </Box>
+      <Box width={1}>
+        <TextField
+          size="small"
+          variant="outlined"
+          fullWidth
+          multiline={true}
+          maxRows={3}
+          name="message"
+          value={values.message}
+          onChange={handleInput}
+          error={errors.message !== undefined}
+        />
+        <br />
+        {errors.message && (
+          <Box component="label" fontSize={12} color="red">
+            {errors.message}
+          </Box>
+        )}
+        {sent && (
+          <Box component="p" color="#5C9EAD">
+            Your message has been sent!
+          </Box>
+        )}
+        {error && (
+          <Box component="p" color="red">
+            {error}
+          </Box>
+        )}
+      </Box>
+    </>
+  );
+
   return (
     <Box {...props}>
       <form onSubmit={handleFormSubmit}>
-        <Box
-          display="flex"
-          flexDirection="column"
-          alignItems="center"
-          bgcolor="card.background"
-          width={1}
-          height={1}
-          borderRadius={5}
-          px="5%"
-          py={5}
-        >
-          <Box component="h1" my="1.5vw">
-            Drop me a line
-          </Box>
-          <Box display="grid" gridTemplateColumns="1fr 1fr" width={1}>
-            <Box mr={1}>
-              <Box component="h2" width={1} fontSize={14} ma={0} mb={1}>
-                Name*
-              </Box>
-              <TextField
-                size="small"
-                variant="outlined"
-                fullWidth
-                className={styles.input}
-                name="name"
-                value={values.name}
-                onChange={handleInput}
-                error={errors.name !== undefined}
-              />
-              {errors.name && (
-                <Box component="label" fontSize={12} color="red">
-                  {errors.name}
-                </Box>
-              )}
-            </Box>
-            <Box ml={1}>
-              <Box component="h2" width={1} fontSize={14} ma={0} mb={1}>
-                Email Address*
-              </Box>
-              <TextField
-                size="small"
-                variant="outlined"
-                fullWidth
-                className={styles.input}
-                name="email"
-                value={values.email}
-                onChange={handleInput}
-                error={errors.email !== undefined}
-              />
-              <br />
-              {errors.email && (
-                <Box component="label" fontSize={12} color="red">
-                  {errors.email}
-                </Box>
-              )}
+        {inputOnly ? (
+          inputFields
+        ) : (
+          <Box
+            display="flex"
+            flexDirection="column"
+            alignItems="center"
+            bgcolor="card.background"
+            width={1}
+            height={1}
+            borderRadius={5}
+            px="5%"
+            py={5}
+          >
+            {inputFields}
+            <Box mt={5}>
+              <Button className={styles.button} style={{ width: 200 }} variant="outlined" color="primary" type="submit">
+                {loading ? <CircularProgress color="primary" size={24} /> : 'Send'}
+              </Button>
             </Box>
           </Box>
-          <Box component="h2" width={1} fontSize={14} my={1}>
-            Message*
-          </Box>
-          <Box width={1}>
-            <TextField
-              size="small"
-              variant="outlined"
-              fullWidth
-              multiline={true}
-              maxRows={3}
-              name="message"
-              value={values.message}
-              onChange={handleInput}
-              error={errors.message !== undefined}
-            />
-            <br />
-            {errors.message && (
-              <Box component="label" fontSize={12} color="red">
-                {errors.message}
-              </Box>
-            )}
-            {sent && (
-              <Box component="p" color="#5C9EAD">
-                Your message has been sent!
-              </Box>
-            )}
-            {error && (
-              <Box component="p" color="red">
-                {error}
-              </Box>
-            )}
-          </Box>
-          <Box mt={5}>
-            <Button className={styles.button} style={{ width: 200 }} variant="outlined" color="primary" type="submit">
-              {loading ? <CircularProgress color="primary" size={24} /> : 'Send'}
-            </Button>
-          </Box>
-        </Box>
+        )}
       </form>
     </Box>
   );
-}
+});
+
+export default ContactCard;

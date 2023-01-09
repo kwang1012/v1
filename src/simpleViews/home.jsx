@@ -25,17 +25,15 @@ export default function SimpleHomeView({ pubs, posts }) {
           <h1 className="mb-0">Kai Wang</h1>
           <div>A graduate student @ NTHU</div>
           <div className="flex text-secondary my-2">
-            {simpleProviders.map((provider, i) => {
-              return (
-                <FontAwesomeIcon
-                  key={i}
-                  className="cursor-pointer mr-4"
-                  icon={provider}
-                  size="2x"
-                  onClick={() => onClickProvider(provider)}
-                />
-              );
-            })}
+            {simpleProviders.map((provider, i) => (
+              <FontAwesomeIcon
+                key={i}
+                className="cursor-pointer mr-4"
+                icon={provider}
+                size="2x"
+                onClick={() => onClickProvider(provider)}
+              />
+            ))}
           </div>
           <div>
             Email:{' '}

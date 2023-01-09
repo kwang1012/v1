@@ -67,12 +67,13 @@ export default function InputBlock({
           setValues(initialFormValues);
           setSent(true);
           setErrors({});
-          setLoading(false);
           onSent(normalize(data));
         })
         .catch((err) => {
-          setLoading(false);
           setError(err.message);
+        })
+        .finally(() => {
+          setLoading(false);
         });
     }
   }
