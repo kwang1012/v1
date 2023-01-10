@@ -129,16 +129,17 @@
       ul {
         display: block;
         float: right;
+        margin-right: 10px;
         li {
-          width: 160px;
           text-align: left;
           color: white;
         }
         .resume {
+          width: calc(100% - 20px);
           margin-left: 10px;
         }
         .switch {
-          margin-left: 25px;
+          margin-left: 10px;
           margin-top: 10px;
         }
       }

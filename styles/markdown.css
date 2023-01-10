@@ -333,11 +333,14 @@
   width: max-content;
   max-width: 100%;
   overflow: auto;
+  margin: 0 auto;
 }
+
 
 .markdown-body td,
 .markdown-body th {
   padding: 0;
+  font-size: 15px;
 }
 
 .markdown-body details summary {

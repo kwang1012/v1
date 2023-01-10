@@ -149,14 +149,14 @@ export default function Nav({ scrollTo, isSimple }) {
         />
         {!isSimple && (
           <Button className={[styles.resume, styles.normal].join(' ')} color="primary" variant="outlined">
-            <Link
+            <a
               style={{ textDecoration: 'none' }}
               href="https://lsalab.cs.nthu.edu.tw/~kswang/cv.pdf"
               target="_blank"
               download
             >
               Resume
-            </Link>
+            </a>
           </Button>
         )}
         <Box onClick={() => setIsMenuOpen(true)}>
@@ -178,37 +178,27 @@ export default function Nav({ scrollTo, isSimple }) {
               {tabs.map((tab, i) => {
                 if (i === 0)
                   return (
-                    <li
-                      key={i}
-                      onClick={() => {
-                        tab.onClick();
-                        setIsMenuOpen(false);
-                      }}
-                    >
-                      {tab.text}
+                    <li key={i} onClick={() => setIsMenuOpen(false)}>
+                      <Link href={tab.url} className="no-underline text-inherit">
+                        {tab.text}
+                      </Link>
                     </li>
                   );
                 return (
-                  <li
-                    key={i}
-                    onClick={() => {
-                      tab.onClick();
-                      setIsMenuOpen(false);
-                    }}
-                  >
-                    {`0${i}.${tab.text}`}
+                  <li key={i} onClick={() => setIsMenuOpen(false)}>
+                    <Link href={tab.url} className="no-underline text-inherit">{`0${i}.${tab.text}`}</Link>
                   </li>
                 );
               })}
               <Button className={styles.resume} color="primary" variant="outlined">
-                <Link
+                <a
                   style={{ textDecoration: 'none' }}
                   href="https://lsalab.cs.nthu.edu.tw/~kswang/cv.pdf"
                   target="_blank"
                   download
                 >
                   Resume
-                </Link>
+                </a>
               </Button>
               <ThemeSwitch
                 checked={currentTheme == 'light'}
