@@ -153,6 +153,7 @@ export default function Nav({ scrollTo, isSimple }) {
               style={{ textDecoration: 'none' }}
               href="https://lsalab.cs.nthu.edu.tw/~kswang/cv.pdf"
               target="_blank"
+              rel='noreferrer'
               download
             >
               Resume
@@ -196,6 +197,7 @@ export default function Nav({ scrollTo, isSimple }) {
                   href="https://lsalab.cs.nthu.edu.tw/~kswang/cv.pdf"
                   target="_blank"
                   download
+                  rel='noreferrer'
                 >
                   Resume
                 </a>
