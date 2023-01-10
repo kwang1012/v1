@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, Card, IconButton, Popover } from '@mui/material';
-import { format } from 'src/utils';
+import { format } from '@/utils';
 import GoogleMeet from 'src/assets/google-meet.png';
 import Image from 'next/image';
 import { MoreVertRounded } from '@mui/icons-material';

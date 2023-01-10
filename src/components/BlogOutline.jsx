@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useState } from 'react';
-import { flat } from 'src/utils';
+import { flat } from '@/utils';
 import { IconButton, Menu } from '@mui/material';
 import { Menu as MenuIcon } from '@mui/icons-material';
 

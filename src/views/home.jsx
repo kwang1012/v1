@@ -1,9 +1,8 @@
-import Nav from 'src/components/nav';
+import Nav from '@/components/nav';
 import styles from 'styles/home.module.scss';
 import { gsap } from 'gsap';
 import { useRef, useEffect } from 'react';
 import { TextPlugin } from 'gsap/dist/TextPlugin';
-import { useTheme } from '@mui/material/styles';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import PublicationCard from 'src/components/PublicationCard';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
@@ -11,10 +10,10 @@ import { useSelector } from 'react-redux';
 import { Box, Button, TextField } from '@mui/material';
 import WorkCard from 'src/components/WorkCard';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import ContactCard from 'src/components/ContactCard';
+import ContactCard from '@/components/ContactCard';
 import { useRouter } from 'next/router';
 import { providers } from 'src/const';
-import { onClickProvider } from 'src/utils';
+import { onClickProvider } from '@/utils';
 import Image from 'next/image';
 
 gsap.registerPlugin(TextPlugin, ScrollTrigger);
