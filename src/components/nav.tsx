@@ -12,8 +12,8 @@ import MenuIcon from '@mui/icons-material/Menu';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import { useMemo } from 'react';
 import { useRouter } from 'next/router';
-import Link from 'next/link';
 import { RootState } from '@/store';
+import { ReactSVG } from 'react-svg';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -31,11 +31,27 @@ export default function Nav({ scrollTo, isSimple }: Props) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const router = useRouter();
 
+  const [loaded, setLoaded] = useState('');
+
+  const reloadSVG = () => {
+    setLoaded('');
+    setTimeout(() => {
+      setLoaded('/brand.svg');
+    }, 30);
+  };
+
+  useEffect(() => {
+    if (loaded != '') setTimeout(reloadSVG, 5000);
+  }, [loaded]);
+
+  useEffect(reloadSVG, []);
+
   const tabs = useMemo(() => {
     if (isSimple) {
       return [
         {
-          text: 'Kai Wang',
+          // text: 'Kai Wang',
+          text: loaded !== '' && <ReactSVG src={loaded} />,
           onClick: () => router.push('/'),
           url: '/',
         },
@@ -84,7 +100,7 @@ export default function Nav({ scrollTo, isSimple }: Props) {
         },
       ];
     }
-  }, [isSimple]);
+  }, [isSimple, loaded]);
 
   useEffect(() => {
     if (!isSimple) {
