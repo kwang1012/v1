@@ -41,7 +41,7 @@ export async function getServerSideProps() {
       'filters[selected][$eq]': true,
     },
   });
-  const isSimple = process.env.SIMPLE ? true : false;
+  const isSimple = process.env.SIMPLE === 'true';
   const props = {
     pubs: normalize(data),
     isSimple,

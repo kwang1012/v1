@@ -6,7 +6,7 @@ import { Close } from '@mui/icons-material';
 import { IconButton, CircularProgress } from '@mui/material';
 import { useMemo } from 'react';
 import { format } from '@/utils';
-import AppEventCard from 'src/components/AppEventCard';
+import AppEventCard from '@/components/AppEventCard';
 import axios from 'axios';
 
 export function ScheduleView() {

@@ -1,6 +1,6 @@
 import { Paper } from '@mui/material';
 import { useRouter } from 'next/router';
-import ProjectView from 'src/views/project';
+import ProjectView from '@/views/project';
 
 export default function Project() {
   const router = useRouter();

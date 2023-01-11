@@ -1,4 +1,4 @@
-import { Box, useTheme, Tooltip } from '@mui/material';
+import { Box, useTheme, Tooltip, AppTheme } from '@mui/material';
 import gsap from 'gsap';
 import { useRef } from 'react';
 import styles from 'styles/ProjectCard.module.scss';
@@ -7,13 +7,18 @@ import { useEffect } from 'react';
 
 gsap.registerPlugin(ScrollTrigger);
 
-export default function ProjectCard({ project, index }) {
-  const theme = useTheme();
+type Props = {
+  project: any;
+  index: number;
+};
+
+export default function ProjectCard({ project, index }: Props) {
+  const theme = useTheme<AppTheme>();
 
   const ref = useRef();
 
   useEffect(() => {
-    gsap.from(ref.current, {
+    gsap.from(ref.current!, {
       scrollTrigger: {
         trigger: ref.current,
         toggleActions: 'play none none none',
@@ -27,12 +32,7 @@ export default function ProjectCard({ project, index }) {
   }, []);
 
   return (
-    <Box
-      ref={ref}
-      className={styles.writingCard}
-      bgcolor="card.background"
-      style={{ boxShadow: theme.palette.shadow }}
-    >
+    <Box ref={ref} className={styles.writingCard} bgcolor="card.background" style={{ boxShadow: theme.palette.shadow }}>
       <div className={styles.wrapper}>
         {/* <div className={styles.tags}>
           <span className={styles.tag}>{project.venueShort}</span>

@@ -19,7 +19,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 type Props = {
   scrollTo?: Function;
-  isSimple: boolean;
+  isSimple?: boolean;
 };
 
 export default function Nav({ scrollTo, isSimple }: Props) {
@@ -46,19 +46,15 @@ export default function Nav({ scrollTo, isSimple }: Props) {
 
   useEffect(reloadSVG, []);
 
-  const tabs = useMemo(() => {
+  const tabs: any[] = useMemo(() => {
     if (isSimple) {
       return [
         {
-          // text: 'Kai Wang',
-          text: loaded !== '' && <ReactSVG src={loaded} />,
+          text: 'Kai Wang',
+          icon: loaded !== '' && <ReactSVG src={loaded} />,
           onClick: () => router.push('/'),
           url: '/',
         },
-        // {
-        //   text: 'Home',
-        //   onClick: () => router.push('/'),
-        // },
         {
           text: 'Publications',
           onClick: () => router.push('/pubs'),
@@ -84,6 +80,7 @@ export default function Nav({ scrollTo, isSimple }: Props) {
       return [
         {
           text: 'Kai Wang',
+          icon: loaded !== '' && <ReactSVG src={loaded} />,
           onClick: () => scrollTo?.('top'),
         },
         {
@@ -149,7 +146,7 @@ export default function Nav({ scrollTo, isSimple }: Props) {
           if (i === 0)
             return (
               <li key={i} onClick={tab.onClick}>
-                {tab.text}
+                {tab.icon}
               </li>
             );
           return (

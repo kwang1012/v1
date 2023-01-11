@@ -9,7 +9,7 @@ import moment from 'moment';
 import { usePageTracking } from '@/hooks/ga';
 import CommentBlock from '@/components/comment/CommentBlock';
 import { useEffect } from 'react';
-import BlogOutline from 'src/components/BlogOutline';
+import BlogOutline from '@/components/BlogOutline';
 import Link from 'next/link';
 import { RootState } from '@/store';
 

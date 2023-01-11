@@ -19,6 +19,7 @@ const initialFormValues: formType = {
 
 type Props = {
   inputOnly?: boolean;
+  className?: string;
 };
 
 type RefType = {

@@ -1,4 +1,4 @@
-import { Box, useTheme, Tooltip } from '@mui/material';
+import { Box, useTheme, Tooltip, AppTheme } from '@mui/material';
 import gsap from 'gsap';
 import { useRef } from 'react';
 import styles from 'styles/PublicationCard.module.scss';
@@ -7,13 +7,18 @@ import { useEffect } from 'react';
 
 gsap.registerPlugin(ScrollTrigger);
 
-export default function PublicationCard({ pub, index }) {
-  const theme = useTheme();
+type Props = {
+  pub: any;
+  index: number;
+};
+
+export default function PublicationCard({ pub, index }: Props) {
+  const theme = useTheme<AppTheme>();
 
   const ref = useRef();
 
   useEffect(() => {
-    gsap.from(ref.current, {
+    gsap.from(ref.current!, {
       scrollTrigger: {
         trigger: ref.current,
         toggleActions: 'play none none none',
@@ -43,7 +48,7 @@ export default function PublicationCard({ pub, index }) {
       <div className={styles.wrapper}>
         <div className={styles.tags}>
           <span className={styles.tag}>{pub.venue.short}</span>
-          <span className={styles.tag}>{pub.authorList.find(a => a.name === 'Kai-Siang Wang').type}</span>
+          <span className={styles.tag}>{pub.authorList.find((a: any) => a.name === 'Kai-Siang Wang').type}</span>
         </div>
         <Tooltip title={pub.title}>
           <div className={styles.title}>{pub.title}</div>

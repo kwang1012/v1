@@ -4,38 +4,44 @@ import { gsap } from 'gsap';
 import { useRef, useEffect } from 'react';
 import { TextPlugin } from 'gsap/dist/TextPlugin';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
-import PublicationCard from 'src/components/PublicationCard';
+import PublicationCard from '@/components/PublicationCard';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { useSelector } from 'react-redux';
-import { Box, Button, TextField } from '@mui/material';
-import WorkCard from 'src/components/WorkCard';
+import { Box } from '@mui/material';
+import WorkCard from '@/components/WorkCard';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import ContactCard from '@/components/ContactCard';
 import { useRouter } from 'next/router';
 import { providers } from 'src/const';
 import { onClickProvider } from '@/utils';
 import Image from 'next/image';
+import { RootState } from '@/store';
+import { IconName } from '@fortawesome/fontawesome-svg-core';
 
 gsap.registerPlugin(TextPlugin, ScrollTrigger);
 
 const words = ['Kai Wang.', 'A Computer Scientist.', 'A Software Engineer.'];
 
-export default function HomeView({ pubs }) {
-  const boxRef = useRef();
-  const hiRef = useRef();
-  const textRef = useRef();
-  const cursorRef = useRef();
+type Props = {
+  pubs: any[];
+};
 
-  const headerRef = useRef();
-  const workRef = useRef();
-  const writingRef = useRef();
-  const contactRef = useRef();
+export default function HomeView({ pubs }: Props) {
+  const boxRef = useRef<null | HTMLSpanElement>(null);
+  const hiRef = useRef<null | HTMLSpanElement>(null);
+  const textRef = useRef<null | HTMLSpanElement>(null);
+  const cursorRef = useRef<null | HTMLSpanElement>(null);
 
-  const themeValue = useSelector((state) => state.theme.value);
+  const headerRef = useRef<null | HTMLElement>(null);
+  const workRef = useRef<null | HTMLElement>(null);
+  const writingRef = useRef<null | HTMLElement>(null);
+  const contactRef = useRef<null | HTMLElement>(null);
 
-  const mainRef = useRef();
+  const themeValue = useSelector((state: RootState) => state.theme.value);
+
+  const mainRef = useRef<null | HTMLElement>(null);
   const q = gsap.utils.selector(mainRef);
-  const moreRef = useRef();
+  const moreRef = useRef<null | HTMLDivElement>(null);
   const router = useRouter();
 
   const works = [
@@ -63,10 +69,10 @@ export default function HomeView({ pubs }) {
   ];
 
   useEffect(() => {
-    if (navigator.userAgentData.mobile) return;
-    gsap.to(cursorRef.current, { opacity: 0, ease: 'power2.inOut', repeat: -1 });
+    if (navigator.userAgentData?.mobile) return;
+    gsap.to(cursorRef.current!, { opacity: 0, ease: 'power2.inOut', repeat: -1 });
     let boxTL = gsap.timeline();
-    boxTL.to(boxRef.current, { duration: 1, width: '17vw', delay: 0.5, ease: 'power4.inOut' }).from(hiRef.current, {
+    boxTL.to(boxRef.current!, { duration: 1, width: '17vw', delay: 0.5, ease: 'power4.inOut' }).from(hiRef.current!, {
       duration: 1,
       y: '5vw',
       ease: 'power3.out',
@@ -77,14 +83,14 @@ export default function HomeView({ pubs }) {
     let masterTL = gsap.timeline({ repeat: -1 }).pause();
     words.forEach((word) => {
       let tl = gsap.timeline({ repeat: 1, yoyo: true, repeatDelay: 1 });
-      tl.to(textRef.current, { duration: 1, text: word });
+      tl.to(textRef.current!, { duration: 1, text: word });
       masterTL.add(tl);
     });
 
     let moreTL = gsap.timeline({ repeat: -1, yoyo: true });
     moreTL
-      .from(moreRef.current, { y: '-5px', ease: 'power2.in', duration: 0.2 })
-      .to(moreRef.current, { y: '5px', ease: 'power2.out', duration: 0.2 });
+      .from(moreRef.current!, { y: '-5px', ease: 'power2.in', duration: 0.2 })
+      .to(moreRef.current!, { y: '5px', ease: 'power2.out', duration: 0.2 });
 
     const panels = q('section, header');
     gsap.to(panels, {
@@ -106,7 +112,7 @@ export default function HomeView({ pubs }) {
     });
   }, []);
 
-  function scrollIntoView(target) {
+  function scrollIntoView(target: any) {
     const bodyRect = document.body.getBoundingClientRect().top;
     window.scrollTo({
       top: target.getBoundingClientRect().top - bodyRect,
@@ -114,7 +120,7 @@ export default function HomeView({ pubs }) {
     });
   }
 
-  function scrollTo(where) {
+  function scrollTo(where: string) {
     switch (where) {
       case 'top':
         window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -176,7 +182,9 @@ export default function HomeView({ pubs }) {
           <h4>
             Scroll Down
             <br />
-            <ExpandMoreIcon ref={moreRef} />
+            <div ref={moreRef}>
+              <ExpandMoreIcon />
+            </div>
           </h4>
         </Box>
         <section className={[styles.writing, themeValue === 'dark' && styles.darkCover].join(' ')} ref={writingRef}>
@@ -197,7 +205,7 @@ export default function HomeView({ pubs }) {
           </h1>
           <div className={styles.workList}>
             {works.map((work, i) => (
-              <WorkCard work={work} index={i} key={i} sectionRef={(ref) => (workRef) => ref} />
+              <WorkCard work={work} index={i} key={i} sectionRef={(ref: any) => (workRef: any) => ref} />
             ))}
           </div>
         </section>
@@ -218,7 +226,7 @@ export default function HomeView({ pubs }) {
                     <FontAwesomeIcon
                       key={i}
                       className={styles.media}
-                      icon={['fab', provider]}
+                      icon={['fab', provider as IconName]}
                       size="2x"
                       onClick={() => onClickProvider(provider)}
                     />

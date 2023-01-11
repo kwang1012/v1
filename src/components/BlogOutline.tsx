@@ -4,7 +4,15 @@ import { flat } from '@/utils';
 import { IconButton, Menu } from '@mui/material';
 import { Menu as MenuIcon } from '@mui/icons-material';
 
-function collectHeaders(el, n, position, prefix = '') {
+type HeaderType = {
+  title: string;
+  el: any;
+  children: HeaderType[];
+  active: boolean;
+  id: string;
+};
+
+function collectHeaders(el: any, n: number, position: number, prefix = ''): HeaderType {
   if (n === 6)
     return {
       title: el.textContent,
@@ -31,7 +39,7 @@ function collectHeaders(el, n, position, prefix = '') {
   };
 }
 
-function Header({ h, level }) {
+function Header({ h, level }: { h: HeaderType; level: number }) {
   return (
     <>
       <div
@@ -46,7 +54,7 @@ function Header({ h, level }) {
         style={{
           paddingLeft: `${level * 8}px`,
           fontSize: `${13 - level}px`,
-          fontWeight: h.active && 'bold',
+          fontWeight: h.active ? 'bold' : 'normal',
           color: h.active ? '#CC3363' : '#767676',
         }}
         className="cursor-pointer mb-1"
@@ -60,11 +68,19 @@ function Header({ h, level }) {
   );
 }
 
-function HeaderList({ id = '', className, scrollOffset, content, width }) {
+type HeaderListProps = {
+  id?: string;
+  className?: string;
+  scrollOffset: number;
+  content: string;
+  width: number;
+};
+
+function HeaderList({ id = '', className, scrollOffset, content, width }: HeaderListProps) {
   // menu
-  const [anchorEl, setAnchorEl] = useState(null);
+  const [anchorEl, setAnchorEl] = useState<null | any>(null);
   const [openOutline, setOpenOutline] = useState(false);
-  const handleClick = (event) => {
+  const handleClick = (event: any) => {
     setOpenOutline(true);
     setAnchorEl(event.currentTarget);
   };
@@ -72,12 +88,12 @@ function HeaderList({ id = '', className, scrollOffset, content, width }) {
     setOpenOutline(false);
   };
 
-  const [headerList, setHeaderList] = useState([]);
+  const [headerList, setHeaderList] = useState<HeaderType[]>([]);
 
   const updateHeaderList = () => {
     // top level header
     for (let h = 1; h <= 6; h++) {
-      const list = [];
+      const list: any[] = [];
       const hs = document.querySelectorAll(`.markdown-content h${h}`);
       hs.forEach((h2, i) => {
         list.push(collectHeaders(h2, h, i, id));
@@ -96,7 +112,7 @@ function HeaderList({ id = '', className, scrollOffset, content, width }) {
     for (const [i, h] of Object.entries(flatList)) {
       if (h.el.getBoundingClientRect().y > 80 || parseInt(i) === flatList.length - 1) {
         flatList.forEach((el, idx) => {
-          if (idx < i || (i === '0' && idx === 0) || h.el.getBoundingClientRect().y <= 80) {
+          if (idx < parseInt(i) || (i === '0' && idx === 0) || h.el.getBoundingClientRect().y <= 80) {
             const tab = document.getElementById(el.id);
             if (!tab) return;
             const style = getComputedStyle(tab);
@@ -104,7 +120,7 @@ function HeaderList({ id = '', className, scrollOffset, content, width }) {
           }
           if (h.el.getBoundingClientRect().y <= 80) {
             el.active = parseInt(i) === flatList.length - 1 && idx === flatList.length - 1;
-          } else el.active = idx === i - 1 || (i === '0' && idx === 0);
+          } else el.active = idx === parseInt(i) - 1 || (i === '0' && idx === 0);
         });
         return setProgress(height - 4);
       }
@@ -122,48 +138,58 @@ function HeaderList({ id = '', className, scrollOffset, content, width }) {
       {!className && <div className="w-[2px] h-10 ml-5" />}
     </div>
   );
-  return id === 'menu'
-    ? headerList.length && (
-        <>
-          <IconButton
-            className="xl:opacity-0 transition-opacity fixed bottom-2 left-2 sm:bottom-4 sm:left-4 md:bottom-8 md:left-8 lg:bottom-16 lg:left-16 bg-[#e6e6e6] text-[#868686] rounded-md shadow-app"
-            onClick={handleClick}
-            sx={{
-              '&:hover': {
-                backgroundColor: '#b6b6b6',
-              },
-            }}
-          >
-            <MenuIcon fontSize="small" />
-          </IconButton>
-          <Menu
-            anchorEl={anchorEl}
-            open={openOutline}
-            onClose={handleClose}
-            anchorOrigin={{ horizontal: 'left', vertical: 'top' }}
-            transformOrigin={{ horizontal: 'left', vertical: 'bottom' }}
-            elevation={0}
-            container={anchorEl?.parentNode}
-            className="xl:hidden"
-            sx={{
-              '& .MuiPaper-root': {
-                padding: 2,
-                border: '1px solid rgba(229, 231, 235, 1)',
-                boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
-              },
-              '& .MuiList-root': {
-                padding: 0,
-              },
-            }}
-          >
-            {component}
-          </Menu>
-        </>
-      )
-    : component;
+  return id === 'menu' ? (
+    headerList.length ? (
+      <>
+        <IconButton
+          className="xl:opacity-0 transition-opacity fixed bottom-2 left-2 sm:bottom-4 sm:left-4 md:bottom-8 md:left-8 lg:bottom-16 lg:left-16 bg-[#e6e6e6] text-[#868686] rounded-md shadow-app"
+          onClick={handleClick}
+          sx={{
+            '&:hover': {
+              backgroundColor: '#b6b6b6',
+            },
+          }}
+        >
+          <MenuIcon fontSize="small" />
+        </IconButton>
+        <Menu
+          anchorEl={anchorEl}
+          open={openOutline}
+          onClose={handleClose}
+          anchorOrigin={{ horizontal: 'left', vertical: 'top' }}
+          transformOrigin={{ horizontal: 'left', vertical: 'bottom' }}
+          elevation={0}
+          container={anchorEl?.parentNode}
+          className="xl:hidden"
+          sx={{
+            '& .MuiPaper-root': {
+              padding: 2,
+              border: '1px solid rgba(229, 231, 235, 1)',
+              boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+            },
+            '& .MuiList-root': {
+              padding: 0,
+            },
+          }}
+        >
+          {component}
+        </Menu>
+      </>
+    ) : (
+      <></>
+    )
+  ) : (
+    component
+  );
 }
 
-export default function BlogOutline({ content, scrollOffset, width }) {
+type Props = {
+  content: string;
+  scrollOffset: number;
+  width: number;
+};
+
+export default function BlogOutline({ content, scrollOffset, width }: Props) {
   return (
     <>
       <HeaderList

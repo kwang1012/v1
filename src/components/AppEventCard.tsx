@@ -6,15 +6,19 @@ import Image from 'next/image';
 import { MoreVertRounded } from '@mui/icons-material';
 import { useState } from 'react';
 
-export default function AppEventCard({ event }) {
-  const [anchorEl, setAnchorEl] = useState(null);
+type Props = {
+  event: any;
+};
+
+export default function AppEventCard({ event }: Props) {
+  const [anchorEl, setAnchorEl] = useState<null | HTMLButtonElement>(null);
   const open = Boolean(anchorEl);
   return (
     <Card className="shadow-app px-4 py-3 mt-2">
       <div className="mb-2 flex items-center">
         <div className="mr-2 h-3 w-3 rounded-sm bg-primary"></div>
         <div className="flex-grow font-bold text-black text-sm">{event.summary}</div>
-        <IconButton size="small" className="text-black" onClick={(e) => setAnchorEl(e.target)}>
+        <IconButton size="small" className="text-black" onClick={(e) => setAnchorEl(e.target as any)}>
           <MoreVertRounded style={{ width: 14, height: 14 }} />
         </IconButton>
         <Popover

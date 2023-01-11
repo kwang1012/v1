@@ -1,10 +1,10 @@
 import { Button } from '@mui/material';
 import { useRouter } from 'next/router';
 import { useMemo } from 'react';
-import ProjectCard from 'src/components/ProjectCard';
+import ProjectCard from '@/components/ProjectCard';
 import styles from 'styles/project.module.scss';
 
-const projectList = {
+const projectList: any = {
   itri: {
     name: 'Industrial Technology Research Institute (ITRI)',
     title: 'System Architect',
@@ -48,7 +48,11 @@ const projectList = {
   },
 };
 
-export default function ProjectView({ project }) {
+type Props = {
+  project: any;
+};
+
+export default function ProjectView({ project }: Props) {
   const detail = useMemo(() => {
     return projectList[project] || {};
   }, [project]);
@@ -65,7 +69,7 @@ export default function ProjectView({ project }) {
       </div>
       <div className={styles.projectList}>
         <div className={styles.list}>
-          {detail.items?.map((item, i) => (
+          {detail.items?.map((item: any, i: number) => (
             <ProjectCard project={item} index={i} key={i} />
           ))}
         </div>
