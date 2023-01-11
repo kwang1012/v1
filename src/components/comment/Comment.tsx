@@ -59,17 +59,17 @@ export default function Comment({ comment, post }: Props) {
   const dispatch = useDispatch();
   return (
     <>
-      <div className="flex my-2 items-start">
-        <div className="w-12 flex justify-center">
+      <div className="my-2 grid grid-cols-[48px_1fr] gap-3 items-start">
+        <div className="flex justify-center">
           {comment.avatar ? (
             <ReactSVG src={comment.avatar} className="w-12 h-12" />
           ) : (
             <FontAwesomeIcon icon={faUser} style={{ fontSize: 30 }} color="grey" />
           )}
         </div>
-        <div className="flex-1 ml-3">
-          <div className="flex items-start">
-            <div className="flex-1">
+        <div>
+          <div className="grid grid-cols-[1fr_70px] gap-2 items-start">
+            <div className="flex-1 min-w-0">
               <div>
                 <span className="text-primary font-bold cursor-pointer">{comment.name}</span>
                 <span className="text-sm text-gray-400"> {moment(comment.createdAt).format('YYYY-MM-DD')}</span>
