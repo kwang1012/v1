@@ -17,10 +17,13 @@
     height: 100%;
     li {
       position: relative;
+      align-self: stretch;
       cursor: pointer;
       padding: 0 8px;
       transition: color 0.2s;
       font-size: 15px;
+      display: flex;
+      align-items: center;
       &:first-child {
         margin-right: auto;
         padding: 0;
