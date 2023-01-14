@@ -4,6 +4,8 @@ import { useEffect } from 'react';
 import { api } from '@/utils/api';
 import { normalize } from '@/utils';
 import { useState } from 'react';
+import { IconButton } from '@mui/material';
+import { CachedOutlined } from '@mui/icons-material';
 
 type Props = {
   post: any;
@@ -56,12 +58,22 @@ export default function CommentBlock({ post }: Props) {
       />
 
       {!loading && (
-        <>{count ? <h3 className="mb-6">{count} comments</h3> : <p className="text-center">no comment</p>}</>
+        <>
+          {count ? (
+            <h3 className="mb-6 justify-between flex">
+              <span>{count} comments</span>
+              <IconButton size="small" onClick={() => fetchComments(true)}>
+                <CachedOutlined />
+              </IconButton>
+            </h3>
+          ) : (
+            <p className="text-center">no comment</p>
+          )}
+          {comments.map((comment) => (
+            <Comment post={post} comment={comment} key={comment.id} />
+          ))}
+        </>
       )}
-
-      {comments.map((comment) => (
-        <Comment post={post} comment={comment} key={comment.id} />
-      ))}
     </div>
   );
 }

@@ -2,7 +2,6 @@ import { Box, Button, IconButton, InputAdornment, TextField, Tooltip } from '@mu
 import { Face } from '@mui/icons-material';
 import Input from '../form/Input';
 import { faMarkdown } from '@fortawesome/free-brands-svg-icons';
-import { useRouter } from 'next/router';
 import { api } from '@/utils/api';
 import { useState } from 'react';
 import { createAvatar } from '@dicebear/avatars';
@@ -131,14 +130,14 @@ export default function InputBlock({
 
     return isValid;
   }
-  const router = useRouter();
   const [avatar, setAvatar] = useState(initAvatar);
-  useEffect(() => {
+  const changeAvatar = () => {
     const svg = createAvatar(style, {
       dataUri: true,
     });
     setAvatar(svg);
-  }, []);
+  };
+  useEffect(changeAvatar, []);
   const [preview, setPreview] = useState(false);
   const themeValue = useSelector((state: RootState) => state.theme.value);
   return (
@@ -161,11 +160,6 @@ export default function InputBlock({
               error={errors.name !== undefined}
               placeholder="required"
             />
-            {/* {errors.name && (
-                <Box component="label" fontSize={12} color="red">
-                  {errors.name}
-                </Box>
-              )} */}
           </div>
           <div className="ml-1 flex-1">
             <Input
@@ -180,11 +174,6 @@ export default function InputBlock({
               error={errors.email !== undefined}
               placeholder="required"
             />
-            {/* {errors.email && (
-                <Box component="label" fontSize={12} color="red">
-                  {errors.email}
-                </Box>
-              )} */}
           </div>
         </div>
         <div className="flex">
@@ -261,7 +250,7 @@ export default function InputBlock({
               ],
             }}
           >
-            <IconButton className="p-0">
+            <IconButton className="p-0" size="small" onClick={changeAvatar}>
               <Face />
             </IconButton>
           </Tooltip>
