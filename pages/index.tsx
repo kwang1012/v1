@@ -9,16 +9,17 @@ import { ReactElement } from 'react';
 type Props = {
   pubs: any[];
   posts: any[];
+  news: any[];
   isSimple: boolean;
 };
 
-export default function Home({ pubs, posts, isSimple }: Props) {
+export default function Home({ pubs, posts, news, isSimple }: Props) {
   return (
     <>
       <Head>
         <title>Kai Wang</title>
       </Head>
-      {isSimple ? <SimpleHomeView pubs={pubs} posts={posts} /> : <HomeView pubs={pubs}></HomeView>}
+      {isSimple ? <SimpleHomeView pubs={pubs} posts={posts} news={news} /> : <HomeView pubs={pubs}></HomeView>}
     </>
   );
 }
@@ -35,29 +36,36 @@ Home.getLayout = function getLayout(page: ReactElement) {
 
 // This function gets called at build time
 export async function getServerSideProps() {
-  const { data } = await api.get('publications', {
-    params: {
-      'sort[0]': 'date:desc',
-      'filters[selected][$eq]': true,
-    },
-  });
+  const fetchPubs = api
+    .get('publications', {
+      params: {
+        'sort[0]': 'date:desc',
+        'filters[selected][$eq]': true,
+      },
+    })
+    .then(({ data }) => data);
+  const fetchPosts = api
+    .get('posts', {
+      params: {
+        'sort[0]': 'createdAt:desc',
+      },
+    })
+    .then(({ data }) => data);
+  const fetchNews = api
+    .get('news', {
+      params: {
+        'sort[0]': 'date:desc',
+      },
+    })
+    .then(({ data }) => data);
+  const results = await Promise.all([fetchPubs, fetchPosts, fetchNews]);
   const isSimple = process.env.SIMPLE === 'true';
-  const props = {
-    pubs: normalize(data),
-    isSimple,
-    posts: null,
-  };
-  if (isSimple) {
-    try {
-      const { data: d } = await api.get('posts', {
-        params: {
-          'sort[0]': 'createdAt:desc',
-        },
-      });
-      props.posts = normalize(d).slice(0, 2);
-    } catch {}
-  }
   return {
-    props,
+    props: {
+      pubs: normalize(results[0]),
+      posts: normalize(results[1]).slice(0, 2),
+      news: normalize(results[2]),
+      isSimple,
+    },
   };
 }

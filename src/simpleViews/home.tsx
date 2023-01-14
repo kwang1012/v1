@@ -7,13 +7,15 @@ import SimplePublicationCard from '@/components/SimplePublicationCard';
 import moment from 'moment';
 import { useState } from 'react';
 import Image from 'next/image';
+import ReactMarkdown from 'react-markdown';
 
 type Props = {
   pubs: any[];
   posts: any[];
+  news: any[];
 };
 
-export default function SimpleHomeView({ pubs, posts }: Props) {
+export default function SimpleHomeView({ pubs, posts, news }: Props) {
   const [showMoreNews, setShowMoreNews] = useState(false);
 
   return (
@@ -62,26 +64,31 @@ export default function SimpleHomeView({ pubs, posts }: Props) {
       </ul>
       <div className="mt-10 pb-2 text-2xl font-bold border-0 border-b border-gray-200 border-solid">News</div>
       <ul className="pl-6">
-        <li>[12/07/2022] Attend the conference, PDCAT'22, Sendai, Japan</li>
-        <li>
-          [10/23/2022] One paper is accepted to <span className="font-bold">PDCAT 2022</span>
-        </li>
-        {/* <li>[12/07/2022] Attend the conference, PDCAT'22, Sendai, Japan</li>
-          <li>
-            [10/23/2022] One paper is accepted to <span className="font-bold">PDCAT 2022</span>
-          </li> */}
-        {showMoreNews && (
-          <>
-            <li>[12/07/2022] Attend the conference, PDCAT'22, Sendai, Japan</li>
-            <li>
-              [10/23/2022] One paper is accepted to <span className="font-bold">PDCAT 2022</span>
-            </li>
-          </>
-        )}
+        {news.slice(0, 2).map((n, i: number) => (
+          <ReactMarkdown
+            key={i}
+            components={{
+              p: ({ className, children }) => <li className={className}>{children}</li>,
+            }}
+          >
+            {`[${moment(n.date).format('MM/DD/YYYY')}] ${n.title}`}
+          </ReactMarkdown>
+        ))}
+        {showMoreNews &&
+          news.slice(2).map((n, i: number) => (
+            <ReactMarkdown
+              key={i}
+              components={{
+                p: ({ className, children }) => <li className={className}>{children}</li>,
+              }}
+            >
+              {`[${moment(n.date).format('MM/DD/YYYY')}] ${n.title}`}
+            </ReactMarkdown>
+          ))}
       </ul>
-      {/* <span className="text-blue-500 cursor-pointer hover:underline" onClick={() => setShowMoreNews((show) => !show)}>
-          {showMoreNews ? 'view less' : 'view more'}
-        </span> */}
+      <span className="text-blue-500 cursor-pointer hover:underline" onClick={() => setShowMoreNews((show) => !show)}>
+        {showMoreNews ? 'view less' : 'view more'}
+      </span>
       <div className="mt-10 pb-2 text-2xl font-bold border-0 border-b border-gray-200 border-solid">
         Selected Publictions
       </div>
