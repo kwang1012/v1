@@ -82,11 +82,10 @@ export default function InputBlock({
           setSent(true);
           setErrors({});
           onSent(normalize(data));
+          setLoading(false);
         })
         .catch((err) => {
           setError(err.message);
-        })
-        .finally(() => {
           setLoading(false);
         });
     }

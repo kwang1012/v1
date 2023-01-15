@@ -9,7 +9,7 @@ import { useSelector } from 'react-redux';
 import remarkGfm from 'remark-gfm';
 import rehypeRaw from 'rehype-raw';
 import InputBlock from './InputBlock';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { api } from '@/utils/api';
 import { normalize } from '@/utils';
 import { useEffect } from 'react';
@@ -55,6 +55,9 @@ export default function Comment({ comment, post }: Props) {
   }, []);
   const [loading, setLoading] = useState(false);
   const [comments, setComments] = useState<any[]>([]);
+  const childrenCount = useMemo(() => {
+    return Math.max(comment.children.count || 0, comments.length || 0);
+  }, [comment.children.count, comments.length]);
   const thumbUp = useSelector((state: RootState) => state.local.likes[comment.id]);
   const dispatch = useDispatch();
   return (
@@ -123,9 +126,9 @@ export default function Comment({ comment, post }: Props) {
               </IconButton>
               {like !== 0 && <span className="text-primary text-sm">{like}</span>}
               <IconButton size="small" className="text-primary p-1" onClick={() => setEditting(true)}>
-                {comment.children.count ? <ChatBubble fontSize="small" /> : <ChatBubbleOutline fontSize="small" />}
+                {childrenCount ? <ChatBubble fontSize="small" /> : <ChatBubbleOutline fontSize="small" />}
               </IconButton>
-              {comment.children.count !== 0 && <span className="text-primary text-sm">{comment.children.count}</span>}
+              {childrenCount !== 0 && <span className="text-primary text-sm">{childrenCount}</span>}
             </div>
           </div>
           {editting && (
