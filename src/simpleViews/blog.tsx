@@ -4,8 +4,9 @@ import { useRouter } from 'next/router';
 import moment from 'moment';
 import { faMedal } from '@fortawesome/free-solid-svg-icons';
 import Image from 'next/image';
-import { Pagination, PaginationItem } from '@mui/material';
+import { IconButton, Pagination, PaginationItem } from '@mui/material';
 import Link from 'next/link';
+import { EmailOutlined, Facebook, Twitter } from '@mui/icons-material';
 
 type Props = {
   posts: any[];
@@ -39,7 +40,7 @@ export default function BlogView({ posts, categories, pagination }: Props) {
                   <FontAwesomeIcon className="ml-4" icon={faCalendar} />
                   <span className="ml-1">{moment(post.createdAt).format('MM/DD/YYYY')}</span>
                   <FontAwesomeIcon className="ml-4" icon={faFolderOpen} />
-                  <span className="ml-1">{post.category}</span>
+                  <span className="ml-1">{post.post_category?.name || 'Other'}</span>
                 </div>
               </div>
               <div className="line-clamp-2 mt-5">{post.abstract}</div>
@@ -68,21 +69,33 @@ export default function BlogView({ posts, categories, pagination }: Props) {
           />
         </div>
         <div className="w-[245px] flex-shrink-0 hidden md:block">
-          <div className="rounded-md overflow-hidden shadow-md mb-4 border border-solid border-gray-200 flex flex-col aspect-[9/13]">
+          <div className="rounded-md overflow-hidden shadow-md mb-4 border border-solid border-gray-200 flex flex-col">
             <Image src="https://lsalab.cs.nthu.edu.tw/~kswang/avatar.png" width={245} height={272} objectFit="cover" />
             <div
-              className="px-4 flex-1"
+              className="p-4 pt-0 flex-1"
               style={{
-                background: 'linear-gradient(90deg, #fc5c7d70, #6a82fb70)',
+                background: 'linear-gradient(90deg, #fc5c7d33, #6a82fb33)',
               }}
             >
-              <h3>Kai Wang</h3>
+              <div className="py-2 flex items-center justify-around">
+                <IconButton size="small" color="primary" href="mailto:kswang@lsalab.cs.nthu.edu.tw" target="_blank">
+                  <EmailOutlined />
+                </IconButton>
+                <IconButton size="small" color="primary" href="https://twitter.com/kwang871012" target="_blank">
+                  <Twitter />
+                </IconButton>
+                <IconButton size="small" color="primary" href="https://www.facebook.com/kwang871012" target="_blank">
+                  <Facebook />
+                </IconButton>
+              </div>
+              <h3 className="m-0">Kai Wang</h3>
+              <span className="text-sm text-gray-600">Passion && Patient.</span>
             </div>
           </div>
           <div
             className="p-4 text-left rounded-md overflow-hidden shadow-md mb-4 border border-solid border-gray-200"
             style={{
-              background: 'linear-gradient(60deg, #fc5c7d70, #6a82fb70)',
+              background: 'linear-gradient(60deg, #fc5c7d33, #6a82fb33)',
             }}
           >
             <div>
@@ -99,7 +112,7 @@ export default function BlogView({ posts, categories, pagination }: Props) {
           <div
             className="p-4 rounded-md overflow-hidden shadow-md mb-4 border border-solid border-gray-200"
             style={{
-              background: 'linear-gradient(30deg, #fc5c7d70, #6a82fb70)',
+              background: 'linear-gradient(30deg, #fc5c7d33, #6a82fb33)',
             }}
           >
             <div className="text-sm">

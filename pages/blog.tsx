@@ -31,6 +31,7 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   const page = parseInt((query.page as string) || '1');
   var { data } = await api.get('posts', {
     params: {
+      'populate[0]': 'post_category',
       'sort[0]': 'createdAt:desc',
       'pagination[page]': page,
     },
