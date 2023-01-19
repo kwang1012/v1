@@ -65,7 +65,13 @@ export default function MiscellaneousView() {
             ))}
           </div>
           <div className="py-3 border-0 border-gray-300 border-solid self-stretch border-t">
-            <Button variant="contained" disableElevation size="small" className="normal-case">
+            <Button
+              variant="contained"
+              disableElevation
+              size="small"
+              className="normal-case"
+              onClick={() => window.open('mailto:kswang@lsalab.cs.nthu.edu.tw', '_blank')}
+            >
               Email me
             </Button>
             <div className="my-1 text-sm">or</div>
