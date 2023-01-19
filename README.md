@@ -1,5 +1,5 @@
 <div align="center">
-  <img alt="Logo" src="https://admin.kwang.cc/uploads/logo_73280e9520.png" height="100" />
+  <img alt="Logo" src="https://admin.kwang.cc/uploads/svg_path_4c17b9fb2e.svg" height="100" />
 </div>
 <h1 align="center">
   kwang.cc - v1
