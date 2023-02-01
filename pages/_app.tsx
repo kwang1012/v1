@@ -19,6 +19,7 @@ import 'nprogress/nprogress.css';
 import { onBrowserThemeChange } from '@/store/theme';
 import { AppProps } from 'next/app';
 import { Page } from 'types/page';
+import { useVisitor } from '@/hooks/visitors';
 
 NProgress.configure({
   minimum: 0.3,
@@ -62,6 +63,8 @@ type Props = AppProps & {
 };
 
 function App({ Component, pageProps }: Props) {
+  useVisitor();
+
   const dispatch = useDispatch();
   React.useEffect(() => {
     // Remove the server-side injected CSS.
