@@ -16,13 +16,13 @@ export default function SimplePublicationCard({ pub, ...props }: Props) {
       <div className="ml-5 flex-1">
         <div className=" font-extrabold line-clamp-2">{pub.title}</div>
         <div className="my-2 flex line-clamp-1">
-          {pub.author_list.map((author: any, i: number) => (
+          {pub.authorList.map((author: any, i: number) => (
             <span key={i}>
               <span className={author.name.includes('Kai-Siang Wang') ? 'font-bold' : ''}>
                 {author.name}
                 {author.type === 'First Author' && '*'}
               </span>
-              {i !== pub.author_list.length - 1 && <span>, </span>}
+              {i !== pub.authorList.length - 1 && <span>, </span>}
             </span>
           ))}
         </div>
