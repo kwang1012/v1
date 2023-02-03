@@ -6,16 +6,16 @@ import { normalize } from '@/utils';
 import { api } from '@/utils/api';
 
 type Props = {
-  pubs: any[];
+  groups: any[];
 };
 
-export default function Publication({ pubs }: Props) {
+export default function Publication({ groups }: Props) {
   return (
     <>
       <Head>
         <title>Kai Wang - Publications</title>
       </Head>
-      <PublicationView pubs={pubs} />
+      <PublicationView groups={groups} />
     </>
   );
 }
@@ -28,12 +28,13 @@ Publication.getLayout = function getLayout(page: ReactElement) {
 export async function getServerSideProps() {
   const { data } = await api.get('publications', {
     params: {
+      group: 'year',
       'sort[0]': 'date:desc',
     },
   });
   return {
     props: {
-      pubs: normalize(data),
+      groups: normalize(data),
     },
   };
 }
