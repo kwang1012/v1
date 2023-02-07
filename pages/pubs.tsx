@@ -24,7 +24,6 @@ Publication.getLayout = function getLayout(page: ReactElement) {
   return <SimpleLayout>{page}</SimpleLayout>;
 };
 
-// This function gets called at build time
 export async function getServerSideProps() {
   const { data } = await api.get('publications', {
     params: {

@@ -10,16 +10,21 @@ type Props = {
   pubs: any[];
   posts: any[];
   news: any[];
+  exps: any[];
   isSimple: boolean;
 };
 
-export default function Home({ pubs, posts, news, isSimple }: Props) {
+export default function Home({ pubs, posts, exps, news, isSimple }: Props) {
   return (
     <>
       <Head>
         <title>Kai Wang</title>
       </Head>
-      {isSimple ? <SimpleHomeView pubs={pubs} posts={posts} news={news} /> : <HomeView pubs={pubs}></HomeView>}
+      {isSimple ? (
+        <SimpleHomeView pubs={pubs} posts={posts} exps={exps} news={news} />
+      ) : (
+        <HomeView pubs={pubs}></HomeView>
+      )}
     </>
   );
 }
@@ -51,6 +56,13 @@ export async function getServerSideProps() {
       },
     })
     .then(({ data }) => data);
+  const fetchExps = api
+    .get('experiences', {
+      params: {
+        'sort[0]': 'startDate:asc',
+      },
+    })
+    .then(({ data }) => data);
   const fetchNews = api
     .get('news', {
       params: {
@@ -58,13 +70,14 @@ export async function getServerSideProps() {
       },
     })
     .then(({ data }) => data);
-  const results = await Promise.all([fetchPubs, fetchPosts, fetchNews]);
+  const results = await Promise.all([fetchPubs, fetchPosts, fetchExps, fetchNews]);
   const isSimple = process.env.SIMPLE === 'true';
   return {
     props: {
       pubs: normalize(results[0]),
       posts: normalize(results[1]).slice(0, 2),
-      news: normalize(results[2]),
+      exps: normalize(results[2]),
+      news: normalize(results[3]),
       isSimple,
     },
   };

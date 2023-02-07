@@ -10,16 +10,18 @@ import Image from 'next/image';
 import ReactMarkdown from 'react-markdown';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
+import ExperienceCard from '@/components/ExperienceCard';
 
 gsap.registerPlugin(ScrollTrigger);
 
 type Props = {
   pubs: any[];
   posts: any[];
+  exps: any[];
   news: any[];
 };
 
-export default function SimpleHomeView({ pubs, posts, news }: Props) {
+export default function SimpleHomeView({ pubs, posts, exps, news }: Props) {
   const [showMoreNews, setShowMoreNews] = useState(false);
 
   const mainRef = useRef(null);
@@ -159,40 +161,9 @@ export default function SimpleHomeView({ pubs, posts, news }: Props) {
         Research Experiences
       </div>
       <section>
-        <div className="px-4 mt-4">
-          <div>
-            <a
-              className="font-bold text-blue-500 hover:underline cursor-pointer"
-              href="http://hscc.cs.nthu.edu.tw/2011newpage/sh1-1.htm"
-            >
-              HSCC Lab
-            </a>
-            <span className="font-bold"> @ National Tsing Hua University, </span>
-            <span>Hsichu, Taiwan</span>
-          </div>
-          <div className="text-sm">Research Assistant. Sep 2020 - Jan 2021</div>
-          <div className="text-sm">Advisor: Prof. Jang-Ping Sheu</div>
-        </div>
-        <div className="mt-4 px-4">
-          <div>
-            <a className="font-bold text-blue-500 hover:underline cursor-pointer" href="https://lsalab.cs.nthu.edu.tw">
-              LSA Lab
-            </a>
-            <span className="font-bold"> @ National Tsing Hua University, </span>
-            <span>Hsichu, Taiwan</span>
-          </div>
-          <div className="text-sm">Research Assistant. March 2021 - Present</div>
-          <div className="text-sm">Advisor: Prof. Jerry Chou</div>
-        </div>
-        <div className="mt-4 px-4">
-          <div>
-            <a className="font-bold text-blue-500 hover:underline cursor-pointer" href="https://skymizer.com/">
-              Skymizer
-            </a>
-            <span>, Taipei, Taiwan</span>
-          </div>
-          <div className="text-sm">System Architect. May 2021 - Present</div>
-        </div>
+        {exps.map((exp, i) => (
+          <ExperienceCard key={i} exp={exp} sm/>
+        ))}
       </section>
       <div className="mt-10 pb-2 text-2xl font-bold border-0 border-b border-gray-200 border-solid">
         Academic Services
