@@ -187,7 +187,7 @@ export default function SimpleHomeView({ pubs, posts, news }: Props) {
         <div className="mt-4 px-4">
           <div>
             <a className="font-bold text-blue-500 hover:underline cursor-pointer" href="https://skymizer.com/">
-              Skymier
+              Skymizer
             </a>
             <span>, Taipei, Taiwan</span>
           </div>

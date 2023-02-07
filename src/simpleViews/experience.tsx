@@ -39,7 +39,7 @@ export default function ExperienceView() {
       <div className="shadow-md mt-4 border border-solid border-gray-200 p-5 rounded-md">
         <div className="text-lg">
           <a className="font-bold text-blue-500 hover:underline cursor-pointer" href="https://skymizer.com/">
-            Skymier
+            Skymizer
           </a>
           {/* <span className="font-bold"> @ Skymizer, </span> */}
           <span>, Taipei, Taiwan</span>
