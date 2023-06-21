@@ -38,9 +38,9 @@ export default function PublicationCard({ pub, index }: Props) {
       bgcolor="card.background"
       style={{ boxShadow: theme.palette.shadow }}
       onClick={
-        pub.link
+        pub.url
           ? () => {
-              window.open(pub.link, '_blank');
+              window.open(pub.url, '_blank');
             }
           : () => {}
       }

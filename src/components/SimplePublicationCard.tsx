@@ -14,7 +14,12 @@ export default function SimplePublicationCard({ pub, ...props }: Props) {
         {pub.image && <Image src={pub.image} width="100%" height="100%" objectFit="contain" />}
       </div>
       <div className="ml-5 flex-1">
-        <div className=" font-extrabold line-clamp-2">{pub.title}</div>
+        <div
+          className=" font-extrabold line-clamp-2 hover:underline"
+          onClick={() => pub.url && window.open(pub.url, '_blank')}
+        >
+          {pub.title}
+        </div>
         <div className="my-2 flex line-clamp-1">
           {pub.authorList.map((author: any, i: number) => (
             <span key={i}>
