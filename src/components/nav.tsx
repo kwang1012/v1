@@ -65,11 +65,11 @@ export default function Nav({ scrollTo, isSimple }: Props) {
           onClick: () => router.push('/experiences'),
           url: '/experiences',
         },
-        {
-          text: 'Blog',
-          onClick: () => router.push('/blog'),
-          url: '/blog',
-        },
+        // {
+        //   text: 'Blog',
+        //   onClick: () => router.push('/blog'),
+        //   url: '/blog',
+        // },
         {
           text: 'Miscellaneous',
           onClick: () => router.push('/miscellaneous'),

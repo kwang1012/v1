@@ -51,7 +51,7 @@ export default function SimpleHomeView({ pubs, posts, exps, news }: Props) {
         />
         <div className="ml-10">
           <h1 className="mb-0">Kai Wang</h1>
-          <div>A graduate student @ NTHU</div>
+          <div>A first-year PhD student @ UIUC</div>
           <div className="flex text-secondary my-2">
             {simpleProviders.map((provider, i) => (
               <FontAwesomeIcon
@@ -65,8 +65,8 @@ export default function SimpleHomeView({ pubs, posts, exps, news }: Props) {
           </div>
           <div>
             Email:{' '}
-            <Link href="mailto:kswang@lsalab.cs.nthu.edu.tw" target="_blank">
-              <span className="text-blue-500 hover:underline cursor-pointer">kswang@lsalab.cs.nthu.edu.tw</span>
+            <Link href="mailto:kw37@illinois.edu" target="_blank">
+              <span className="text-blue-500 hover:underline cursor-pointer">kw37@illinois.edu</span>
             </Link>
           </div>
         </div>
@@ -129,7 +129,7 @@ export default function SimpleHomeView({ pubs, posts, exps, news }: Props) {
           </div>
         </Link>
       </section>
-      <div className="mt-10 pb-2 text-2xl font-bold border-0 border-b border-gray-200 border-solid">Blog</div>
+      {/* <div className="mt-10 pb-2 text-2xl font-bold border-0 border-b border-gray-200 border-solid">Blog</div>
       <section>
         <p>
           A place to record my feelings, exploration, and growth. I intend to be casual here, so I decided to use
@@ -156,7 +156,7 @@ export default function SimpleHomeView({ pubs, posts, exps, news }: Props) {
             <span className="ml-2">Full list</span>
           </div>
         </Link>
-      </section>
+      </section> */}
       <div className="mt-10 pb-2 text-2xl font-bold border-0 border-b border-gray-200 border-solid">
         Research Experiences
       </div>
@@ -165,12 +165,12 @@ export default function SimpleHomeView({ pubs, posts, exps, news }: Props) {
           <ExperienceCard key={i} exp={exp} sm/>
         ))}
       </section>
-      <div className="mt-10 pb-2 text-2xl font-bold border-0 border-b border-gray-200 border-solid">
+      {/* <div className="mt-10 pb-2 text-2xl font-bold border-0 border-b border-gray-200 border-solid">
         Academic Services
       </div>
       <section>
         <p>Coming Soon</p>
-      </section>
+      </section> */}
     </div>
   );
 }
