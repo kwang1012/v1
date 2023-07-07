@@ -10,8 +10,8 @@
     "deploy": "pm2 restart next-me"
   },
   "dependencies": {
-    "@dicebear/adventurer": "^4.10.8",
-    "@dicebear/avatars": "^4.10.8",
+    "@dicebear/collection": "^6.0.4",
+    "@dicebear/core": "^6.0.4",
     "@emotion/cache": "^11.9.3",
     "@emotion/react": "^11.10.5",
     "@emotion/server": "^11.4.0",
@@ -33,10 +33,9 @@
     "immutable": "^4.0.0-rc.14",
     "material-design-icons": "^3.0.1",
     "moment": "^2.29.4",
-    "nestjs": "^0.0.1",
     "next": "12.1.6",
     "next-redux-wrapper": "^7.0.2",
-    "node-sass": "^7.0.1",
+    "node-sass": "^9.0.0",
     "nprogress": "^0.2.0",
     "pm2": "^5.2.2",
     "react": "17.0.2",

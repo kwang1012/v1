@@ -4,9 +4,9 @@ import Input from '../form/Input';
 import { faMarkdown } from '@fortawesome/free-brands-svg-icons';
 import { api } from '@/utils/api';
 import { useState } from 'react';
-import { createAvatar } from '@dicebear/avatars';
+import { createAvatar } from '@dicebear/core';
+import { adventurer } from '@dicebear/collection';
 import { useEffect } from 'react';
-import * as style from '@dicebear/adventurer';
 import { useSelector } from 'react-redux';
 import { ReactSVG } from 'react-svg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -41,9 +41,7 @@ export default function InputBlock({
   parent,
   onCancel,
   onSent = () => {},
-  initAvatar = createAvatar(style, {
-    dataUri: true,
-  }),
+  initAvatar = createAvatar(adventurer, { seed: Date.now().toString() }).toDataUriSync(),
 }: Props) {
   const [values, setValues] = useState(initialFormValues);
 
@@ -131,9 +129,9 @@ export default function InputBlock({
   }
   const [avatar, setAvatar] = useState(initAvatar);
   const changeAvatar = () => {
-    const svg = createAvatar(style, {
-      dataUri: true,
-    });
+    const svg = createAvatar(adventurer, {
+      seed: Date.now().toString(),
+    }).toDataUriSync();
     setAvatar(svg);
   };
   useEffect(changeAvatar, []);
