@@ -20,7 +20,7 @@ export default function SimplePublicationCard({ pub, ...props }: Props) {
         >
           {pub.title}
         </div>
-        <div className="my-2 flex line-clamp-1">
+        <div className="my-2 line-clamp-1">
           {pub.authorList.map((author: any, i: number) => (
             <span key={i}>
               <span className={author.name.includes('Kai-Siang Wang') ? 'font-bold' : ''}>
