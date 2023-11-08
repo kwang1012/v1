@@ -63,7 +63,7 @@ type Props = AppProps & {
 };
 
 function App({ Component, pageProps }: Props) {
-  useVisitor();
+  // useVisitor();
 
   const dispatch = useDispatch();
   React.useEffect(() => {

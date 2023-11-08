@@ -2,7 +2,7 @@ import SimplePublicationCard from '@/components/SimplePublicationCard';
 import moment from 'moment';
 
 type Props = {
-  groups: { pubs: any[]; year: string }[]; // already group by year
+  groups: { pubs: any[]; year: number }[]; // already group by year
 };
 
 export default function PublicationView({ groups }: Props) {
@@ -13,7 +13,7 @@ export default function PublicationView({ groups }: Props) {
       </div>
       {groups.map((grp, i) => (
         <div key={i}>
-          <div className="text-2xl font-bold mt-6">{moment(grp.year).year()}</div>
+          <div className="text-2xl font-bold mt-6">{grp.year}</div>
           {grp.pubs.map((pub, j) => (
             <SimplePublicationCard key={j} pub={pub} />
           ))}
