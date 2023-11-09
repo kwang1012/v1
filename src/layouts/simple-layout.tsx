@@ -1,5 +1,5 @@
 import Nav from '@/components/nav';
-import { FC, ReactNode } from 'react';
+import { ReactNode } from 'react';
 import SimpleFooter from '@/components/SimpleFooter';
 
 type Props = {

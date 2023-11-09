@@ -1,4 +1,6 @@
+import { RootState } from '@/store';
 import moment from 'moment';
+import { useSelector } from 'react-redux';
 
 export const format = (date: string | Date) => {
   if (typeof date === 'string') date = new Date(date);
@@ -6,7 +8,7 @@ export const format = (date: string | Date) => {
   else return moment(date).format('h a');
 };
 
-export function onClickProvider(provider: string) {
+export function onClickProvider(provider: string, setting: any) {
   switch (provider) {
     case 'facebook':
       window.open('https://www.facebook.com/kwang871012', '_blank');
@@ -20,7 +22,7 @@ export function onClickProvider(provider: string) {
     case 'google-scholar':
       window.open('https://scholar.google.com/citations?hl=en&user=wE-FPxoAAAAJ', '_blank');
     default: {
-      if (provider.includes('cv')) window.open('https://lsalab.cs.nthu.edu.tw/~kswang/cv.pdf', '_blank');
+      if (provider.includes('cv') && setting.resumeURL) window.open(setting.resumeURL, '_blank');
       else if (provider.includes('google-scholar'))
         window.open('https://scholar.google.com/citations?hl=en&user=wE-FPxoAAAAJ', '_blank');
       else if (provider.includes('github')) window.open('https://github.com/kwang1012', '_blank');

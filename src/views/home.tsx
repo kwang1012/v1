@@ -38,6 +38,7 @@ export default function HomeView({ pubs }: Props) {
   const contactRef = useRef<null | HTMLElement>(null);
 
   const themeValue = useSelector((state: RootState) => state.theme.value);
+  const setting = useSelector((state: RootState) => state.setting);
 
   const mainRef = useRef<null | HTMLElement>(null);
   const q = gsap.utils.selector(mainRef);
@@ -172,12 +173,7 @@ export default function HomeView({ pubs }: Props) {
               <br />
               In addition, I work at Skymizer as an intern & focus on optimizing the performance of DL inference.
             </h2>
-            <Image
-              src="https://lsalab.cs.nthu.edu.tw/~kswang/avatar.png"
-              width={150}
-              height={150}
-              objectFit="contain"
-            />
+            <Image src={setting.avatarURL || ''} width={150} height={150} objectFit="contain" />
           </div>
           <h4>
             Scroll Down
@@ -217,7 +213,7 @@ export default function HomeView({ pubs }: Props) {
             <ContactCard className={styles.contactCard} />
             <div className={styles.contactInfo}>
               <h3>Email</h3>
-              <p>kswang@lsalab.cs.nthu.edu.tw</p>
+              <p>kw37@illinois.edu</p>
               <h3>Social Media</h3>
 
               <div className={styles.mediaList}>
@@ -228,7 +224,7 @@ export default function HomeView({ pubs }: Props) {
                       className={styles.media}
                       icon={['fab', provider as IconName]}
                       size="2x"
-                      onClick={() => onClickProvider(provider)}
+                      onClick={() => onClickProvider(provider, setting)}
                     />
                   );
                 })}

@@ -28,6 +28,7 @@ export default function Nav({ scrollTo, isSimple }: Props) {
   const ref = useRef();
   const idleTime = useRef(-1);
   const currentTheme = useSelector((state: RootState) => state.theme.value);
+  const setting = useSelector((state : RootState) => state.setting)
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const router = useRouter();
 
@@ -167,7 +168,7 @@ export default function Nav({ scrollTo, isSimple }: Props) {
           <Button className={[styles.resume, styles.normal].join(' ')} color="primary" variant="outlined">
             <a
               style={{ textDecoration: 'none' }}
-              href="https://lsalab.cs.nthu.edu.tw/~kswang/cv.pdf"
+              href={setting.resumeURL}
               target="_blank"
               rel="noreferrer"
               download
@@ -220,7 +221,7 @@ export default function Nav({ scrollTo, isSimple }: Props) {
               <Button className={styles.resume} color="primary" variant="outlined">
                 <a
                   style={{ textDecoration: 'none' }}
-                  href="https://lsalab.cs.nthu.edu.tw/~kswang/cv.pdf"
+                  href={setting.resumeURL}
                   target="_blank"
                   download
                   rel="noreferrer"

@@ -11,6 +11,8 @@ import ReactMarkdown from 'react-markdown';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import ExperienceCard from '@/components/ExperienceCard';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/store';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -23,6 +25,7 @@ type Props = {
 
 export default function SimpleHomeView({ pubs, posts, exps, news }: Props) {
   const [showMoreNews, setShowMoreNews] = useState(false);
+  const setting = useSelector((state: RootState) => state.setting);
 
   const mainRef = useRef(null);
   useEffect(() => {
@@ -42,13 +45,7 @@ export default function SimpleHomeView({ pubs, posts, exps, news }: Props) {
   return (
     <div ref={mainRef}>
       <div className="flex flex-wrap justify-center md:justify-start">
-        <Image
-          src="https://lsalab.cs.nthu.edu.tw/~kswang/avatar.png"
-          width={182}
-          height={182}
-          objectFit="cover"
-          className="rounded-full"
-        />
+        <Image src={setting.avatarURL || ''} width={182} height={182} objectFit="cover" className="rounded-full" />
         <div className="ml-10">
           <h1 className="mb-0">Kai Wang</h1>
           <div>A first-year PhD student @ UIUC</div>
@@ -59,7 +56,7 @@ export default function SimpleHomeView({ pubs, posts, exps, news }: Props) {
                 className="cursor-pointer mr-4"
                 icon={provider}
                 size="2x"
-                onClick={() => onClickProvider(provider as string)}
+                onClick={() => onClickProvider(provider as string, setting)}
               />
             ))}
           </div>
@@ -162,7 +159,7 @@ export default function SimpleHomeView({ pubs, posts, exps, news }: Props) {
       </div>
       <section>
         {exps.map((exp, i) => (
-          <ExperienceCard key={i} exp={exp} sm/>
+          <ExperienceCard key={i} exp={exp} sm />
         ))}
       </section>
       {/* <div className="mt-10 pb-2 text-2xl font-bold border-0 border-b border-gray-200 border-solid">

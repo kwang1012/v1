@@ -14,7 +14,9 @@ export default function ExperienceCard({
       <div className={sm ? '' : 'text-lg'}>
         <a
           className="font-bold text-blue-500 hover:underline cursor-pointer"
-          href="http://hscc.cs.nthu.edu.tw/2011newpage/sh1-1.htm"
+          href={exp.link}
+          target="_blank"
+          rel="noreferrer"
         >
           {exp.title}
         </a>

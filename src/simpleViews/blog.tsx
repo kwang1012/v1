@@ -7,6 +7,8 @@ import Image from 'next/image';
 import { IconButton, Pagination, PaginationItem } from '@mui/material';
 import Link from 'next/link';
 import { EmailOutlined, Facebook, Twitter } from '@mui/icons-material';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/store';
 
 type Props = {
   posts: any[];
@@ -17,6 +19,7 @@ type Props = {
 export default function BlogView({ posts, categories, pagination }: Props) {
   const router = useRouter();
   const page = parseInt((router.query.page as string) || '1');
+  const setting = useSelector((state: RootState) => state.setting);
   return (
     <>
       <h1>Kai's Blog</h1>
@@ -70,7 +73,7 @@ export default function BlogView({ posts, categories, pagination }: Props) {
         </div>
         <div className="w-[245px] flex-shrink-0 hidden md:block">
           <div className="rounded-md overflow-hidden shadow-md mb-4 border border-solid border-gray-200 flex flex-col">
-            <Image src="https://lsalab.cs.nthu.edu.tw/~kswang/avatar.png" width={245} height={272} objectFit="cover" />
+            <Image src={setting.avatarURL || ''} width={245} height={272} objectFit="cover" />
             <div
               className="p-4 pt-0 flex-1"
               style={{
@@ -78,7 +81,7 @@ export default function BlogView({ posts, categories, pagination }: Props) {
               }}
             >
               <div className="py-2 flex items-center justify-around">
-                <IconButton size="small" color="primary" href="mailto:kswang@lsalab.cs.nthu.edu.tw" target="_blank">
+                <IconButton size="small" color="primary" href="mailto:kw37@illinois.edu" target="_blank">
                   <EmailOutlined />
                 </IconButton>
                 <IconButton size="small" color="primary" href="https://twitter.com/kwang871012" target="_blank">

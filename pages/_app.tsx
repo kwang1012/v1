@@ -20,6 +20,7 @@ import { onBrowserThemeChange } from '@/store/theme';
 import { AppProps } from 'next/app';
 import { Page } from 'types/page';
 import { useVisitor } from '@/hooks/visitors';
+import { useSetting } from '@/hooks/setting';
 
 NProgress.configure({
   minimum: 0.3,
@@ -64,6 +65,7 @@ type Props = AppProps & {
 
 function App({ Component, pageProps }: Props) {
   // useVisitor();
+  useSetting();
 
   const dispatch = useDispatch();
   React.useEffect(() => {

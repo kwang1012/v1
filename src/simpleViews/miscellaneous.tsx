@@ -10,8 +10,12 @@ import { simpleProviders } from 'src/const';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useRef } from 'react';
 import { onClickProvider } from '@/utils';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/store';
 
 export default function MiscellaneousView() {
+  const setting = useSelector((state: RootState) => state.setting);
+  const themeValue = useSelector((state: RootState) => state.theme.value);
   const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {
@@ -26,15 +30,13 @@ export default function MiscellaneousView() {
 
   return (
     <>
-      <div className="mt-20 pt-24 max-w-[650px] mx-auto bg-[#f8f9fb] rounded-md shadow-app flex flex-col items-center relative text-center">
+      <div
+        className={`mt-20 pt-24 max-w-[650px] mx-auto ${
+          themeValue === 'light' ? 'bg-[#f8f9fb]' : 'dark:bg-[#131313]'
+        } rounded-md shadow-app flex flex-col items-center relative text-center duration-400`}
+      >
         <div className="absolute -top-[60px]">
-          <Image
-            src="https://lsalab.cs.nthu.edu.tw/~kswang/avatar.png"
-            width={150}
-            height={150}
-            objectFit="cover"
-            className="rounded-full"
-          />
+          <Image src={setting.avatarURL || ''} width={150} height={150} objectFit="cover" className="rounded-full" />
         </div>
         <div className="flex flex-col items-center self-stretch">
           <h2 className="mb-0">Kai-Siang Wang (Kai)</h2>
@@ -60,7 +62,7 @@ export default function MiscellaneousView() {
                 className="cursor-pointer mr-4"
                 icon={provider}
                 size="2x"
-                onClick={() => onClickProvider(provider as string)}
+                onClick={() => onClickProvider(provider as string, setting)}
               />
             ))}
           </div>
@@ -70,7 +72,7 @@ export default function MiscellaneousView() {
               disableElevation
               size="small"
               className="normal-case"
-              onClick={() => window.open('mailto:kswang@lsalab.cs.nthu.edu.tw', '_blank')}
+              onClick={() => window.open('mailto:kw37@illinois.edu', '_blank')}
             >
               Email me
             </Button>

@@ -7,7 +7,7 @@ export function useVisitor() {
     axios
       .get('https://ipgeolocation.abstractapi.com/v1/', {
         params: {
-          api_key: '3e903d6215a942c9ba37f2c6dd0241d6',
+          api_key: process.env.NEXT_GEO_API_KEY,
         },
       })
       .then(({ data }) => {
