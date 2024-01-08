@@ -5,6 +5,10 @@ import { api } from '@/utils/api';
 import { normalize } from '@/utils';
 import SimpleLayout from '@/layouts/simple-layout';
 import { ReactElement } from 'react';
+import { fetchPubs } from '@/const/pubs';
+import { fetchExps } from '@/const/experiences';
+import { fetchPosts } from '@/const/posts';
+import { fetchNews } from '@/const/news';
 
 type Props = {
   pubs: any[];
@@ -41,35 +45,6 @@ Home.getLayout = function getLayout(page: ReactElement) {
 
 // This function gets called at build time
 export async function getServerSideProps() {
-  const fetchPubs = api
-    .get('publications', {
-      params: {
-        'sort[0]': 'date:desc',
-        'filters[selected][$eq]': true,
-      },
-    })
-    .then(({ data }) => data);
-  const fetchPosts = api
-    .get('posts', {
-      params: {
-        'sort[0]': 'createdAt:desc',
-      },
-    })
-    .then(({ data }) => data);
-  const fetchExps = api
-    .get('experiences', {
-      params: {
-        'sort[0]': 'startDate:asc',
-      },
-    })
-    .then(({ data }) => data);
-  const fetchNews = api
-    .get('news', {
-      params: {
-        'sort[0]': 'date:desc',
-      },
-    })
-    .then(({ data }) => data);
   const results = await Promise.all([fetchPubs, fetchPosts, fetchExps, fetchNews]);
   const isSimple = process.env.SIMPLE === 'true';
   return {

@@ -71,16 +71,15 @@ export default function SimpleHomeView({ pubs, posts, exps, news }: Props) {
       <div className="mt-10 pb-2 text-2xl font-bold border-0 border-b border-gray-200 border-solid">About Me</div>
       <section>
         <p>
-          I'm currently a graduate student at NTHU. My research interest covers topics around parallel computing
+          I'm currently a PhD student at UIUC. My research interest covers topics around parallel computing
           including MPI and CUDA programming. Also, I am familiar with cloud computing such as resource provisioning
-          strategies. In addition, I work at Skymizer as an intern & focus on optimizing the performance of DL
-          inference.
+          strategies. Recently I have been working on Smart Home projects and focusing on the consistency among devices.
         </p>
-        <p>My research interests mainly lie in computer vision, especially in:</p>
+        <p>My research interests mainly lie in distributed systems, especially in:</p>
         <ul>
           <li>Cloud Computing</li>
           <li>ML Systems</li>
-          <li>Algorithmic optimization</li>
+          <li>Smart Homes</li>
         </ul>
       </section>
       <div className="mt-10 pb-2 text-2xl font-bold border-0 border-b border-gray-200 border-solid">News</div>

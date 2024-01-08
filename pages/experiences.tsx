@@ -4,6 +4,7 @@ import SimpleLayout from '@/layouts/simple-layout';
 import ExperienceView from '@/simpleViews/experience';
 import { api } from '@/utils/api';
 import { normalize } from '@/utils';
+import { fetchExps } from '@/const/experiences';
 
 export default function Experience({ exps }: { exps: any[] }) {
   return (
@@ -21,11 +22,7 @@ Experience.getLayout = function getLayout(page: ReactElement) {
 };
 
 export async function getServerSideProps() {
-  const { data } = await api.get('experiences', {
-    params: {
-      'sort[0]': 'startDate:asc',
-    },
-  });
+  const data = await fetchExps;
   return {
     props: {
       exps: normalize(data),

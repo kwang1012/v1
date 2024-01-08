@@ -4,6 +4,7 @@ import SimpleLayout from '@/layouts/simple-layout';
 import PublicationView from '@/simpleViews/pubs';
 import { normalize } from '@/utils';
 import { api } from '@/utils/api';
+import { fetchGroupedPubs, fetchPubs } from '@/const/pubs';
 
 type Props = {
   groups: any[];
@@ -25,12 +26,7 @@ Publication.getLayout = function getLayout(page: ReactElement) {
 };
 
 export async function getServerSideProps() {
-  const { data } = await api.get('publications', {
-    params: {
-      group: 'year',
-      'sort[0]': 'date:desc',
-    },
-  });
+  const data = await fetchGroupedPubs;
   return {
     props: {
       groups: normalize(data),
